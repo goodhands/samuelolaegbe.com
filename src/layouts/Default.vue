@@ -11,7 +11,9 @@
     </header>
     <slot/>
     <center>
-      Thanks for stopping by, you rock 🤩
+      <p class="home-links">
+        Thanks for stopping by, you rock 🤩
+      </p>
     </center>
   </div>
 </template>
