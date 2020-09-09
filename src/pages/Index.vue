@@ -5,7 +5,7 @@
     <g-image alt="Samuel's image" src="~/media/Sam.jpg" width="135" />
     <span class="text-muted">Yeah, I'm sure you've seen this picture a few times around the web. I am that guy.</span>
 
-    <h1>Hello, world!</h1>
+    <h1>Samuel Olaegbe</h1>
 
     <p>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur excepturi labore tempore expedita, et iste tenetur suscipit explicabo! Dolores, aperiam non officia eos quod asperiores

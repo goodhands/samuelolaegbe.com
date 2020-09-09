@@ -1,9 +1,7 @@
 <template>
   <div class="layout">
     <header class="header">
-      <strong>
-        <g-link to="/">{{ $static.metadata.siteName }}</g-link>
-      </strong>
+      <g-link class="index" to="/">{{ $static.metadata.siteName }}</g-link>
       <nav class="nav">
         <g-link class="nav__link" to="/about/">About</g-link>
         <a class="nav__link" target="_blank" href="https://github.com/goodhands">Github</a>
@@ -12,6 +10,9 @@
       </nav>
     </header>
     <slot/>
+    <center>
+      Thanks for stopping by, you rock 🤩
+    </center>
   </div>
 </template>
 
@@ -30,6 +31,12 @@ body {
   padding:0;
   line-height: 1.5;
   background: #FFF7EF;
+}
+
+.index{
+  text-decoration: none;
+  font-size: 20px;
+  color: #000;
 }
 
 .layout {
