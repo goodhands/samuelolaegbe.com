@@ -5,7 +5,7 @@
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
 module.exports = {
-  siteName: 'Hello, my name is Samuel',
+  siteName: 'Thanks for stopping by, you rock 🤩',
   plugins: [],
   siteUrl: 'https://goodhands.github.io/',
 }

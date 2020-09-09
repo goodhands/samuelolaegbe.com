@@ -25,7 +25,7 @@ query {
 
 <style>
 body {
-  font-family: gt-america, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Crimson Text', serif, Helvetica, Arial, sans-serif;
   margin:0;
   padding:0;
   line-height: 1.5;
