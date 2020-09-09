@@ -5,8 +5,10 @@
         <g-link to="/">{{ $static.metadata.siteName }}</g-link>
       </strong>
       <nav class="nav">
-        <g-link class="nav__link" to="/">Home</g-link>
         <g-link class="nav__link" to="/about/">About</g-link>
+        <a class="nav__link" target="_blank" href="https://github.com/goodhands">Github</a>
+        <a class="nav__link" target="_blank" href="https://twitter.com/devloader">Twitter</a>
+        <a class="nav__link" target="_blank" href="https://linkedin.com/in/olaegbe-samuel">LinkedIn</a>
       </nav>
     </header>
     <slot/>
@@ -23,14 +25,15 @@ query {
 
 <style>
 body {
-  font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  font-family: gt-america, "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin:0;
   padding:0;
   line-height: 1.5;
+  background: #FFF7EF;
 }
 
 .layout {
-  max-width: 760px;
+  max-width: 90%;
   margin: 0 auto;
   padding-left: 20px;
   padding-right: 20px;
@@ -46,5 +49,19 @@ body {
 
 .nav__link {
   margin-left: 20px;
+  color: rgba(0, 0, 0, 0.5);
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 400;
+  transition: color 0.2s ease-in-out 0s;
+}
+
+.nav__link:hover{
+  color: #000;
+}
+
+::selection{
+  background: #E3DFBA;
+  color: #000;
 }
 </style>
