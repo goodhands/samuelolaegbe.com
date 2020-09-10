@@ -1,6 +1,5 @@
 <template>
   <Layout>
-
     <!-- Learn how to use images here: https://gridsome.org/docs/images -->
     <g-image alt="Samuel's image" src="~/media/Sam.jpg" width="135" />
     <span class="text-muted">Yeah, I'm sure you've seen this picture a few times around the web. I am that guy.</span>
