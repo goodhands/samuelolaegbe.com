@@ -1,14 +1,17 @@
 <template>
   <Layout>
-    <!-- Learn how to use images here: https://gridsome.org/docs/images -->
-    <g-image alt="Samuel's image" src="~/media/Sam.jpg" width="135" />
-    <span class="text-muted">Yeah, I'm sure you've seen this picture a few times around the web. I am that guy.</span>
+    <div class="container mt-20">
+      <h1 class="font-bold leading-none text-4xl">
+        Hi, my name is <br/>Samuel Olaegbe
+      </h1>
+    </div>
 
-    <h1>Samuel Olaegbe</h1>
+    <div class="container my-10 sm:w-128">
+      <p class="text-xl font-body">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur excepturi labore tempore expedita, et iste tenetur suscipit explicabo! Dolores, aperiam non officia eos quod asperiores
+      </p>
+    </div>
 
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur excepturi labore tempore expedita, et iste tenetur suscipit explicabo! Dolores, aperiam non officia eos quod asperiores
-    </p>
 
     
 
