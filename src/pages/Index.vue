@@ -49,10 +49,7 @@
     
     <!-- Contact section -->
     <div class="container h-screen flex flex-col justify-center h-screen">
-      <h2 class="text-2xl text-center mb-10">
-        Contact
-      </h2>
-      <div class="flex flex-row justify-between">
+      <div class="flex flex-row justify-evenly">
         <a href="https://linkedin.com/in/olaegbe-samuel" class="font-body">LinkedIn</a>
         <a href="https://twitter.com/devloader" class="font-body">Twitter</a>
         <a href="https://github.com/goodhands" class="font-body">Github</a>
