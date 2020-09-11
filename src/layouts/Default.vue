@@ -11,8 +11,8 @@
     </header>
     <slot/>
     <center>
-      <p class="home-links">
-        Thanks for stopping by, you rock 🤩
+      <p class="home-links font-body m-2">
+        All rights reserved. Samuel Olaegbe 2020 &copy;
       </p>
     </center>
   </div>
