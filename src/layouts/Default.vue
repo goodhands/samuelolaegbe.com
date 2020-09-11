@@ -1,7 +1,7 @@
 <template>
   <div class="layout">
     <header class="header">
-      <g-link class="index font-body" to="/">SO</g-link>
+      <g-link class="index font-body" to="/" title="Samuel Olaegbe">SO</g-link>
       <nav class="nav font-body">
         <g-link class="nav__link" to="/about/">About</g-link>
         <a class="nav__link" target="_blank" href="https://github.com/goodhands">Github</a>
