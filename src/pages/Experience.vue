@@ -39,11 +39,11 @@
                                     -
                                     {{ work.role }} 
                                 </h5>
-                                <p class="mb-3 text-lg text-secondary">
+                                <p class="mb-3 text-xl text-secondary">
                                     {{ work.summary }}
                                 </p>
-                                <ul class="list-disc text-lg text-secondary" v-for="(achievements, index) in work.achievements" :key="index">
-                                    <li>
+                                <ul class="list-disc text-lg text-secondary">
+                                    <li v-for="(achievements, index) in work.achievements" :key="index">
                                         {{ achievements }}
                                     </li>
                                 </ul>
