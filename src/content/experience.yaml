@@ -1,0 +1,12 @@
+- company: Stylishcare
+  role: HNG Bootcamp
+  start: May 2020
+  end: July 2020
+  summary: ""
+  achievements: [
+    As tech lead, I led a team of 20+ developers and 
+    guided the architecture and scope of the the Expense NG project 
+    by providing a walk-through of the government's Open Treasury 
+    (opentreasury.gov.ng) website which was crawled to fetch the 
+    expense sheets for each year.
+  ]

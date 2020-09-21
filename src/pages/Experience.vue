@@ -101,7 +101,22 @@
 </template>
 
 <script>
-export default {
-    
-}
+
 </script>
+
+
+<page-query>
+    query{
+        items: allExperience{
+            edges{
+                node{
+                    company
+                    start
+                    end
+                    summary
+                    achievements
+                }
+            }
+        }
+    }
+</page-query>
