@@ -15,7 +15,14 @@ if (process.env.NODE_ENV === 'production') postcssPlugins.push(purgecss(require(
 
 module.exports = {
   siteName: 'Samuel Olaegbe —— Fullstack Software Developer',
-  plugins: [],
+  plugins: [
+    {
+      use: '@gridsome/plugin-google-analytics',
+      options: {
+        id: 'UA-85677153-3'
+      }
+    }
+  ],
   siteUrl: 'https://goodhands.github.io/',
   css: {
     loaderOptions: {
