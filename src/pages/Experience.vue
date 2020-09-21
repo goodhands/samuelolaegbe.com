@@ -1,8 +1,10 @@
 <template>
     <Layout>
-        <section class="flex flex-row mt-20">
-            <section class="w-3/12 sticky">
-                <h3 class="title">Other Skills</h3>
+        <section class="flex flex-row mt-20 justify-between">
+            <section class="w-2/12 sticky">
+                <a href="$static.metadata.social.gh" target="_blank" class="font-body">Open Source</a>
+                    <hr>
+                <h3 class="text-xl mt-6">Other Skills</h3>
             </section>
 
             <section class="flex flex-col w-9/12">
@@ -16,9 +18,9 @@
                             Senior Backend Engineer
                         </p>
                         <div class="space-x-10 text-left">
-                            <a :href="$static.metadata.social.lnkd">LN</a>
-                            <a :href="$static.metadata.social.lnkd">GH</a>
-                            <a :href="$static.metadata.social.lnkd">TN</a>
+                            <a target="_blank" :href="$static.metadata.social.lnkd">LN</a>
+                            <a target="_blank" :href="$static.metadata.social.lnkd">GH</a>
+                            <a target="_blank" :href="$static.metadata.social.lnkd">TN</a>
                         </div>
                     </div>
                     <hr>
