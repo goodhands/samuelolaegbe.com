@@ -2,7 +2,10 @@
     <Layout>
         <section class="flex flex-row mt-20 justify-between">
             <section class="w-2/12 sticky">
-                <a href="$static.metadata.social.gh" target="_blank" class="font-body">Open Source</a>
+                <a :href="$static.metadata.social.gh" target="_blank" class="flex flex-row-reverse font-body items-center justify-between">
+                    <img src="https://octodex.github.com/images/original.png" class="h-5" title="Git Octocat"/>
+                    Open Source
+                </a>
                     <hr>
                 <h3 class="text-xl mt-6">Other Skills</h3>
             </section>
