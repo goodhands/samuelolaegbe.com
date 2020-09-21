@@ -16,9 +16,9 @@
                             Senior Backend Engineer
                         </p>
                         <div class="space-x-10 text-left">
-                            <a href="">LN</a>
-                            <a href="#">GH</a>
-                            <a href="#">TN</a>
+                            <a :href="$static.metadata.social.lnkd">LN</a>
+                            <a :href="$static.metadata.social.lnkd">GH</a>
+                            <a :href="$static.metadata.social.lnkd">TN</a>
                         </div>
                     </div>
                     <hr>
@@ -62,6 +62,20 @@
         </section>
     </Layout>
 </template>
+
+<static-query>
+query {
+  metadata {
+    social {
+        fb,
+        lnkd
+        tw
+        tm
+        gh
+    }
+  }
+}
+</static-query>
 
 <script>
     import experience from '@/content/experience.yaml';
