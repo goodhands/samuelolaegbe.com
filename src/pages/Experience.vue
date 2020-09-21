@@ -101,22 +101,13 @@
 </template>
 
 <script>
-
-</script>
-
-
-<page-query>
-    query{
-        items: allExperience{
-            edges{
-                node{
-                    company
-                    start
-                    end
-                    summary
-                    achievements
-                }
+    import experience from '@/content/experience.yaml';
+    
+    export default {
+        data() {
+            return {
+                experience
             }
-        }
-    }
-</page-query>
+        },
+    };
+</script>
