@@ -28,6 +28,63 @@
                         fast and thoroughly built web systems, I love creating system architecture, 
                         RESTful APIs and overall giving the user an awesome web experience.
                     </p>
+
+                    <section class="mt-10">
+                        <h4 class="text-2xl mb-5">Work Experience</h4>
+                        <!-- TODO:An API that serves a single source of truth for when i update my resume  -->
+                        
+                        <!-- HNG -->
+                        <div class="font-body resume-item flex flex-row justify-between">
+                            <div class="resume-body w-9/12">
+                                <h5 class="mb-3">
+                                    <span class="font-bold">HNG Bootcamp</span>
+                                    -
+                                    Back End Developer 
+                                </h5>
+                                <p class="mb-3">
+                                    As tech lead, I led a team of 20+ developers and 
+                                    guided the architecture and scope of the the Expense NG project 
+                                    by providing a walk-through of the government's Open Treasury 
+                                    (opentreasury.gov.ng) website which was crawled to fetch the 
+                                    expense sheets for each year.
+                                </p>
+                                <ul class="list-disc">
+                                    <li>Introduced and enforced consistent coding conventions and standards across the application.</li>
+                                    <li>Allowed visitors to make comments and interact with each other with a comments section which is available on each company/ministry's page, the comments component was built by me with Vue.js, Pusher and Laravel Echo</li>
+                                </ul>
+                            </div>
+                            <div id="timeline">
+                                June 2020 - August 2020 
+                            </div>
+                        </div>
+                        <!-- End HNG -->
+
+                        <!-- Stylishcare -->
+                        <div class="font-body resume-item flex flex-row justify-between">
+                            <div class="resume-body w-9/12">
+                                <h5 class="mb-3">
+                                    <span class="font-bold">Stylishcare</span>
+                                    -
+                                    Full Stack Engineer (Contractor)
+                                </h5>
+                                <p class="mb-3">
+                                    As tech lead, I led a team of 20+ developers and 
+                                    guided the architecture and scope of the the Expense NG project 
+                                    by providing a walk-through of the government's Open Treasury 
+                                    (opentreasury.gov.ng) website which was crawled to fetch the 
+                                    expense sheets for each year.
+                                </p>
+                                <ul class="list-disc">
+                                    <li>Introduced and enforced consistent coding conventions and standards across the application.</li>
+                                    <li>Allowed visitors to make comments and interact with each other with a comments section which is available on each company/ministry's page, the comments component was built by me with Vue.js, Pusher and Laravel Echo</li>
+                                </ul>
+                            </div>
+                            <div id="timeline">
+                                May 2020 - July 2020 
+                            </div>
+                        </div>
+                        <!-- End Stylishcare -->
+                    </section>
                 </div>
             </section>
         </section>
