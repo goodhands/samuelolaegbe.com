@@ -32,6 +32,7 @@ module.exports = {
     extend: {
       colors: {
         cyan: '#9cdbff',
+        secondary: 'rgba(0, 0, 0, 0.5)'
       },
       spacing: {
         '96': '24rem',
