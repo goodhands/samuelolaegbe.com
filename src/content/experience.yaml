@@ -1,12 +1,21 @@
-- company: Stylishcare
-  role: HNG Bootcamp
-  start: May 2020
-  end: July 2020
-  summary: ""
+- company: HNG Bootcamp
+  role: Backend Engineer
+  start: June 2020
+  end: August 2020
+  summary: "As tech lead, I led a team of 20+ developers and guided the architecture and scope of the the Expense NG project by providing a walk-through of the government's Open Treasury (opentreasury.gov.ng) website which was crawled to fetch the expense sheets for each year."
   achievements: [
-    As tech lead, I led a team of 20+ developers and 
-    guided the architecture and scope of the the Expense NG project 
-    by providing a walk-through of the government's Open Treasury 
-    (opentreasury.gov.ng) website which was crawled to fetch the 
-    expense sheets for each year.
+    "Allowed visitors to make comments and interact with each other with a comments section which is available on each company/ministry's page, the comments component was built by me with Vue.js, Pusher and Laravel Echo",
+    "Introduced and enforced consistent coding conventions and standards across the application."
   ]
+
+- company: Stylishcare
+  role: Fullstack Engineer
+  start: May 2020
+  end: June 2020
+  summary: "Led the development of a feature rich Warehouse management software for the company built as an efficient single page application using Laravel & Vue.js to replace the previous software which had a lot of restrictions and didn't fit their business plan."
+  achievements: [
+    "By implementing a simple and accessible user interface for the packer to see all that is going on at once and also give proper feedback as each product is scanned, employees have recorded a decrease in time taken to package an order and ship by 50%.",
+    "Client was satisfied with the solution which aligns properly with their business goals and allows them to in turn satisfy customers with accurate & just-in-time shipping.",
+    "Implemented audio and visual feedback across the admin dashboard to aid the packers who may not be paying attention while scanning orders."
+  ]
+
