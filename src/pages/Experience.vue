@@ -6,20 +6,21 @@
             </section>
 
             <section class="flex flex-col w-9/12">
-                <div class="flex flex-row justify-between">
-                    <h2 class="text-4xl leading-none">
-                        Samuel Olaegbe
-                    </h2>
-                    <div class="text-left mb-3">
-                        <a href="#">LinkedIn</a>
-                        <a href="#">GitHub</a>
-                    </div>
-                </div>
+                <h2 class="text-4xl leading-none">
+                    Samuel Olaegbe
+                </h2>
 
                 <div class="body">
-                    <p class="font-body font-hairline text-secondary text-xl">
-                        Senior Backend Engineer
-                    </p>
+                    <div class="flex flex-row justify-between">
+                        <p class="font-body font-hairline text-secondary text-xl">
+                            Senior Backend Engineer
+                        </p>
+                        <div class="space-x-10 text-left">
+                            <a href="">LN</a>
+                            <a href="#">GH</a>
+                            <a href="#">TN</a>
+                        </div>
+                    </div>
                     <hr>
                     <p class="font-body mt-3">
                         Strong in design and problem solving skills. 
@@ -54,6 +55,8 @@
                         </div>
                         <!-- End Experience -->
                     </section>
+
+
                 </div>
             </section>
         </section>
@@ -71,3 +74,9 @@
         },
     };
 </script>
+
+<style>
+    ul.list-disc.text-lg.text-secondary li{
+        margin-bottom: 13px;
+    }
+</style>
