@@ -2,14 +2,27 @@
     <Layout>
         <section class="flex flex-row mt-20 justify-between">
             <section class="h-128 sticky w-2/12">
-                <a :href="$static.metadata.social.gh" target="_blank" class="flex flex-row-reverse font-body items-center justify-between">
+                <a :href="$static.metadata.social.gh" target="_blank" class="bg-white flex flex-row-reverse font-body items-center justify-between px-2 py-2 shadow">
                     <img src="https://octodex.github.com/images/original.png" class="h-5" title="Git Octocat"/>
                     Open Source
                 </a>
-                    <hr>
-                <h3 class="text-xl mt-6">Other Skills</h3>
+                
+                <hr>
+                
+                <h3 class="text-xl mt-6">Tools</h3>
+                <hr>
                 <ul>
-                    <li></li>
+                    <li class="font-body" v-for="tool in tools" :key="tool">
+                        {{ tool }}
+                    </li>
+                </ul>
+
+                <h3 class="text-xl mt-6">Skills</h3>
+                <hr>
+                <ul>
+                    <li class="font-body" v-for="skill in skills" :key="skill">
+                        {{ skill }}
+                    </li>
                 </ul>
             </section>
 
@@ -91,7 +104,9 @@ query {
     export default {
         data() {
             return {
-                experience
+                experience: experience.experiences,
+                skills: experience.skills,
+                tools: experience.tools,
             }
         },
     };
