@@ -38,8 +38,8 @@
                         </p>
                         <div class="space-x-10 text-left">
                             <a target="_blank" :href="$static.metadata.social.lnkd">LN</a>
-                            <a target="_blank" :href="$static.metadata.social.lnkd">GH</a>
-                            <a target="_blank" :href="$static.metadata.social.lnkd">TN</a>
+                            <a target="_blank" :href="$static.metadata.social.gh">GH</a>
+                            <a target="_blank" :href="$static.metadata.social.tm">TN</a>
                         </div>
                     </div>
                     <hr>
