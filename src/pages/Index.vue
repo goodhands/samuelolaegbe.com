@@ -15,11 +15,11 @@
     </div>
 
     <!-- Projects section -->
-    <div class="container h-screen">
+    <div class="container mb-40">
       <h4 class="heading text-2xl leading-tight">Projects</h4>
       <span class="font-body">See some of my recent projects</span>
 
-      <div class="grid grid-cols-2 gap-6 mt-10">
+      <div class="gap-16 grid grid-cols-2 mt-10">
         <!-- Expense NG Project -->
         <div class="w-full h-96">
           <g-image src="~/media/expenseng-project-header.png"/>
@@ -32,7 +32,19 @@
             <a href="https://expenseng.com" target="_blank" class="hover:border-b-2 font-body hover:text-black mr-2 text-base text-gray-500">expenseng.com</a>
           </div>
         </div>
-        <!-- ... -->
+        <!-- Vision App Project -->
+        <div class="w-full h-96">
+          <g-image src="~/media/vision-app.png"/>
+          <p class="font-body leading-relaxed mt-5">
+            <a href="https://devloader.herokuapp.com/" target="_blank">Image Vision</a> is a website I built for 
+            labelling images with Google Vision API. It integrates with Cloudinary to upload and 
+            label multiple images at once from various sources such as social media profiles, cloud storage or local file upload. Built using Vue.js, Laravel & Google Vision
+          </p>
+          <div class="flex flex-row justify-items-start mt-3">
+            <a href="https://github.com/goodhands/vision-app" target="_blank"  class="hover:border-b-2 font-body hover:text-black mr-2 text-base text-gray-500">Github</a>
+          </div>
+        </div>
+        <!-- Devloader -->
         <div class="w-full h-96">
           <g-image src="~/media/website-devloader-project.png"/>
           <p class="font-body leading-relaxed mt-5">
