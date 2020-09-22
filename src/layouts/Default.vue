@@ -10,11 +10,6 @@
       </nav>
     </header>
     <slot/>
-    <center>
-      <p class="home-links font-body m-2">
-        All rights reserved. Samuel Olaegbe 2020 &copy;
-      </p>
-    </center>
   </div>
 </template>
 
