@@ -19,7 +19,7 @@
       <h4 class="heading text-2xl leading-tight">Projects</h4>
       <span class="font-body">See some of my recent projects</span>
 
-      <div class="gap-16 grid grid-cols-2 mt-10">
+      <div class="gap-16 grid grid-cols-1 sm:grid-cols-2 mt-10">
         <!-- Expense NG Project -->
         <div class="w-full h-96">
           <g-image src="~/media/expenseng-project-header.png"/>
