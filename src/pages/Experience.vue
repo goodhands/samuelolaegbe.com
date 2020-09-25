@@ -1,7 +1,7 @@
 <template>
     <Layout>
-        <section class="flex flex-row mt-20 justify-between">
-            <section class="h-128 sticky w-2/12">
+        <section class="flex flex-col-reverse sm:flex-row justify-between mt-20">
+            <section class="h-128 sticky w-full sm:w-2/12">
                 <a :href="$static.metadata.social.gh" target="_blank" class="bg-white flex flex-row-reverse font-body items-center justify-between px-2 py-2 shadow">
                     <img src="https://octodex.github.com/images/original.png" class="h-5" title="Git Octocat"/>
                     Open Source
@@ -26,13 +26,13 @@
                 </ul>
             </section>
 
-            <section class="flex flex-col w-9/12">
+            <section class="flex flex-col w-full sm:w-9/12">
                 <h2 class="text-4xl leading-none">
                     Samuel Olaegbe
                 </h2>
 
                 <div class="body">
-                    <div class="flex flex-row justify-between">
+                    <div class="flex flex-col sm:flex-row justify-between">
                         <p class="font-body font-hairline text-secondary text-xl">
                             Senior Backend Engineer
                         </p>
@@ -54,8 +54,8 @@
                     <section class="mt-10">
                         <h4 class="text-2xl mb-5">Work Experience</h4>                        
                         <!-- Experience -->
-                        <div class="font-body resume-item flex mt-10 flex-row justify-between" v-for="work in experience" :key="work.company">
-                            <div class="resume-body w-9/12">
+                        <div class="font-body resume-item flex mt-10 flex-col sm:flex-row justify-between" v-for="work in experience" :key="work.company">
+                            <div class="resume-body w-full sm:w-9/12">
                                 <h5 class="mb-3 text-xl">
                                     <span class="font-bold">{{ work.company }}</span>
                                     -
