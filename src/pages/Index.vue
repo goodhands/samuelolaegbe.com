@@ -21,7 +21,7 @@
 
       <div class="gap-16 grid grid-cols-1 sm:grid-cols-2 mt-10">
         <!-- Expense NG Project -->
-        <div class="w-full h-96">
+        <div class="w-full sm:h-96">
           <g-image src="~/media/expenseng-project-header.png"/>
           <p class="font-body leading-relaxed mt-5">
             <a href="https://expenseng.com" target="_blank">ExpenseNG</a> is an expense tracking app developed to monitor the
@@ -33,7 +33,7 @@
           </div>
         </div>
         <!-- Vision App Project -->
-        <div class="w-full h-96">
+        <div class="w-full sm:h-96">
           <g-image src="~/media/vision-app.png"/>
           <p class="font-body leading-relaxed mt-5">
             <a href="#" target="_blank">Image Vision</a> is a website I built for 
@@ -45,7 +45,7 @@
           </div>
         </div>
         <!-- Devloader -->
-        <div class="w-full h-96">
+        <div class="w-full sm:h-96">
           <g-image src="~/media/website-devloader-project.png"/>
           <p class="font-body leading-relaxed mt-5">
             <a href="https://devloader.herokuapp.com/" target="_blank">Devloader Blog</a> is a hobby project I worked on while learning how to build single page apps with Vue.js and Laravel
