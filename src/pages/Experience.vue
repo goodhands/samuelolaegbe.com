@@ -46,7 +46,7 @@
                     <hr>
                     <p class="font-body mt-3">
                         Strong in design and problem solving skills. 
-                        Backend Developer and Laravel Engineer with 4 years of experience building successful 
+                        Backend Developer with 3 years of experience building 
                         products for clients around the globe. I am passionate about efficient, 
                         fast and thoroughly built web systems, I love creating system architecture, 
                         RESTful APIs and overall giving the user an awesome web experience.
