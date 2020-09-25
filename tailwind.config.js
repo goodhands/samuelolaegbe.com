@@ -40,6 +40,27 @@ module.exports = {
       spacing: {
         '96': '24rem',
         '128': '32rem',
+      },
+      keyframes: {
+        grow: {
+          '0%': { 
+            transform: 'scale(0)',
+            opacity: '0',
+          },
+          '50%': { 
+            opacity: '0.5',
+          },
+          '75%': { 
+            opacity: '0.7',
+          },
+          '100%': { transform: 'scale(1)', opacity: '1' },
+        }
+      },
+      transformOrigin:{
+        'top-right': 'top right',
+      },
+      animation:{
+        grow: 'grow 600ms cubic-bezier(0.68, -0.55, 0.27, 1.55)'
       }
     }
   }

@@ -13,7 +13,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16" />
                 </svg>
             </a>
-            <div class="bg-blue-100 fixed flex flex-col font-body justify-evenly h-128 menu-mobile shadow w-11/12" v-if="menuOpened">
+            <div class="bg-blue-100 fixed flex flex-col animate-grow origin-top-right font-body justify-evenly h-128 menu-mobile shadow w-11/12" v-if="menuOpened">
                 <div class="flex flex-col font-body justify-center justify-items-center ml-5 text-2xl text-indigo-500">
                     <g-link to="/experience">Experience</g-link>
                     <g-link to="/projects">Projects</g-link>
