@@ -1,23 +1,8 @@
 <template>
   <div class="layout">
     <header class="header">
-      <g-link class="index font-body" to="/" title="Samuel Olaegbe">SO</g-link>
-      <nav class="nav font-body hidden sm:flex">
-        <g-link class="nav__link" to="/experience/">Experience</g-link>
-        <a class="nav__link" target="_blank" href="https://github.com/goodhands">Github</a>
-        <a class="nav__link" target="_blank" href="https://twitter.com/devloader">Twitter</a>
-        <a class="nav__link" target="_blank" href="https://linkedin.com/in/olaegbe-samuel">LinkedIn</a>
-      </nav>
-      <nav class="sm:hidden">
-        <a href="#" @click="openMenu()" class="block h-6 w-6">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16" />
-          </svg>
-        </a>
-        <div class="menu" v-if="menuOpened">
-
-        </div>
-      </nav>
+      <g-link class="index font-body z-50" to="/" title="Samuel Olaegbe">SO</g-link>
+      <Navbar/>
     </header>
     <slot/>
   </div>
@@ -32,19 +17,12 @@ query {
 </static-query>
 
 <script>
-export default {
-  data() {
-    return {
-      menuOpened: false,
-    }
-  },
-
-  methods: {
-    openMenu(){
-      this.menuOpened = !this.menuOpened;
-    }
-  },
-}
+import Navbar from '@/components/Navbar.vue';
+  export default {
+    components:{
+      Navbar
+    },
+  }
 </script>
 <style>
 body {
