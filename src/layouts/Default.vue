@@ -2,7 +2,7 @@
   <div class="layout">
     <header class="header">
       <g-link class="index font-body" to="/" title="Samuel Olaegbe">SO</g-link>
-      <nav class="nav font-body">
+      <nav class="nav font-body hidden sm:flex">
         <g-link class="nav__link" to="/experience/">Experience</g-link>
         <a class="nav__link" target="_blank" href="https://github.com/goodhands">Github</a>
         <a class="nav__link" target="_blank" href="https://twitter.com/devloader">Twitter</a>
