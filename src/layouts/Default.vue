@@ -8,6 +8,16 @@
         <a class="nav__link" target="_blank" href="https://twitter.com/devloader">Twitter</a>
         <a class="nav__link" target="_blank" href="https://linkedin.com/in/olaegbe-samuel">LinkedIn</a>
       </nav>
+      <nav class="sm:hidden">
+        <a href="#" @click="openMenu()" class="block h-6 w-6">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16" />
+          </svg>
+        </a>
+        <div class="menu" v-if="menuOpened">
+
+        </div>
+      </nav>
     </header>
     <slot/>
   </div>
@@ -21,6 +31,21 @@ query {
 }
 </static-query>
 
+<script>
+export default {
+  data() {
+    return {
+      menuOpened: false,
+    }
+  },
+
+  methods: {
+    openMenu(){
+      this.menuOpened = !this.menuOpened;
+    }
+  },
+}
+</script>
 <style>
 body {
   font-family: 'Crimson Text', serif, Helvetica, Arial, sans-serif;
