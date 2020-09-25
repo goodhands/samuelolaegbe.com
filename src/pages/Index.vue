@@ -7,9 +7,9 @@
       <!-- Short bio -->
       <div class="container mt-10 sm:w-128">
         <p class="text-xl font-body">
-          Senior Fullstack Engineer with 4 years of experience with crafting awesome,
-          high-performant websites with PHP/Laravel. Additional skills include Vue.js, MySQL, 
-          Tailwind, Gridsome, Nuxt, Vuex. Available for hire 🚀 
+          Software Engineer with a passion for building products that addresses real life
+          challenges. I build for the web and the good of all. Open Source Contributor. 
+          Vue.js & Laravel fanboy.
         </p>
       </div>
     </div>
