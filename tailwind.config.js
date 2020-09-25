@@ -34,6 +34,9 @@ module.exports = {
         cyan: '#9cdbff',
         secondary: 'rgba(0, 0, 0, 0.5)'
       },
+      listStyleType: {
+        square: 'square',
+      },
       spacing: {
         '96': '24rem',
         '128': '32rem',

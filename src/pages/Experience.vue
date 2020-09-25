@@ -40,6 +40,7 @@
                             <a target="_blank" :href="$static.metadata.social.lnkd">LN</a>
                             <a target="_blank" :href="$static.metadata.social.gh">GH</a>
                             <a target="_blank" :href="$static.metadata.social.tm">TN</a>
+                            <a target="_blank" :href="$static.metadata.social.tw">TW</a>
                         </div>
                     </div>
                     <hr>
@@ -61,16 +62,20 @@
                                     -
                                     {{ work.role }} 
                                 </h5>
+                                <div class="sm:hidden">
+                                    {{ work.start }} - {{ work.end }}
+                                </div>
+                                <hr class="mb-4 sm:hidden">
                                 <p class="mb-3 text-xl text-secondary">
                                     {{ work.summary }}
                                 </p>
-                                <ul class="list-disc text-lg text-secondary">
-                                    <li v-for="(achievements, index) in work.achievements" :key="index">
+                                <ul class="list-disc text-lg list-inside list-square text-secondary">
+                                    <li v-for="(achievements, index) in work.achievements" :key="index" class="break-words">
                                         {{ achievements }}
                                     </li>
                                 </ul>
                             </div>
-                            <div id="timeline">
+                            <div class="hidden sm:block">
                                 {{ work.start }} - {{ work.end }}
                             </div>
                         </div>

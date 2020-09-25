@@ -1,8 +1,8 @@
 experiences:
   - company: HNG Bootcamp
     role: Backend Engineer
-    start: June 2020
-    end: August 2020
+    start: Jun 2020
+    end: Aug 2020
     summary: "As tech lead, I led a team of 20+ developers and guided the architecture and scope of the the Expense NG project by providing a walk-through of the government's Open Treasury (opentreasury.gov.ng) website which was crawled to fetch the expense sheets for each year."
     achievements: [
       "Allowed visitors to make comments and interact with each other with a comments section which is available on each company/ministry's page, the comments component was built by me with Vue.js, Pusher and Laravel Echo",
@@ -14,7 +14,7 @@ experiences:
   - company: Stylishcare
     role: Fullstack Engineer (Contractor)
     start: May 2020
-    end: Julu 2020
+    end: Jul 2020
     summary: "Led the development of a feature rich Warehouse management software for the company built as an efficient single page application using Laravel & Vue.js to replace the previous software which had a lot of restrictions and didn't fit their business plan."
     achievements: [
       "By implementing a simple and accessible user interface for the packer to see all that is going on at once and also give proper feedback as each product is scanned, employees have recorded a decrease in time taken to package an order and ship by 50%.",
@@ -25,8 +25,8 @@ experiences:
 
   - company: Clindata
     role: Fullstack Engineer (Contractor)
-    start: April 2019
-    end: August 2019
+    start: Apr 2019
+    end: Aug 2019
     summary: 'Bulk returns is a product for helping e-commerce businesses in UK consolidate their return items from their various customers and shipping it back to them "in bulk"'
     achievements: [
       "Strategized on maximizing the Laravel Spark features to quickly ship a premium product without sacrificing user interface quality.",
@@ -38,8 +38,8 @@ experiences:
 
   - company: Lorveet
     role: Co-Founder & CTO
-    start: December 2017
-    end: December 2018
+    start: Dec 2017
+    end: Dec 2018
     summary: Lorveet is a search engine for jobs which we built to make it easy for a job seeker to use a single port into the world of job listing websites.
     achievements: [
       "I was the CTO and Co-Founder of Lorveet and was the sole developer with my friend who is my Co-Founder and COO, I developed the Lorveet jobs engine which was the system that ran cron jobs to pull jobs from job listing websites in Nigeria.",
@@ -49,8 +49,8 @@ experiences:
 
   - company: Total Makeover Program
     role: Web Developer (Remote)
-    start: June 2017
-    end: July 2018
+    start: Jun 2017
+    end: Jul 2018
     summary: Total Makeover Program is a weight loss company located in Porto Algre, Brasil.
     achievements: [
       "I joined the company as an intern in 2017, during the time which I worked on various projects including the personal website of the CEO, Remi Owadokun, website for the Phat Gal mobile app and other in house projects.",
