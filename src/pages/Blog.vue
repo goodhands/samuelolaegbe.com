@@ -12,7 +12,7 @@
                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Non sed quod atque explicabo reprehenderit maxime quo, et nostrum vero exercitationem dolore, temporibus, eligendi sit.
                             </p>
                             <span class="hidden sm:flex flex-row items-baseline justify-between">
-                                <g-link class="active font-body text-blue-800 text-tiny" to="/author/sam">By Samuel Olaegbe</g-link>
+                                <g-link class="active font-body text-blue-800 text-tiny" :to="edge.node.category.path">{{ edge.node.category.title }}</g-link>
                                 <small class="font-body text-green-900 text-tiny">{{ edge.node.date }}</small>
                             </span>
                         </div>
@@ -49,6 +49,11 @@
                     path
                     path
                     cover
+                    category{
+                        id
+                        title
+                        path
+                    }
                     date (format: "D. MMMM YYYY")
                     title
                 }

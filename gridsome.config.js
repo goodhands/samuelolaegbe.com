@@ -28,8 +28,12 @@ module.exports = {
         typeName: 'Post',
         path: 'src/content/posts/*.md',
         refs:{
-          tags: {
+          author: {
             typeName: 'Author',
+            create: true
+          },
+          category: {
+            typeName: 'Category',
             create: true
           }
         }
@@ -38,7 +42,8 @@ module.exports = {
   ],
   templates:{
     Post: '/:title',
-    Author: '/author/:shortname'
+    Author: '/author/:title',
+    Category: '/category/:title',
   },
   transformers: {
     remark: {

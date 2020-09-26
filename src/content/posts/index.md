@@ -2,8 +2,10 @@
 slug: "check-variable-number"
 date: "2019-05-04"
 title: "How to Check if a Variable is a Number"
+category: "business"
 excerpt: "This is a short execerpt"
 cover: "./media/vision-app.png"
+author: "Samuel Olaegbe"
 tags: ['development', 'tech']
 ---
 
