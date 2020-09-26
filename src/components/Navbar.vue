@@ -2,9 +2,9 @@
     <div>
         <nav class="nav font-body hidden sm:flex">
             <g-link class="nav__link" to="/experience/">Experience</g-link>
-            <a class="nav__link" target="_blank" href="https://github.com/goodhands">Github</a>
-            <a class="nav__link" target="_blank" href="https://twitter.com/devloader">Twitter</a>
-            <a class="nav__link" target="_blank" href="https://linkedin.com/in/olaegbe-samuel">LinkedIn</a>
+            <g-link class="nav__link" to="/projects/">Projects</g-link>
+            <g-link class="nav__link" to="/blog/">Blog</g-link>
+            <g-link class="nav__link" to="/hire/">Hire me</g-link>
         </nav> 
 
         <nav class="sm:hidden flex z-50">
