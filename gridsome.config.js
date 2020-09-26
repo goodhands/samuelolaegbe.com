@@ -21,8 +21,20 @@ module.exports = {
       options: {
         id: 'UA-85677153-3'
       }
+    },
+    {
+      use: '@gridsome/source-filesystem',
+      options: {
+        typeName: 'Post',
+        path: 'src/content/posts/*.md'
+      }
     }
   ],
+  transformers: {
+    remark: {
+      // global remark options
+    }
+  },
   siteUrl: 'https://goodhands.github.io/',
   css: {
     loaderOptions: {
