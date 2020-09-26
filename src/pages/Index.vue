@@ -58,7 +58,12 @@
         </div>
       </div>
     </div>
-    
+
+    <!-- Contact Form -->
+    <div class="container mb-40">
+      
+    </div>
+
     <!-- Contact section -->
     <div class="container h-screen flex flex-col justify-center h-screen">
       <div class="flex flex-row justify-evenly">
