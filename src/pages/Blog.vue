@@ -12,18 +12,18 @@
                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Non sed quod atque explicabo reprehenderit maxime quo, et nostrum vero exercitationem dolore, temporibus, eligendi sit.
                             </p>
                             <span class="hidden sm:flex flex-row items-baseline justify-between">
-                                <g-link class="active font-body text-blue-800 text-tiny" to="/">By Samuel Olaegbe</g-link>
-                                <small class="font-body text-green-900 text-tiny">Wed, 14th July 2020</small>
+                                <g-link class="active font-body text-blue-800 text-tiny" to="/author/sam">By Samuel Olaegbe</g-link>
+                                <small class="font-body text-green-900 text-tiny">{{ edge.node.date }}</small>
                             </span>
                         </div>
                     </header>
                     <!-- Cover -->
-                    <g-link :to="edge.node.slug">
+                    <g-link :to="edge.node.path">
                         <g-image :src="edge.node.cover"></g-image>
                     </g-link>
 
                     <div>
-                        <g-link :to="edge.node.slug">
+                        <g-link :to="edge.node.path">
                             <h2 class="font-display leading-none mt-6 text-2xl">
                                 {{ edge.node.title }}
                             </h2>
@@ -46,6 +46,7 @@
             edges{
                 node{
                     id
+                    path
                     path
                     cover
                     date (format: "D. MMMM YYYY")

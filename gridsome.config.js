@@ -26,10 +26,20 @@ module.exports = {
       use: '@gridsome/source-filesystem',
       options: {
         typeName: 'Post',
-        path: 'src/content/posts/*.md'
+        path: 'src/content/posts/*.md',
+        refs:{
+          tags: {
+            typeName: 'Author',
+            create: true
+          }
+        }
       }
     }
   ],
+  templates:{
+    Post: '/:title',
+    Author: '/author/:shortname'
+  },
   transformers: {
     remark: {
       // global remark options

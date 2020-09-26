@@ -1,7 +1,8 @@
 ---
-path: "/blog/check-variable-number"
+slug: "check-variable-number"
 date: "2019-05-04"
 title: "How to Check if a Variable is a Number"
+excerpt: "This is a short execerpt"
 cover: "./media/vision-app.png"
 tags: ['development', 'tech']
 ---
