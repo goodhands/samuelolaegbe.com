@@ -34,6 +34,9 @@ module.exports = {
         cyan: '#9cdbff',
         secondary: 'rgba(0, 0, 0, 0.5)'
       },
+      margin:{
+        90: '18.9rem',
+      },
       listStyleType: {
         square: 'square',
       },
@@ -61,6 +64,9 @@ module.exports = {
       },
       animation:{
         grow: 'grow 600ms cubic-bezier(0.68, -0.55, 0.27, 1.55)'
+      },
+      borderWidth: {
+        '15': '15px'
       }
     }
   }

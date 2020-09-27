@@ -28,6 +28,7 @@ import Navbar from '@/components/Navbar.vue';
 body {
   font-family: 'Crimson Text', serif, Helvetica, Arial, sans-serif;
   margin:0;
+  position: relative;
   padding:0;
   line-height: 1.5;
   background: #FFF7EF;
