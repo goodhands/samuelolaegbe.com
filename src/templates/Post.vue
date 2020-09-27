@@ -49,9 +49,33 @@
 import PostSidebar from '@/components/PostSidebar.vue';
 
 export default {
+    data() {
+        return {
+            
+        }
+    },
     components:{
         PostSidebar
-    }    
+    },
+    
+    metaInfo () {
+        return {
+            title: this.$page.post.title + ' by ' + this.$page.post.author.title,
+            meta: [
+                {
+                    name: 'description',
+                    content: this.$page.post.excerpt
+                },
+                {
+                    name: 'author',
+                    content: this.$page.post.author.title
+                }
+            ],
+            bodyAttrs: {
+                class: 'border-15 border-black'
+            }
+        }
+    }
 }
 </script>
 
