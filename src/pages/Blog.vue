@@ -9,7 +9,7 @@
                         <!-- Excerpt -->
                         <div class="excerpts flex flex-col ml-5 sm:ml-2 justify-between">
                             <p class="h-12 overflow-hidden leading-4 text-tiny font-base sm:leading-snug sm:h-auto sm:text-base font-body">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Non sed quod atque explicabo reprehenderit maxime quo, et nostrum vero exercitationem dolore, temporibus, eligendi sit.
+                                
                             </p>
                             <span class="hidden sm:flex flex-row items-baseline justify-between">
                                 <g-link class="active font-body text-blue-800 text-tiny" :to="edge.node.category.path">{{ edge.node.category.title }}</g-link>
@@ -46,7 +46,6 @@
             edges{
                 node{
                     id
-                    path
                     path
                     cover
                     category{
