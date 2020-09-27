@@ -34,6 +34,9 @@ module.exports = {
         cyan: '#9cdbff',
         secondary: 'rgba(0, 0, 0, 0.5)'
       },
+      margin:{
+        90: '18.9rem',
+      },
       listStyleType: {
         square: 'square',
       },

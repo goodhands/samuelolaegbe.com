@@ -10,7 +10,7 @@
                             </svg> Go back
                         </g-link>
 
-                        <h2 class="leading-10 my-8 text-3xl">
+                        <h2 class="leading-10 mt-8 mb-4 text-2xl sm:text-3xl break-words">
                             {{ $page.post.title }}
                         </h2>
 
@@ -35,7 +35,7 @@
                 </div>
                 <div v-html="$page.post.content"></div>
             </section>
-            <section class="sidebar w-full sm:w-6/12 sticky sm:mt-96 h-128">
+            <section class="sidebar w-full sm:w-6/12 sticky sm:mt-90 h-128">
                 <header class="mt-0 mb-2">
                     <h2 class="text-lg">Recent Articles</h2>
                 </header>
