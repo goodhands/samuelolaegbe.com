@@ -3,7 +3,7 @@ slug: "check-variable-number"
 date: "2019-05-04"
 title: "How to Check if a Variable is a Number"
 category: "business"
-excerpt: "This is a short execerpt"
+excerpt: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto aut amet delectus odit voluptatem quo repudiandae explicabo perspiciatis, velit sunt, nesciunt dolor veritatis beatae ea rerum excepturi laborum itaque totam?"
 cover: "./media/vision-app.png"
 author: "Samuel Olaegbe"
 tags: ['development', 'tech']
