@@ -13,7 +13,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16" />
                 </svg>
             </a>
-            <div class="bg-blue-100 fixed flex flex-col animate-grow origin-top-right font-body justify-evenly h-128 menu-mobile shadow w-11/12" v-if="menuOpened">
+            <div class="animate-grow bg-blue-100 bottom-0 fixed flex flex-col font-body justify-evenly left-0 menu-mobile origin-top-right right-0 shadow top-0 w-full" v-if="menuOpened">
                 <div class="flex flex-col font-body justify-center justify-items-center ml-5 text-2xl text-indigo-500">
                     <g-link to="/experience">Experience</g-link>
                     <g-link to="/projects">Projects</g-link>
@@ -21,7 +21,7 @@
                     <g-link to="/blog">Blog</g-link>
 
                 </div>
-                <div class="flex flex-row items-center justify-center">
+                <div class="flex flex-col font-body h-64 justify-between ml-5 text-2xl text-indigo-500">
                     <a class="nav__link" target="_blank" href="https://github.com/goodhands">Github</a>
                     <a class="nav__link" target="_blank" href="https://twitter.com/devloader">Twitter</a>
                     <a class="nav__link" target="_blank" href="https://linkedin.com/in/olaegbe-samuel">LinkedIn</a>
@@ -45,6 +45,7 @@ export default {
     methods: {
         openMenu(){
             this.menuOpened = !this.menuOpened;
+            document.querySelector('body').classList += 'overflow-hidden';
         }
     },
 }
@@ -52,8 +53,6 @@ export default {
 
 <style>
     .menu-mobile{
-        left: calc(10% - 21px);
-        margin: auto;
-        top: 18px;
+        z-index: 9;
     }
 </style>
