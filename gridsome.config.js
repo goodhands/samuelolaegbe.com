@@ -26,7 +26,7 @@ module.exports = {
       use: '@gridsome/source-filesystem',
       options: {
         typeName: 'Post',
-        path: 'content/posts/*.md',
+        path: 'src/content/posts/*.md',
         refs:{
           author: {
             typeName: 'Author',
