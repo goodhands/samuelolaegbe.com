@@ -1,7 +1,7 @@
 <template>
     <Layout>
-        <section class="flex flex-col sm:flex-row sm:space-x-10">
-            <section class="article relative">
+        <section class="flex flex-col sm:flex-row sm:space-x-10 w-full">
+            <section class="article relative sm:w-12/12">
                 <div>
                     <header class="my-10">
                         <g-link to="/blog/" class="flex flex-row items-center">
@@ -35,7 +35,7 @@
                 </div>
                 <div v-html="$page.post.content"></div>
             </section>
-            <section class="sidebar w-full sm:w-6/12 sticky sm:mt-90 h-128">
+            <section class="sidebar w-full sticky sm:mt-90 h-128">
                 <header class="mt-0 mb-2">
                     <h2 class="text-lg">Recent Articles</h2>
                 </header>
@@ -69,6 +69,10 @@ export default {
                 {
                     name: 'author',
                     content: this.$page.post.author.title
+                },
+                {
+                    name: 'canonical',
+                    content: this.$page.post.canonical
                 }
             ],
             bodyAttrs: {
@@ -88,6 +92,7 @@ query Post ($id: ID!) {
     excerpt
     date (format: "D. MMMM YYYY")
     timeToRead
+    canonical
     category{
         id
         title

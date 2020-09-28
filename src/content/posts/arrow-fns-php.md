@@ -5,7 +5,7 @@ category: PHP
 tags: ["php", "code", "release", "php7", "guide"]
 author: Samuel Olaegbe
 cover: https://cdn.hashnode.com/res/hashnode/image/upload/v1584016517463/CJQ1Az-nt.png
-canonical: https://devloader.hashnode.dev/using-arrow-functions-in-php-74-ck7oqwvor00jf64s1hdfr63ig
+canonical: 'https://devloader.hashnode.dev/using-arrow-functions-in-php-74-ck7oqwvor00jf64s1hdfr63ig'
 excerpt: PHP 7.4 has just been released with a shorter way of writing functions using the same arrow convention in languages like Javascript 
 ---
 Last November, PHP 7.4 was [released](https://www.php.net/releases/7_4_0.php) and the entire community was so excited with the new features that this release brings with it. You can now build faster apps with PHP and also be excited while you work on them with these new release! See the full list of features [https://www.php.net/releases/7_4_0.php](here).
