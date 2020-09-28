@@ -6,6 +6,7 @@ tags: ["tutorials", "code"]
 author: Samuel Olaegbe
 cover: https://cdn.hashnode.com/res/hashnode/image/upload/v1578042967363/VEz4gZODN.png
 excerpt: Common native apps like Twitter or any app that allows you to share content outside of them provide support for a dialog that allows you to share their content into other apps that are installed on your phone. In this tutorial, we will take a look at how this is done.
+canonical: https://devloader.hashnode.dev/how-to-enable-the-os-supported-share-dialog-from-your-website-on-mobile-devices-using-javascript-web-share-api-ck4xy25vi0056mus1nn2n9ck5
 ---
 
 ## Native Apps vs Web Apps
