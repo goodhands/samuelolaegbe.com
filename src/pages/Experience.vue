@@ -104,7 +104,7 @@ query {
 </static-query>
 
 <script>
-    import experience from '@/content/experience.yaml';
+    import experience from '@/../content/experience.yaml';
     
     export default {
         data() {

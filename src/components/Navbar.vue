@@ -14,17 +14,16 @@
                 </svg>
             </a>
             <div class="animate-grow bg-blue-100 bottom-0 fixed flex flex-col font-body justify-evenly left-0 menu-mobile origin-top-right right-0 shadow top-0 w-full" v-if="menuOpened">
-                <div class="flex flex-col font-body justify-center justify-items-center ml-5 text-2xl text-indigo-500">
+                <div class="flex flex-col font-body items-start justify-evenly ml-10 text-2xl text-indigo-500">
                     <g-link to="/experience">Experience</g-link>
                     <g-link to="/projects">Projects</g-link>
                     <g-link to="/hire">Hire me</g-link>
                     <g-link to="/blog">Blog</g-link>
-
                 </div>
-                <div class="flex flex-col font-body h-64 justify-between ml-5 text-2xl text-indigo-500">
-                    <a class="nav__link" target="_blank" href="https://github.com/goodhands">Github</a>
-                    <a class="nav__link" target="_blank" href="https://twitter.com/devloader">Twitter</a>
-                    <a class="nav__link" target="_blank" href="https://linkedin.com/in/olaegbe-samuel">LinkedIn</a>
+                <div class="flex flex-row font-body justify-center m-0 space-x-10 text-2xl text-indigo-500">
+                    <a class="nav__link ml-0" target="_blank" href="https://github.com/goodhands">Github</a>
+                    <a class="nav__link ml-0" target="_blank" href="https://twitter.com/devloader">Twitter</a>
+                    <a class="nav__link ml-0" target="_blank" href="https://linkedin.com/in/olaegbe-samuel">LinkedIn</a>
                 </div>
             </div>
         </nav>
