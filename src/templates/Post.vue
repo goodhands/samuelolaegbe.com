@@ -1,7 +1,7 @@
 <template>
     <Layout>
-        <section class="flex flex-col sm:flex-row sm:space-x-10">
-            <section class="article relative">
+        <section class="flex flex-col sm:flex-row sm:space-x-10 w-full">
+            <section class="article relative sm:w-12/12">
                 <div>
                     <header class="my-10">
                         <g-link to="/blog/" class="flex flex-row items-center">
@@ -33,11 +33,11 @@
                     <g-image class="left-0 right-0 w-full" :src="$page.post.cover"></g-image>
                 
                 </div>
-                <div v-html="$page.post.content"></div>
+                <div v-html="$page.post.content" class="prose prose-xl mt-10"></div>
             </section>
-            <section class="sidebar w-full sm:w-6/12 sticky sm:mt-90 h-128">
-                <header class="mt-0 mb-2">
-                    <h2 class="text-lg">Recent Articles</h2>
+            <section class="h-128 sidebar sm:mt-90 sm:w-5/12 sticky w-full">
+                <header class="sm:mt-0 mt-20 mb-2">
+                    <h2 class="sm:text-lg text-2xl underline">Recent Articles</h2>
                 </header>
                 <PostSidebar />
             </section>
@@ -69,6 +69,10 @@ export default {
                 {
                     name: 'author',
                     content: this.$page.post.author.title
+                },
+                {
+                    name: 'canonical',
+                    content: this.$page.post.canonical
                 }
             ],
             bodyAttrs: {
@@ -84,10 +88,10 @@ query Post ($id: ID!) {
   post: post (id: $id) {
     id
     title
-    slug
     excerpt
     date (format: "D. MMMM YYYY")
     timeToRead
+    canonical
     category{
         id
         title
@@ -100,7 +104,7 @@ query Post ($id: ID!) {
     }
     excerpt
     content
-    cover (width: 860, blur: 10)
+    cover
   }
 }
 </page-query>
@@ -109,4 +113,22 @@ query Post ($id: ID!) {
     .sticky{
         top: 50px;
     }
+
+    p{
+       @apply font-body;
+    }
+
+    a {
+        word-break: break-word;
+    }
+
+    code[class*="language-"], pre[class*="language-"] {
+        text-shadow: unset !important;
+    }
+
+    .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string {
+        color: #ffa740;
+        background: transparent !important;
+    }
+
 </style>

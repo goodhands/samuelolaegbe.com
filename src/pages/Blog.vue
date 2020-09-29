@@ -4,11 +4,11 @@
             <div v-for="edge in $page.posts.edges" :key="edge.node.id" class="h-auto border-indigo-400">
                     <header class="flex flex-row justify-between mb-5">
                         <!-- Authour -->
-                        <g-image src="~/media/Sam.jpg" class="h-12 w-12 sm:w-24 sm:h-24 rounded"></g-image>
+                        <g-image src="~/media/Sam.jpg" class="h-12 w-12 sm:w-16 sm:h-16 rounded"></g-image>
 
                         <!-- Excerpt -->
                         <div class="excerpts flex flex-col ml-5 sm:ml-2 justify-between">
-                            <p class="h-12 overflow-hidden leading-4 text-tiny font-base sm:leading-snug sm:h-auto sm:text-base font-body">
+                            <p class="h-12 overflow-hidden leading-4 text-tiny font-base sm:leading-snug sm:h-16 sm:text-base font-body">
                                 {{ edge.node.excerpt }}    
                             </p>
                             <span class="hidden sm:flex flex-row items-baseline justify-between">
@@ -19,7 +19,7 @@
                     </header>
                     <!-- Cover -->
                     <g-link :to="edge.node.path">
-                        <g-image :src="edge.node.cover"></g-image>
+                        <g-image :src="edge.node.cover" width="300" height="300" fit="cover"></g-image>
                     </g-link>
 
                     <div>
