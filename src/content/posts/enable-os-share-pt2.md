@@ -1,5 +1,5 @@
 ---
-title: How to enable the OS supported share dialog from your website on mobile devices using Javascript Web Share API part 2
+title: Implement the OS supported share dialog on your website the using Javascript Web Share API 2
 date: 2020-01-09
 category: Javascript
 tags: ["tutorials", "code"]
