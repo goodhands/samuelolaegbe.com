@@ -4,7 +4,7 @@ date: 2020-01-09
 category: Javascript
 tags: ["tutorials", "code"]
 author: Samuel Olaegbe
-cover: https://cdn.hashnode.com/res/hashnode/image/upload/v1578042967363/VEz4gZODN.png
+cover: ./media/js-os-dialog.png
 excerpt: Common native apps like Twitter or any app that allows you to share content outside of them provide support for a dialog that allows you to share their content into other apps that are installed on your phone. In this tutorial, we will take a look at how this is done.
 canonical: https://devloader.hashnode.dev/how-to-enable-the-os-supported-share-dialog-from-your-website-on-mobile-devices-using-javascript-web-share-api-part-2-ck56bmc2p02y6mzs1u72pwmjn
 ---

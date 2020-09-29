@@ -48,6 +48,16 @@ module.exports = {
   transformers: {
     remark: {
       // global remark options
+      autolinkHeadings: true,
+      slug: true,
+      externalLinksTarget: '_blank',
+      externalLinksRel: ['nofollow', 'noopener', 'noreferrer'],
+      anchorClassName: 'icon icon-link',
+      plugins: [
+        ['@gridsome/remark-prismjs', {showLineNumbers: true}],
+        'remark-slug',
+        'remark-highlight.js'
+      ]
     }
   },
   siteUrl: 'https://goodhands.github.io/',

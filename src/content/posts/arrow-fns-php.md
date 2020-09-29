@@ -4,21 +4,21 @@ date: 2020-03-12
 category: PHP
 tags: ["php", "code", "release", "php7", "guide"]
 author: Samuel Olaegbe
-cover: https://cdn.hashnode.com/res/hashnode/image/upload/v1584016517463/CJQ1Az-nt.png
+cover: ./media/arrow-fn-php7-4.png
 canonical: 'https://devloader.hashnode.dev/using-arrow-functions-in-php-74-ck7oqwvor00jf64s1hdfr63ig'
 excerpt: PHP 7.4 has just been released with a shorter way of writing functions using the same arrow convention in languages like Javascript 
 ---
-Last November, PHP 7.4 was [released](https://www.php.net/releases/7_4_0.php) and the entire community was so excited with the new features that this release brings with it. You can now build faster apps with PHP and also be excited while you work on them with these new release! See the full list of features [https://www.php.net/releases/7_4_0.php](here).
+Last November, PHP 7.4 was [released](https://www.php.net/releases/7_4_0.php) and the entire community was so excited with the new features that this release brings with it. You can now build faster apps with PHP and also be excited while you work on them with these new release! See the full list of features [here](https://www.php.net/releases/7_4_0.php).
 
 Now let's dig into what the arrow function is and how to use them in your PHP based projects. If you're a JavaScript developer, the following code snippet should look familiar to you:
 
-````
+````js
 users.forEach(user => console.log(user.name) )
 ````
 
 This is a shorter version of what would have looked like this:
 
-````
+````php
 for(var x = 0; x <= users.length; x++){
      console.log(users[x].name)
 }
@@ -28,7 +28,8 @@ With the above code we were using multiple lines for something that could have b
 
 A simple example in PHP would be:
 
-````
+
+~~~php
 <?php
    //
    public function index(){
@@ -40,22 +41,22 @@ A simple example in PHP would be:
        )
 
    }
-````
+~~~
 
 Now, the code above could be simplified as follows (in PHP 7.4):
 
-````
+````php
 <?php
    Users::find(
       fn() => $post->author
    )
 ````
 
-### Syntax
-It is important to note that the `return` keyword is not used in the arrow function, although it returns a value from the expression on the right hand side.
+## Syntax
+It is important to note that the ``return`` keyword is not used in the arrow function, although it returns a value from the expression on the right hand side.
 
 A simple way to think of it is this:
-````
+````php
     $output = fn() => expression
 ````
 
@@ -65,7 +66,7 @@ A simple way to think of it is this:
 ## By-value variable binding
 The RFC for arrow functions in PHP 7.4 explains the use of by-value variable which basically binds a variable used in the closure such that it cannot be modified and any attempt to modify it will be silently ignored:
 
-````
+````php
 $x = "foo";
 
 $output = fn() => $x . " bar"; // this is silently ignored

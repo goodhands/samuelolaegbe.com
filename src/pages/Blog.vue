@@ -19,7 +19,7 @@
                     </header>
                     <!-- Cover -->
                     <g-link :to="edge.node.path">
-                        <g-image :src="edge.node.cover"></g-image>
+                        <g-image :src="edge.node.cover" width="300" height="300" fit="cover"></g-image>
                     </g-link>
 
                     <div>

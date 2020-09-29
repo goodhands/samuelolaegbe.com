@@ -69,5 +69,8 @@ module.exports = {
         '15': '15px'
       }
     }
-  }
+  },
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 }
