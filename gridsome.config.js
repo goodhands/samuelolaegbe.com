@@ -14,7 +14,7 @@ const postcssPlugins = [
 if (process.env.NODE_ENV === 'production') postcssPlugins.push(purgecss(require('./purgecss.config.js')))
 
 module.exports = {
-  siteName: 'Samuel Olaegbe —— Fullstack Software Developer',
+  siteName: 'Samuel Olaegbe | Software Developer',
   plugins: [
     {
       use: '@gridsome/plugin-google-analytics',

@@ -2,9 +2,9 @@ module.exports = {
     content: [
         './src/**/*.vue',
         './src/**/*.js',
-        './src/**/*.jsx',
+        // './src/**/*.jsx',
         './src/**/*.html',
-        './src/**/*.pug',
+        // './src/**/*.pug',
         './src/**/*.md',
     ],
     whitelist: [
@@ -19,7 +19,7 @@ module.exports = {
     extractors: [
         {
             extractor: content => content.match(/[A-z0-9-:\\/]+/g),
-            extensions: ['vue', 'js', 'jsx', 'md', 'html', 'pug'],
+            extensions: ['vue', 'js', 'html', 'md'],
         },
     ],
 }
