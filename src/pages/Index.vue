@@ -32,6 +32,18 @@
             <a href="https://expenseng.com" target="_blank" class="hover:border-b-2 font-body hover:text-black mr-2 text-base text-gray-500">expenseng.com</a>
           </div>
         </div>
+        <!-- Comments SDK -->
+        <div class="w-full sm:h-96">
+          <g-image src="~/media/comments-sdk.png"/>
+          <p class="font-body leading-relaxed mt-5">
+            <a href="https://github.com/goodhands/comments-sdk" target="_blank">Comments PHP Package</a> is an open source package I am currently
+            working on as an easy method of interfacting with this <a href="https://comments.microapi.com" target="_blank">comments microservice</a>.
+          </p>
+          <div class="flex flex-row justify-items-start mt-3">
+            <a href="https://github.com/goodhands/comments-sdk" target="_blank"  class="hover:border-b-2 font-body hover:text-black mr-2 text-base text-gray-500">Github</a>
+            <a href="https://packagist.org/packages/goodhands/comments-sdk" target="_blank" class="hover:border-b-2 font-body hover:text-black mr-2 text-base text-gray-500">Packagist</a>
+          </div>
+        </div>
         <!-- Vision App Project -->
         <div class="w-full sm:h-96">
           <g-image src="~/media/vision-app.png"/>
