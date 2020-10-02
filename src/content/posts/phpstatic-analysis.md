@@ -68,7 +68,7 @@ parameters:
     level: max
     paths:
         - src
-				- test
+			- test
 ```
 
 Using the configuration setting above, we can now omit the 3rd argument when running the `phpstan` command which is the `path` to our source code. This is now a valid command once you have `phpstan.neon` on your root directory:
