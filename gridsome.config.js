@@ -14,8 +14,12 @@ const postcssPlugins = [
 if (process.env.NODE_ENV === 'production') postcssPlugins.push(purgecss(require('./purgecss.config.js')))
 
 module.exports = {
+  siteUrl: 'https://goodhands.github.io',
   siteName: 'Samuel Olaegbe | Software Developer',
   plugins: [
+    {
+      use: '@gridsome/plugin-sitemap'
+    },
     {
       use: '@gridsome/plugin-google-analytics',
       options: {
