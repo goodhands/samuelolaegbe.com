@@ -8,8 +8,6 @@ cover: ./media/phpstan-cover.png
 excerpt: Static analysis is the method of testing your code for basic logical, runtime or typographical exceptions without actually executing the code.
 ---
 
-# Static analysis with Phpstan
-
 Testing your code is one way to ensure that you have a high quality codebase, which is one way to ensure the maintainability of your projects and also a way to ensure you don't ship broken features in your product. CI tools like [Travis CI](https://travis-ci.org/) help you to test your code each time you push to source control.
 
 Static analysis is the method of testing your code for basic logical, runtime or typographical exceptions without actually executing the code. 
@@ -68,7 +66,7 @@ parameters:
     level: max
     paths:
         - src
-				- test
+			- test
 ```
 
 Using the configuration setting above, we can now omit the 3rd argument when running the `phpstan` command which is the `path` to our source code. This is now a valid command once you have `phpstan.neon` on your root directory:
