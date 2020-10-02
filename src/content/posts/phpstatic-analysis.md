@@ -1,6 +1,6 @@
 ---
 title: Static analysis with Phpstan
-date: 2020-01-20
+date: 2020-10-01
 category: PHP
 tags: ["tooling"]
 author: Samuel Olaegbe
@@ -25,7 +25,7 @@ PHPStan checks for a couple of language constructs such as use of `instanceof`, 
 
 ## PHPStan: Static analysis in your favourite language
 
-    Recently, [PHPStan Pro](https://phpstan.org/blog/introducing-phpstan-pro) was announced by the creators of PHPStan and that is already looking very promising with continuous watch mode (hot-reloading in PHP?), a Web UI and an interactive fixer! The good news is you get to save a ton of time and keystrokes by finding errors sooner and PHPStan can suggest a fix for you and everyone is happier.
+Recently, [PHPStan Pro](https://phpstan.org/blog/introducing-phpstan-pro) was announced by the creators of PHPStan and that is already looking very promising with continuous watch mode (hot-reloading in PHP?), a Web UI and an interactive fixer! The good news is you get to save a ton of time and keystrokes by finding errors sooner and PHPStan can suggest a fix for you and everyone is happier.
 
 ### Using PHPStan in your projects
 
@@ -35,7 +35,7 @@ Below we will go over steps to use PHPStan in our projects.
 
 You can use PHPStan in any PHP project of your choice, for the purpose of this tutorial I have created a skeleton PHP library that I will be using. My `composer.json` file looks like this before installing `phpstan`
 
-![./media/phpstan.png](/media/phpstan.png)
+![My composer.json](./media/phpstan.png)
 
 A screenshot of my composer.json setup
 
