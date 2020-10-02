@@ -1,13 +1,17 @@
 <template>
     <Layout>
-        <section class="gap-16 grid grid-cols-1 sm:grid-cols-2 mt-10 mb-10">
+        <section class="gap-8 grid grid-cols-1 sm:grid-cols-2 mt-10 mb-10">
             <div v-for="edge in $page.posts.edges" :key="edge.node.id" class="h-auto border-indigo-400">
+                    <div>
+                        <g-link :to="edge.node.path">
+                            <h2 class="font-display leading-none mt-6 text-2xl">
+                                {{ edge.node.title }}
+                            </h2>
+                        </g-link>
+                    </div>
                     <header class="flex flex-row justify-between mb-5">
-                        <!-- Authour -->
-                        <g-image src="~/media/Sam.jpg" class="h-12 w-12 sm:w-16 sm:h-16 rounded"></g-image>
-
                         <!-- Excerpt -->
-                        <div class="excerpts flex flex-col ml-5 sm:ml-2 justify-between">
+                        <div class="excerpts flex flex-col justify-between">
                             <p class="h-12 overflow-hidden leading-4 text-tiny font-base sm:leading-snug sm:h-16 sm:text-base font-body">
                                 {{ edge.node.excerpt }}    
                             </p>
@@ -17,18 +21,6 @@
                             </span>
                         </div>
                     </header>
-                    <!-- Cover -->
-                    <g-link :to="edge.node.path">
-                        <g-image :src="edge.node.cover" width="300" height="300" fit="cover"></g-image>
-                    </g-link>
-
-                    <div>
-                        <g-link :to="edge.node.path">
-                            <h2 class="font-display leading-none mt-6 text-2xl">
-                                {{ edge.node.title }}
-                            </h2>
-                        </g-link>
-                    </div>
             </div>
         </section>
     </Layout>
