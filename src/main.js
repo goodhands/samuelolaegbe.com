@@ -15,4 +15,9 @@ export default function (Vue, { router, head, isClient }) {
     rel: 'stylesheet',
     href: 'https://fonts.googleapis.com/css2?family=Cabin&family=Crimson+Text:wght@700&display=swap'
   })
+
+  head.meta.push({
+    name: 'google-site-verification',
+    content: 'n08k_-VUMxOElIwQG1EydSmCpreLYnx-vm5FqJODRX0'
+  })
 }
