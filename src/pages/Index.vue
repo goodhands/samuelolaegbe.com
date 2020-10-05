@@ -1,17 +1,20 @@
 <template>
   <Layout>
-    <div class="container flex flex-col justify-center h-screen">
-      <h1 class="font-bold leading-none text-4xl">
-        Hi, my name is <br/>Samuel Ola-e-gbe
-      </h1>
-      <!-- Short bio -->
-      <div class="container mt-10 sm:w-128">
-        <p class="text-xl font-body">
-          Software Engineer with a passion for building products that addresses real life
-          challenges. I build for the web and the good of all. Open Source Contributor. 
-          Vue.js & Laravel fanboy.
-        </p>
+    <div class="flex flex-row justify-between items-center">
+      <div class="container flex flex-col justify-center h-screen">
+        <h1 class="font-bold leading-none text-4xl">
+          Hi, my name is <br/>Samuel Ola-e-gbe
+        </h1>
+        <!-- Short bio -->
+        <div class="container mt-10 sm:w-128">
+          <p class="text-xl font-body">
+            Software Engineer with a passion for building products that addresses real life
+            challenges. I build for the web and the good of all. Open Source Contributor. 
+            Vue.js & Laravel fanboy.
+          </p>
+        </div>
       </div>
+      <g-image src="~/media/Sam.jpg" class="h-96 rounded-full w-96"></g-image>
     </div>
 
     <!-- Projects section -->
