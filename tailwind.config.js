@@ -72,4 +72,15 @@ module.exports = {
   plugins: [
     require('@tailwindcss/typography'),
   ],
+  future: {
+    purgeLayersByDefault: false,
+  },
+  purge: {
+    layers: ['utilities'],
+    content: [
+      './src/**/*.vue',
+      './src/**/*.js',
+      './src/**/*.html',
+    ],
+  },
 }
