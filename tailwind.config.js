@@ -82,5 +82,18 @@ module.exports = {
       './src/**/*.js',
       './src/**/*.html',
     ],
+    options: {
+      whitelist: [
+          'from-red-400',
+          'prose',
+          'prose-xl',
+          'language-*',
+          'language-json',
+          'language-php',
+          'language-js',
+          'language-html',
+          'language-sql'
+      ],
+    }
   },
 }
