@@ -12,6 +12,8 @@ module.exports = {
         'html',
         'img',
         'a',
+        'prose',
+        'prose-xl',
         'g-image',
         'g-image--lazy',
         'g-image--loaded',
