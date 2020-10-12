@@ -3,7 +3,6 @@
         <nav class="nav font-body hidden sm:flex">
             <g-link class="nav__link" to="/experience/">Experience</g-link>
             <g-link class="nav__link" to="/projects/">Projects</g-link>
-            <g-link class="nav__link" to="/blog/">Blog</g-link>
             <g-link class="nav__link" to="/hire/">Hire me</g-link>
         </nav> 
 
@@ -44,7 +43,6 @@ export default {
     methods: {
         openMenu(){
             this.menuOpened = !this.menuOpened;
-            document.querySelector('body').classList += 'overflow-hidden';
         }
     },
 }

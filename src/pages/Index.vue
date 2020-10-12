@@ -1,17 +1,20 @@
 <template>
   <Layout>
-    <div class="container flex flex-col justify-center h-screen">
-      <h1 class="font-bold leading-none text-4xl">
-        Hi, my name is <br/>Samuel Ola-e-gbe
-      </h1>
-      <!-- Short bio -->
-      <div class="container mt-10 sm:w-128">
-        <p class="text-xl font-body">
-          Software Engineer with a passion for building products that addresses real life
-          challenges. I build for the web and the good of all. Open Source Contributor. 
-          Vue.js & Laravel fanboy.
-        </p>
+    <div class="flex flex-col-reverse items-center justify-between sm:flex-row">
+      <div class="container flex flex-col justify-center my-10 sm:my-0 sm:h-screen">
+        <h1 class="font-bold leading-none sm:text-left text-center text-2xl sm:text-4xl">
+          Hi, my name is <br/>Samuel Ola-e-gbe
+        </h1>
+        <!-- Short bio -->
+        <div class="container mt-10 sm:w-128">
+          <p class="text-xl font-body">
+            Software Engineer with a passion for building products that addresses real life
+            challenges. I build for the web and the good of all. Open Source Contributor. 
+            Vue.js & Laravel fanboy.
+          </p>
+        </div>
       </div>
+      <g-image src="~/media/Sam.jpg" class="sm:h-96 rounded-full sm:w-96"></g-image>
     </div>
 
     <!-- Projects section -->
@@ -19,56 +22,19 @@
       <h4 class="heading text-2xl leading-tight">Projects</h4>
       <span class="font-body">See some of my recent projects</span>
 
-      <div class="gap-16 grid grid-cols-1 sm:grid-cols-2 mt-10">
+      <div class="sm:gap-y-0 gap-y-10 gap-x-16 grid grid-cols-1 sm:grid-cols-2 mt-10">
         <!-- Expense NG Project -->
-        <div class="w-full sm:h-96">
-          <g-image src="~/media/expenseng-project-header.png"/>
-          <p class="font-body leading-relaxed mt-5">
-            <a href="https://expenseng.com" target="_blank">ExpenseNG</a> is an expense tracking app developed to monitor the
-            the expenses of the Federal Government of Nigeria.
+        <div class="w-full sm:h-128" v-for="project in $page.projects.edges" :key="project.node.id">
+          <g-image :src="project.node.cover"/>
+          <h2 class="text-2xl leading-none mt-5">
+            {{ project.node.name }}
+          </h2>
+          <p class="font-body leading-relaxed">
+            {{ project.node.description }}
           </p>
-          <div class="flex flex-row justify-items-start mt-3">
-            <a href="https://github.com/expenseng/expenseng" target="_blank"  class="hover:border-b-2 font-body hover:text-black mr-2 text-base text-gray-500">Github</a>
-            <a href="https://expenseng.com" target="_blank" class="hover:border-b-2 font-body hover:text-black mr-2 text-base text-gray-500">expenseng.com</a>
-          </div>
-        </div>
-        <!-- Comments SDK -->
-        <div class="w-full sm:h-96">
-          <g-image src="~/media/comments-sdk.png"/>
-          <p class="font-body leading-relaxed mt-5">
-            <a href="https://github.com/goodhands/comments-sdk" target="_blank">Comments PHP Package</a> is an open source package I am currently
-            working on as an easy method of interfacting with this <a href="https://comments.microapi.com" target="_blank">comments microservice</a>.
-          </p>
-          <div class="flex flex-row justify-items-start mt-3">
-            <a href="https://github.com/goodhands/comments-sdk" target="_blank"  class="hover:border-b-2 font-body hover:text-black mr-2 text-base text-gray-500">Github</a>
-            <a href="https://packagist.org/packages/goodhands/comments-sdk" target="_blank" class="hover:border-b-2 font-body hover:text-black mr-2 text-base text-gray-500">Packagist</a>
-          </div>
-        </div>
-        <!-- Vision App Project -->
-        <div class="w-full sm:h-96">
-          <g-image src="~/media/vision-app.png"/>
-          <p class="font-body leading-relaxed mt-5">
-            <a href="#" target="_blank">Image Vision</a> is a website I built for 
-            labelling images with Google Vision API. Integrates with Cloudinary to upload and 
-            label multiple images at once from various sources such as social media profiles, cloud storage, etc.
-          </p>
-          <div class="flex flex-row justify-items-start mt-3">
-            <a href="https://github.com/goodhands/vision-app" target="_blank"  class="hover:border-b-2 font-body hover:text-black mr-2 text-base text-gray-500">Github</a>
-          </div>
-        </div>
-        <!-- Devloader -->
-        <div class="w-full sm:h-96">
-          <g-image src="~/media/website-devloader-project.png"/>
-          <p class="font-body leading-relaxed mt-5">
-            <a href="https://devloader.herokuapp.com/" target="_blank">Devloader Blog</a> is a hobby project I worked on while learning how to build single page apps with Vue.js and Laravel
-            in 2019. Built with Laravel + Vue.js + WP REST API
-          </p>
-          <div class="flex flex-row justify-items-start mt-3">
-            <a href="https://github.com/goodhands/devloader1.0" target="_blank"  class="hover:border-b-2 font-body hover:text-black mr-2 text-base text-gray-500">Github</a>
-            <a href="https://devloader.herokuapp.com/" target="_blank" class="hover:border-b-2 font-body hover:text-black mr-2 text-base text-gray-500">devloader app</a>
-          </div>
         </div>
       </div>
+
     </div>
 
     <!-- Contact Form -->
@@ -89,11 +55,11 @@
 </template>
 
 <script>
-export default {
-  metaInfo: {
-    title: 'Hello, world!'
+  export default {
+    metaInfo: {
+      title: 'Hello, world!'
+    },
   }
-}
 </script>
 
 <style>
@@ -101,3 +67,17 @@ export default {
   margin-right: 1rem;
 }
 </style>
+
+<page-query>
+    query{
+        projects: allProjects{
+            edges{
+                node{
+                    name
+                    cover
+                    description
+                }
+            }
+        }
+    }
+</page-query>

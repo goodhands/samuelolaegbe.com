@@ -16,6 +16,7 @@ if (process.env.NODE_ENV === 'production') postcssPlugins.push(purgecss(require(
 module.exports = {
   siteUrl: 'https://goodhands.github.io',
   siteName: 'Samuel Olaegbe | Software Developer',
+  titleTemplate: '%s - Samuel Olaegbe',
   plugins: [
     {
       use: '@gridsome/plugin-sitemap'
@@ -42,11 +43,19 @@ module.exports = {
           }
         }
       }
+    },
+    {
+      use: '@gridsome/source-filesystem',
+      options: {
+        typeName: 'Projects',
+        path: 'src/content/projects/*.yaml',
+      }
     }
   ],
   templates:{
     Post: '/:title',
     Author: '/author/:title',
+    Projects: '/project/:name',
     Category: '/category/:title',
   },
   transformers: {
@@ -58,9 +67,8 @@ module.exports = {
       externalLinksRel: ['nofollow', 'noopener', 'noreferrer'],
       anchorClassName: 'icon icon-link',
       plugins: [
-        ['@gridsome/remark-prismjs', {showLineNumbers: true}],
-        'remark-slug',
-        'remark-highlight.js'
+        '@gridsome/remark-prismjs',
+        // 'remark-slug',
       ]
     }
   },
