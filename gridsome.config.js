@@ -42,11 +42,19 @@ module.exports = {
           }
         }
       }
+    },
+    {
+      use: '@gridsome/source-filesystem',
+      options: {
+        typeName: 'Projects',
+        path: 'src/content/projects/*.yaml',
+      }
     }
   ],
   templates:{
     Post: '/:title',
     Author: '/author/:title',
+    Projects: '/project/:name',
     Category: '/category/:title',
   },
   transformers: {

@@ -43,7 +43,6 @@ export default {
     methods: {
         openMenu(){
             this.menuOpened = !this.menuOpened;
-            document.querySelector('body').classList += 'overflow-hidden';
         }
     },
 }

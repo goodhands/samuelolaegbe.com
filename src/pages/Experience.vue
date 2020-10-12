@@ -69,7 +69,7 @@
                                 <p class="mb-3 text-xl text-secondary">
                                     {{ work.summary }}
                                 </p>
-                                <ul class="list-disc text-lg list-inside list-square text-secondary">
+                                <ul class="list-disc text-lg list-inside text-secondary">
                                     <li v-for="(achievements, index) in work.achievements" :key="index" class="break-words">
                                         {{ achievements }}
                                     </li>
