@@ -1,5 +1,5 @@
 <template>
-  <div class="layout">
+  <div class="h-full layout mb-12">
     <header class="header">
       <g-link class="index font-body z-50" to="/" title="Samuel Olaegbe">SO</g-link>
       <Navbar/>
