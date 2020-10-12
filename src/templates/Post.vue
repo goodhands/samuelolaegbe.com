@@ -75,9 +75,6 @@ export default {
                     content: this.$page.post.canonical
                 }
             ],
-            bodyAttrs: {
-                class: 'border-15 border-black'
-            }
         }
     }
 }
