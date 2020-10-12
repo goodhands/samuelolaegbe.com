@@ -5,15 +5,17 @@ module.exports = {
         // './src/**/*.jsx',
         './src/**/*.html',
         // './src/**/*.pug',
-        './src/**/*.md',
+        // './src/**/*.md',
     ],
     whitelist: [
         'body',
         'html',
+        'pre',
         'img',
         'a',
         'prose',
         'prose-xl',
+        'prose code',
         'g-image',
         'g-image--lazy',
         'g-image--loaded',
@@ -21,7 +23,7 @@ module.exports = {
     extractors: [
         {
             extractor: content => content.match(/[A-z0-9-:\\/]+/g),
-            extensions: ['vue', 'js', 'html', 'md'],
+            extensions: ['vue', 'js', 'html'],
         },
     ],
 }
