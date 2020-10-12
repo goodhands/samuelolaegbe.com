@@ -60,7 +60,7 @@ export default {
     
     metaInfo () {
         return {
-            title: this.$page.post.title + ' by ' + this.$page.post.author.title,
+            title: this.$page.post.title,
             meta: [
                 {
                     name: 'description',

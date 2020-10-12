@@ -28,7 +28,9 @@
 
 <script>
     export default {
-        
+        metaInfo: {
+            title: 'Technical Articles'
+        },
     }
 </script>
 

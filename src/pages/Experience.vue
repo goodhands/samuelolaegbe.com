@@ -107,6 +107,9 @@ query {
     import experience from '@/content/experience.yaml';
     
     export default {
+        metaInfo: {
+            title: 'Experienced Software Developer'
+        },
         data() {
             return {
                 experience: experience.experiences,
