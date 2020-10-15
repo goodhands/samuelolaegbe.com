@@ -31,6 +31,8 @@ module.exports = {
     extend: {
       colors: {
         cyan: '#9cdbff',
+        primary: "#FFF7EF",
+        solidblue: "#2E2AFB",
         secondary: 'rgba(0, 0, 0, 0.5)'
       },
       margin:{

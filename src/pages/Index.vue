@@ -18,7 +18,7 @@
     </div>
 
     <!-- Projects section -->
-    <div class="container mb-40">
+    <div class="container mb-20">
       <h4 class="heading text-2xl leading-tight">Projects</h4>
       <span class="font-body">See some of my recent projects</span>
 
@@ -38,12 +38,27 @@
     </div>
 
     <!-- Contact Form -->
-    <div class="container mb-40">
-      
+    <div class="container mb-10">
+      <h4 class="heading text-2xl leading-tight">Articles</h4>
+      <span class="font-body">I occassionally write articles about the problems I faced while coding and how I solved them</span>
+
+      <div class="sm:gap-y-0 gap-y-10 gap-x-16 grid grid-cols-2 sm:grid-cols-2 mt-10">
+        <div class="w-full sm:h-auto mb-10 flex flex-col" v-for="post in $page.posts.edges" :key="post.node.id">
+          <g-link :to="post.node.path">
+            <div class="w-full sm:h-64 overflow-hidden">
+              <g-image :src="post.node.cover"></g-image>
+            </div>
+            <h2 class="text-2xl leading-none mt-4">
+              {{ post.node.title }}
+            </h2>
+          </g-link>
+        </div>
+      </div>
+
     </div>
 
     <!-- Contact section -->
-    <div class="container h-screen flex flex-col justify-center h-screen">
+    <div class="container h-screen flex flex-col justify-center">
       <div class="flex flex-row justify-evenly">
         <a href="https://linkedin.com/in/olaegbe-samuel" class="font-body">LinkedIn</a>
         <a href="https://twitter.com/devloader" class="font-body">Twitter</a>
@@ -78,6 +93,17 @@
                     description
                 }
             }
+        }
+
+        posts: allPost{
+          edges{
+            node{
+              title
+              cover
+              path
+              excerpt
+            }
+          }
         }
     }
 </page-query>

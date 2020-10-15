@@ -3,9 +3,24 @@
         <section class="flex flex-col sm:flex-row sm:space-x-10 w-full">
             <section class="article relative sm:w-12/12">
                 <div>
+                    <div class="bg-primary border-15 relative border-solid border-solidblue px-8 flex flex-row items-center justify-evenly py-8">
+                        <div class="post-title flex flex-col">
+                            <span class="font-body italic text-tiny">MySQL</span>
+                            <h2 class="font-bold leading-tight text-2xl">
+                                Optimizing Database 
+                                Queries in large 
+                                applications
+                            </h2>
+                            <div class="absolute bottom-0 mb-4">
+                                <h2>By Samuel Olaegbe</h2>
+                                <p>https://goodhands.github.io</p>
+                            </div>
+                        </div>
+                        <g-image src="~/media/Sam.jpg" class="h-48 rounded-full w-48"></g-image>
+                    </div>
                     <header class="my-10">
                         <g-link to="/blog/" class="flex flex-row items-center">
-                            <svg class="flex h-4 inline mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg class="h-4 inline mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
                             </svg> Go back
                         </g-link>
@@ -54,6 +69,9 @@ export default {
             
         }
     },
+    mounted() {
+        this.OgGenerator(this.$page.post);
+    },
     components:{
         PostSidebar
     },
@@ -88,6 +106,7 @@ query Post ($id: ID!) {
     excerpt
     date (format: "D. MMMM YYYY")
     timeToRead
+    path
     canonical
     category{
         id
