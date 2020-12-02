@@ -19,9 +19,6 @@ module.exports = {
   titleTemplate: '%s - Samuel Olaegbe',
   plugins: [
     {
-      use: 'gridsome-plugin-og-generator'
-    },
-    {
       use: '@gridsome/plugin-sitemap'
     },
     {
