@@ -14,7 +14,7 @@ const postcssPlugins = [
 if (process.env.NODE_ENV === 'production') postcssPlugins.push(purgecss(require('./purgecss.config.js')))
 
 module.exports = {
-  siteUrl: 'https://goodhands.github.io',
+  siteUrl: 'https://samuelolaegbe.com',
   siteName: 'Samuel Olaegbe | Software Developer',
   titleTemplate: '%s - Samuel Olaegbe',
   plugins: [
@@ -72,7 +72,6 @@ module.exports = {
       ]
     }
   },
-  siteUrl: 'https://goodhands.github.io/',
   css: {
     loaderOptions: {
         postcss: {
