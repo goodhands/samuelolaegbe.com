@@ -18,6 +18,6 @@ export default function (Vue, { router, head, isClient }) {
 
   head.meta.push({
     name: 'google-site-verification',
-    content: 'GHcfxvGLJCSbxU9FcbW0nZ1KVzYIxzHS7OwdVQa71'
+    content: 'GHcfxvGLJCSbxU9FcbW0nZ1KVzYIxzHS7OwdVQa71-g'
   })
 }
