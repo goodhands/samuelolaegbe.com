@@ -1,4 +1,14 @@
 experiences:
+  - company: Brightminded Ltd
+    role: Software Developer
+    start: Jan 2021
+    end: Present
+    summary: "Working with the software development team to create bespoke and scalable websites"
+    achievements: [
+      "Developed bespoke Wordpress themes using Bedrock and other frontend technologies like SASS, React, etc",
+      "Led development of Laravel based projects to build robust and scalable web applications",
+      "Introduced and encourage the use of new tools and technologies",
+    ]
   - company: HNG Bootcamp
     role: Backend Engineer
     start: Jun 2020
@@ -66,10 +76,12 @@ tools:
   - Netlify
   - PHPStorm
   - Heroku
+  - Nuxt
 
 skills:
   - PHP
   - Vue.js
+  - React
   - TailwindCSS
   - Git & Github
   - Docker
@@ -79,3 +91,4 @@ skills:
   - Nginx
   - MySQL
   - PHP CS
+  - LESS

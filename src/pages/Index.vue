@@ -38,6 +38,11 @@
     </div>
 
     <!-- Contact Form -->
+    <form action="https://formspree.io/f/mqkgazzz" method="POST">
+      <input type="text" name="name">
+      <input type="email" name="_replyto">
+      <input type="submit" value="Send">
+    </form>
 
     <!-- Contact section -->
     <div class="container h-screen flex flex-col justify-center">

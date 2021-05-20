@@ -72,7 +72,8 @@ module.exports = {
     }
   },
   plugins: [
-    require('@tailwindcss/typography'),
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/typography')
   ],
   future: {
     purgeLayersByDefault: false,
