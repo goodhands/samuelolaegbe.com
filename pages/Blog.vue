@@ -13,7 +13,7 @@
                         <!-- Excerpt -->
                         <div class="excerpts flex flex-col justify-between">
                             <p class="h-12 overflow-hidden leading-4 text-tiny font-base sm:leading-snug sm:h-16 sm:text-base font-body">
-                                {{ edge.node.excerpt }}    
+                                {{ edge.node.excerpt }}
                             </p>
                             <span class="hidden sm:flex flex-row items-baseline justify-between">
                                 <g-link class="active font-body text-blue-800 text-tiny" :to="edge.node.category.path">{{ edge.node.category.title }}</g-link>
@@ -33,25 +33,3 @@
         },
     }
 </script>
-
-<page-query>
-    query{
-        posts: allPost{
-            edges{
-                node{
-                    id
-                    path
-                    cover
-                    excerpt
-                    category{
-                        id
-                        title
-                        path
-                    }
-                    date (format: "D. MMMM YYYY")
-                    title
-                }
-            }
-        }
-    }
-</page-query>
