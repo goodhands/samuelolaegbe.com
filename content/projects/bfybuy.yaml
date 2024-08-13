@@ -1,0 +1,36 @@
+name: Before you buy
+description: A Telegram bot that uses data from UK grocery stores to help you make informed decisions before you buy
+cover: ./media/bfybuy.jpg
+links: {
+  live: 'https://t.me/BfybyBot',
+  github: 'https://github.com/bfybuy/telegram'
+}
+spotlight:
+  - cover: ./media/arrow-fn-php7-4.png
+  - index:
+    - name: Web crawler
+      description: We added a web crawler
+      tools: ['Firehose', 'Other tools']
+    - name: Twitter Bot
+      description: We added a Twitter bot
+      tools: ['Tweet bot']
+problems:
+  - cover: ./media/expenseng-project-header.png
+  - index:
+    - Nigerian politicians were always stealing money and padding budgets
+    - We wanted a way to reduce the stealing
+purpose:
+  - cover: ./media/expenseng-project-header.png
+  - index:
+    - To make clear how the government spends money
+    - To allow the citizens query the expenses of the government
+process:
+  - cover: ./media/expenseng-project-header.png
+  - index:
+    - Designers brainstormed on sketches
+    - We iterated on content
+stack:
+  - name: Laravel
+    description: We needed a fast way to prototype this and also do that in a controlled environment
+  - name: Vue.js
+    description: The progressive framework
