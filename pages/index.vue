@@ -104,7 +104,7 @@
         <a href="https://linkedin.com/in/olaegbe-samuel" class="font-body">LinkedIn</a>
         <a href="https://twitter.com/devloader" class="font-body">Twitter</a>
         <a href="https://github.com/goodhands" class="font-body">Github</a>
-        <a href="https://drive.google.com/file/d/1ZwhXpf08p4M-tGZ6Btv4Zgg6WH8qUBoX/view?usp=sharing" class="font-body">Resume</a>
+        <a href="https://docs.google.com/document/d/e/2PACX-1vQKYpfgoCuCIU0uanOcNO-4d_oQ557DnLKUQTnXOIZI_xSVSA4ElWE2jy9qemnubfj7MfHUktTdAA4_/pub" class="font-body">Resume</a>
       </div>
     </div>
   </div>
@@ -116,6 +116,11 @@
     const response = await queryContent('/projects').find();
     return response;
   })
+
+  definePageMeta({
+    title: 'Welcome'
+  })
+
 </script>
 
 <style>

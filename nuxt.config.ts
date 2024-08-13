@@ -11,10 +11,11 @@ export default defineNuxtConfig({
     "@zadigetvoltaire/nuxt-gtm"
   ],
   gtm: {
-    id: 'UA-85677153-3'
+    id: 'GTM-K3JCQ48T'
   },
   site: {
     url: 'https://samuelolaegbe.netlify.app',
     name: 'Samuel Olaegbe | Software Engineer',
+    title: 'Samuel Olaegbe | Software Engineer',
   },
 })

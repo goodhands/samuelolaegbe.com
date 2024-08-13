@@ -8,14 +8,14 @@
   </div>
 </template>
 
-<script>
-import Navbar from '@/components/Navbar.vue';
-export default {
-  components:{
-    Navbar
-  },
-}
+<script setup lang="ts">
+  const route = useRoute()
+
+  useHead({
+    meta: [{ property: 'og:title', content: `Samuel Olaegbe | Software Engineer - ${route.meta.title}` }]
+})
 </script>
+
 <style>
 body {
   font-family: 'Crimson Text', serif, Helvetica, Arial, sans-serif;

@@ -90,7 +90,9 @@
         return response;
     })
 
-    console.log({data})
+    definePageMeta({
+        title: 'Experienced Software Engineer',
+    })
 </script>
 
 <style>
