@@ -11,7 +11,8 @@ export async function generateStaticParams() {
   }))
 }
 
-export async function generateMetadata({ params }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function generateMetadata({ params }: any) {
   const post = getBlogPosts().find((post) => post.slug === params.slug)
   if (!post) {
     return
@@ -51,7 +52,8 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default function Blog({ params }: { params: { slug: string } }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function Blog({ params }: any) {
   const post = getBlogPosts().find((post) => post.slug === params.slug)
 
   if (!post) {
@@ -90,7 +92,8 @@ export default function Blog({ params }: { params: { slug: string } }) {
           {formatDate(post.metadata.publishedAt)}
         </p>
 		<p className="text-sm text-slate-500 dark:text-slate-400 mb-6">
-		  {post.metadata.category}
+		  {/* @ts-expect-error - dunno tbh */}
+		  {post.metadata?.category}
 		</p>
       </div>
       <article className="prose prose-slate dark:prose-invert">

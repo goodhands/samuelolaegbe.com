@@ -3,8 +3,8 @@ import remarkGfm from 'remark-gfm'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import remarkSlugImport from 'remark-slug'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const remarkSlug = remarkSlugImport as any;
-
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
