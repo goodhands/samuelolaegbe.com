@@ -1,0 +1,211 @@
+---
+title: How to authenticate your frontend apps with Laravel Sanctum
+publishedAt: 2020-12-14
+category: Laravel
+tags: ["tooling"]
+author: Samuel Olaegbe
+cover: ./media/phpstan-cover.png
+excerpt: One popular question I have seen everywhere is people asking: "Should I use Passport or Sanctum to authenticate my API"? I have seen people answer this in various ways, but my answer is: Use Sanctum when you need to create a frontend application to interact with your API.
+---
+
+## Passport or Sanctum?
+
+One popular question I have seen everywhere is people asking: "Should I use Passport or Sanctum to authenticate my API"? I have seen people answer this in various ways, but my answer is: Use Sanctum when you need to create a frontend application to interact with your API.
+
+**Sanctum** provides authentication for your frontend application without the need for tokens unlike Passport, and that isn't to say Sanctum isn't capable of issuing tokens, you can also issue tokens with abilities (read: scope as used in Oauth) to users to authenticate all requests made to your API.
+
+The two core functionalities Sanctum provides are:
+
+- Stateful authentication
+- API Tokens
+
+I love to use Sanctum when building an API backend with Laravel that will interact with a frontend application as it's simple and straight-forward to use for that purpose.
+
+**Passport**
+
+Passport is a much more compact tool than Sanctum, with a lot of options for authenticating your users. This is more appropriate when building an application that offers [Oauth2](https://oauth2.thephpleague.com/) capabilities, to enable your users to connect an external service with your application and also gives you the capability to grant each application scopes and abilities.
+
+If you want to build an application that needs to issue [Oauth2](https://oauth2.thephpleague.com/) tokens to external applications that may connect with a tool like [Socialite](https://laravel.com/docs/8.x/socialite#introduction), then Passport is definitely the right choice.
+
+### Installing sanctum in your Laravel application
+
+The [Laravel docs](https://laravel.com/docs/8.x/sanctum) provide the information needed to set up Sanctum for your application, but I still got confused about setting it up and deciding what was right for my use case between the API tokens option and SPA Authentication option. So I have written this guide hoping it will help anyone else setting Sanctum for the first time.
+
+**Setting up**:
+
+- Follow the [installation guide](https://laravel.com/docs/8.x/sanctum)
+- Leave the default options for model name and migrations
+
+### API Tokens or SPA Authentication
+
+Sanctum provides these two authentication methods to you by default and you do not have to use the two at once. I have put together this shortlist to determine which one is best to use:
+
+**SPA Authentication:**
+
+- Stateful authentication without tokens.
+- CSRF protection
+
+**API Tokens:**
+
+- Issue tokens to users
+- Authenticate users with Bearer Authorization
+- Attach `abilities` to tokens for access control
+
+> To use the SPA Authentication, your SPA has to be on the same domain as your Laravel API.
+
+The stateful authentication method uses Laravel sessions to authenticate the user and thus eliminating the need for tokens, and I think that is super smart!
+
+To authenticate with this method, note that you need to use the `web` middleware as the Laravel session is only available through this middleware.
+
+You could write your own custom authentication or use any of [Laravel starter kits](https://laravel.com/docs/8.x/starter-kits) to authenticate, I love to use [Breeze](https://laravel.com/docs/8.x/starter-kits#laravel-breeze) and take out the views as this is an API only application.
+
+### Configuring your 3rd party domains
+
+In order for Sanctum to maintain stateful authentication, you need to configure your application's domain names from `config/sanctum.php`:
+
+```php
+/*
+|--------------------------------------------------------------------------
+| Stateful Domains
+|--------------------------------------------------------------------------
+|
+| Requests from the following domains / hosts will receive stateful API
+| authentication cookies. Typically, these should include your local
+| and production domains which access your API via a frontend SPA.
+|
+*/
+
+'stateful' => explode(',', env(
+  'SANCTUM_STATEFUL_DOMAINS',
+  'localhost,localhost:8000,localhost:8080,::1'
+)),
+```
+
+This setting notifies Sanctum on which domains it should keep your users logged in using cookie based session authentication. We want our users to remain logged-in on our SPA and also our API.
+
+While in development, you want to make sure you add the different port names for your Laravel application and your SPA.
+
+Above we have added `localhost:8000` which is same as `127.0.0.1:8000` for our Laravel application and we have also added `localhost:8080` which the URL of our SPA which is also running locally. Of course, you can change this to whatever the URL of your SPA is. I am using a Vue CLI app and the default URL is `localhost:8080`
+
+Note that you have to update these settings in our environment variables once our app is deployed.
+
+> You should clear your application cache with `php artisan config:cache` after changing your config files to make sure the new changes are working.
+
+### Add the Sanctum middleware
+
+Follow the [docs](https://laravel.com/docs/8.x/sanctum#sanctum-middleware) to add the Sanctum middleware.
+
+### CORS
+
+If your SPA is on a different URL like we have in this tutorial, you will come across cross-site resource sharing errors (cors), but do not fret, I will show you how to overcome those. First you should make sure the API paths you will be accessing via the SPA are listed in the `paths` key of the `config/cors.php` file:
+
+```jsx
+/*
+|--------------------------------------------------------------------------
+| Cross-Origin Resource Sharing (CORS) Configuration
+|--------------------------------------------------------------------------
+|
+| Here you may configure your settings for cross-origin resource sharing
+| or "CORS". This determines what cross-origin operations may execute
+| in web browsers. You are free to adjust these settings as needed.
+|
+| To learn more: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+|
+*/
+
+'paths' => [
+    'api/*',
+    'sanctum/csrf-cookie'
+		//define other custom paths
+],
+```
+
+Above, we have defined the paths we will be accessing on the API. The first is the `/api/*` path which will be handling all requests to our API routes in the `routes/api.php` file. We have also defined the `sanctum/csrf-cookie` path which will set the headers for our application to use in subsequent requests to the backend. More details on this can be found in the **Authentication** section.
+
+> TIP: You may configure the prefix for the routes defined in `routes/api.php` from `App\Providers\RouteServiceProvider.php`, or even set a new prefix for a new file path in the routes folder.
+
+While testing, you should set your `domains` key in `config/sessions.php` to `[localhost](http://localhost)`:
+
+```php
+'domain' => 'localhost',
+```
+
+On the frontend, you should use a library like [Axios](https://www.npmjs.com/package/axios) with Vue or React which already helps you set your headers based on the response from the server during the initial authentication request as we will see below.
+
+Further, you should set the `withCredentials` option of axios to true:
+
+```jsx
+axios.defaults.withCredentials = true;
+```
+
+To enable Laravel transform XHTTP (or Ajax) responses to JSON instead of the regular redirect or view responses, you should set the `Accept` header to `application/json` when making requests.
+
+In a Vue CLI app, this can be done from the `main.js` file:
+
+```jsx
+import Vue from 'vue'
+import App from './App.vue'
+import axios from 'axios';
+
+Vue.config.productionTip = false;
+axios.defaults.headers.common['Accept'] = 'application/json';
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+axios.defaults.withCredentials = true;
+```
+
+### Authentication
+
+The method of authentication Sanctum uses is similar to the regular authentication method in Laravel. The only difference is that you have to first make a post request to `sanctum/csrf-token` from your frontend application:
+
+```jsx
+methods:{
+    login(){
+			//initial request to set Laravel authentication cookies
+      axios.get('http://localhost:8000/sanctum/csrf-cookie').then(() => {
+				//make a request to /login
+        axios.post('http://localhost:8000/login', {
+          email: "olaegbesamuel@gmail.com",
+          password: "strong-password"
+        }).then(res => {
+					//do anything with returned response
+        })
+      });
+    },
+}
+```
+
+### Get authenticated user from a protected route
+
+To protect a route with Sanctum, you need to apply the `auth:sanctum` middleware to the route definition:
+
+```php
+//api.php
+Route::middleware('auth:sanctum')->post('/me', function (Request $request) {
+    return auth()->user();
+});
+```
+
+If Sanctum was set up correctly you should get the authenticated user back:
+
+```json
+{
+"id":1,
+"name":"Samuel Olaegbe",
+"email":"olaegbesamuel@gmail.com",
+"email_verified_at":null,
+"created_at":"2020-12-12T23:19:04.000000Z",
+"updated_at":"2020-12-12T23:19:04.000000Z"
+}
+```
+
+## Conclusion
+
+While building a Laravel powered API, this is one of the problems we are faced with and I had to do a lot of research to get this working solution that has worked for me and thought to share it here. This post should be a guide on best practices on how to authenticate your first-party SPA with Sanctum and would be updated regularly.
+
+Taylor promised some additional documentation on how to do this well:
+
+%[https://twitter.com/taylorotwell/status/1334587723269763074?s=20]
+
+Let me know if you have any questions or additions and I will be happy to discuss them!
+
+PS: Subscribe to my blog so you could receive an email each time I publish content.

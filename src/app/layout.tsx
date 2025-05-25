@@ -20,7 +20,7 @@ const display = DM_Serif_Display({
 
 export const metadata: Metadata = {
   title: {
-    default: "Samuel Olaegbe",
+    default: "Samuel Olaegbe | Software Engineer",
     template: "%s | Samuel Olaegbe",
   },
   description:
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    creator: "@olaegbesamuel",
+    creator: "@sammyolaegbe",
   },
   openGraph: {
     type: "website",

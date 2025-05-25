@@ -27,7 +27,7 @@ function Table({ data }: { data: { headers: string[]; rows: string[][] } }) {
   )
 }
 
-function CustomLink(props: any) {
+function CustomLink(props: { href: string, className: string, children: React.ReactNode }) {
 	const { href, className, children, ...rest } = props;
 	if (!href) return <a {...props} />;
 
@@ -48,11 +48,12 @@ function CustomLink(props: any) {
 	);
 }
 
-function RoundedImage(props: any) {
-  return <Image alt={props.alt} className="rounded-lg" {...props} />
+function RoundedImage(props: { alt: string, src: string, width: number, height: number }) {
+	// @ts-expect-error - Can't use <Image> without alt, but alt is on the props as well
+	return <Image alt={props.alt} className="rounded-lg" {...props} />
 }
 
-function Code({ children, className = '', ...props }: any) {
+function Code({ children, className = '', ...props }: { children: React.ReactNode; className?: string }) {
 	const codeString =
     typeof children === 'string'
       ? children
@@ -94,14 +95,16 @@ function slugify(str: string) {
     .replace(/\-\-+/g, '-') // Replace multiple - with single -
 }
 
-function extractText(children: any): string {
+function extractText(children: React.ReactNode): string {
 	if (typeof children === 'string') return children;
 	if (Array.isArray(children)) return children.map(extractText).join('');
+	// @ts-expect-error - dunno tbh
 	if (children && typeof children === 'object' && children.props) return extractText(children.props.children);
 	return '';
 }
 
 function createHeading(level: number) {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const Heading = ({ children, ...props }: any) => {
 	  const slug = slugify(extractText(children));
 	  return React.createElement(
@@ -129,6 +132,7 @@ h6: createHeading(6),
   Image: RoundedImage,
   a: CustomLink,
   code: Code,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   pre: (props: any) => {
 		// MDX wraps block code as <pre><code class="language-php">...</code></pre>
 		// We want to pass the inner code to our Code component
@@ -151,6 +155,7 @@ h6: createHeading(6),
   Table,
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function CustomMDX(props: any) {
   return (
     <MDXRemote
