@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { motion } from "motion/react";
 import { Sun, Moon } from "lucide-react";
 import { useTheme } from "next-themes";
+import React from "react";
 
 function buildBreadcrumbs(pathname: string) {
   const segments = pathname.split("/").filter(Boolean);
@@ -21,7 +22,13 @@ function buildBreadcrumbs(pathname: string) {
 export default function Header() {
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
   const crumbs = buildBreadcrumbs(pathname);
+
+  // Only show theme toggle after mounting to prevent hydration mismatch
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <header className="sticky top-0 z-30 w-full bg-surface/80 backdrop-blur">
@@ -42,16 +49,18 @@ export default function Header() {
         </nav>
 
         {/* Theme toggle */}
-        <motion.button
-          initial={{ rotate: 0 }}
-          animate={{ rotate: theme === "dark" ? 180 : 0 }}
-          transition={{ type: "spring", stiffness: 200, damping: 15 }}
-          aria-label="Toggle theme"
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          className="rounded-md p-2 opacity-80 hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-primary"
-        >
-          {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
-        </motion.button>
+        {mounted && (
+          <motion.button
+            initial={{ rotate: 0 }}
+            animate={{ rotate: theme === "dark" ? 180 : 0 }}
+            transition={{ type: "spring", stiffness: 200, damping: 15 }}
+            aria-label="Toggle theme"
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="rounded-md p-2 opacity-80 hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-primary"
+          >
+            {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+          </motion.button>
+        )}
       </div>
     </header>
   );
