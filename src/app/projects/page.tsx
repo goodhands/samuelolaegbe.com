@@ -1,4 +1,3 @@
-// src/app/projects/page.tsx
 import { getProjects } from '@/lib/posts' // adjust path as needed
 import Image from 'next/image'
 import Link from 'next/link'
