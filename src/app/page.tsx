@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { BlogPosts } from "@/components/Posts";
+import { getBlogPosts, Post } from "@/lib/posts";
 
 export default function HomePage() {
   return (
@@ -32,10 +33,10 @@ export default function HomePage() {
       <p className="mt-4 text-sm text-slate-600 dark:text-slate-400">
         Currently building&nbsp;
         <Link
-          href="/projects/trustbuy"
+          href="/projects/schoolconvoy"
           className="font-medium text-primary underline-offset-4 hover:underline"
         >
-          TrustBuy
+          SchoolConvoy
         </Link>
         .
       </p>
@@ -44,7 +45,7 @@ export default function HomePage() {
 	<h2 className="mt-16 mb-6 font-display text-lg font-medium text-slate-900 dark:text-white">
 		Latest writing
 	</h2>
-	<BlogPosts />
+	<BlogPosts allBlogs={getBlogPosts().filter((post: Post) => post.metadata.frontpage !== 'hidden')} />
       <div className="mt-8">
         <Link
           href="/blog"

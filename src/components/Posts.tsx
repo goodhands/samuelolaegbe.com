@@ -1,13 +1,12 @@
 import Link from 'next/link'
-import { formatDate, getBlogPosts } from '@/lib/posts'
+import { formatDate, Post } from '@/lib/posts'
 
-export function BlogPosts() {
-  const allBlogs = getBlogPosts()
+export function BlogPosts({ allBlogs }: {allBlogs: Post[]}) {
 
   return (
     <div className="mt-8">
       <ul className="divide-y divide-neutral-200 dark:divide-neutral-700">
-        {allBlogs
+        {allBlogs && allBlogs
           .sort(
             (a, b) =>
               new Date(b.metadata.publishedAt).getTime() -

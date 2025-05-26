@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Github, Linkedin, Rss } from "lucide-react";
+import { Calendar, Github, Linkedin, Rss, X } from "lucide-react";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -23,6 +23,14 @@ export default function Footer() {
             rel="noopener noreferrer"
           >
             <Github size={18} />
+		</Link>
+		<Link
+            href="https://x.com/sammyolaegbe"
+            className="transition-opacity hover:opacity-100 opacity-80"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <X size={18} />
           </Link>
           <Link
             href="https://www.linkedin.com/in/olaegbe-samuel"
@@ -31,13 +39,21 @@ export default function Footer() {
             rel="noopener noreferrer"
           >
             <Linkedin size={18} />
+		</Link>
+		<Link
+            href="https://calendly.com/samuelolaegbe/one-on-one-with-so"
+            className="transition-opacity hover:opacity-100 opacity-80"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Calendar size={18} />
           </Link>
           <Link
             href="/rss.xml"
             className="transition-opacity hover:opacity-100 opacity-80"
           >
             <Rss size={18} />
-          </Link>
+		</Link>
         </nav>
       </div>
     </footer>

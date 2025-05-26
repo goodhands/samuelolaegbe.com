@@ -7,6 +7,7 @@ type Metadata = {
   summary: string
   image?: string
 	category?: string
+	frontpage?: string
 //   tags?: string[]
   author?: string
   url?: string
@@ -56,6 +57,12 @@ function getMDXData(dir: string) {
 
 export function getBlogPosts() {
   return getMDXData(path.join(process.cwd(), 'src', 'app', 'blog', 'posts'))
+}
+
+export interface Post {
+	metadata: Metadata
+	slug: string
+	content: string
 }
 
 export function getProjects() {
