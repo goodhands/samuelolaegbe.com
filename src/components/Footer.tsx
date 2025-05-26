@@ -17,7 +17,7 @@ export default function Footer() {
           aria-label="Social links"
         >
           <Link
-            href="https://github.com/OlaegbeSamuel"
+            href="https://github.com/goodhands"
             className="transition-opacity hover:opacity-100 opacity-80"
             target="_blank"
             rel="noopener noreferrer"
