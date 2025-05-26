@@ -3,8 +3,6 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { BlogPosts } from "@/components/Posts";
 
-export const revalidate = 60 * 60;
-
 export default function HomePage() {
   return (
     <main className="mx-auto max-w-2xl px-4 py-24 md:px-6">
