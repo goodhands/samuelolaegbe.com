@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { BlogPosts } from "@/components/Posts";
 
-// export const revalidate = 60 * 60;
+export const revalidate = 60 * 60;
 
 export default function HomePage() {
   return (

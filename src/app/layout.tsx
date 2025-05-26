@@ -27,7 +27,33 @@ export const metadata: Metadata = {
     "Software developer & psychology enthusiast writing about code, cognition, and life in Lagos.",
   metadataBase: new URL("https://samuelolaegbe.com"),
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/favicon.png' },
+      { url: '/favicon.svg' },
+      { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png' },
+    ],
+    other: [
+      {
+        rel: 'web-app-manifest',
+        url: '/site.webmanifest',
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '192x192',
+        url: '/web-app-manifest-192x192.png',
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '512x512',
+        url: '/web-app-manifest-512x512.png',
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",

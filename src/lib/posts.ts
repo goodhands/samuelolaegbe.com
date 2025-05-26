@@ -6,6 +6,11 @@ type Metadata = {
   publishedAt: string
   summary: string
   image?: string
+	category?: string
+//   tags?: string[]
+  author?: string
+  url?: string
+  slug?: string
 }
 
 function parseFrontmatter(fileContent: string) {
@@ -19,7 +24,7 @@ function parseFrontmatter(fileContent: string) {
   frontMatterLines.forEach((line) => {
     const [key, ...valueArr] = line.split(': ')
     let value = valueArr.join(': ').trim()
-    value = value.replace(/^['"](.*)['"]$/, '$1') // Remove quotes
+	  value = value.replace(/^['"](.*)['"]$/, '$1') // Remove quotes
     metadata[key.trim() as keyof Metadata] = value
   })
 
@@ -51,6 +56,10 @@ function getMDXData(dir: string) {
 
 export function getBlogPosts() {
   return getMDXData(path.join(process.cwd(), 'src', 'app', 'blog', 'posts'))
+}
+
+export function getProjects() {
+  return getMDXData(path.join(process.cwd(), 'src', 'app', 'projects', 'posts'))
 }
 
 export function formatDate(date: string, includeRelative = false) {

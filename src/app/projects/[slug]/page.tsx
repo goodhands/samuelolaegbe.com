@@ -1,11 +1,10 @@
 import { notFound } from 'next/navigation'
 import { CustomMDX } from '@/components/Mdx'
-import { formatDate, getBlogPosts } from '@/lib/posts'
+import { formatDate, getProjects } from '@/lib/posts'
 import { baseUrl } from '@/app/sitemap'
-import { NewsletterBox } from '@/components/NewsletterBox'
 
 export async function generateStaticParams() {
-  const posts = getBlogPosts()
+  const posts = getProjects()
 
   return posts.map((post) => ({
     slug: post.slug,
@@ -14,7 +13,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const post = getBlogPosts().find((post) => post.slug === slug)
+  const post = getProjects().find((post) => post.slug === slug)
   if (!post) {
     return
   }
@@ -34,9 +33,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     openGraph: {
       title,
       description,
-      type: 'article',
+      type: 'website',
       publishedTime,
-      url: `${baseUrl}/blog/${post.slug}`,
+      url: `${baseUrl}/projects/${post.slug}`,
       images: [
         {
           url: ogImage,
@@ -54,7 +53,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function Blog({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const post = getBlogPosts().find((post) => post.slug === slug)
+  const post = getProjects().find((post) => post.slug === slug)
 
   if (!post) {
     notFound()
@@ -68,7 +67,7 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             '@context': 'https://schema.org',
-            '@type': 'BlogPosting',
+            '@type': 'Product',
             headline: post.metadata.title,
             datePublished: post.metadata.publishedAt,
             dateModified: post.metadata.publishedAt,
@@ -76,7 +75,7 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
             image: post.metadata.image
               ? `${baseUrl}${post.metadata.image}`
               : `/og?title=${encodeURIComponent(post.metadata.title)}`,
-            url: `${baseUrl}/blog/${post.slug}`,
+            url: `${baseUrl}/projects/${post.slug}`,
             author: {
               '@type': 'Person',
               name: 'Samuel Olaegbe',
@@ -96,9 +95,8 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
 		</p>
       </div>
       <article className="prose prose-slate dark:prose-invert">
-			<CustomMDX source={post.content} />
-		</article>
-		<NewsletterBox />
-	</article>
+        <CustomMDX source={post.content} />
+      </article>
+    </article>
   )
 }
