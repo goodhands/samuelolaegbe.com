@@ -60,9 +60,9 @@ export function formatDate(date: string, includeRelative = false) {
   }
   const targetDate = new Date(date)
 
-  const yearsAgo = currentDate.getFullYear() - targetDate.getFullYear()
-  const monthsAgo = currentDate.getMonth() - targetDate.getMonth()
-  const daysAgo = currentDate.getDate() - targetDate.getDate()
+  const yearsAgo = currentDate.getUTCFullYear() - targetDate.getUTCFullYear()
+  const monthsAgo = currentDate.getUTCMonth() - targetDate.getUTCMonth()
+  const daysAgo = currentDate.getUTCDate() - targetDate.getUTCDate()
 
   let formattedDate = ''
 
@@ -80,6 +80,7 @@ export function formatDate(date: string, includeRelative = false) {
     month: 'long',
     day: 'numeric',
     year: 'numeric',
+    timeZone: 'UTC'
   })
 
   if (!includeRelative) {

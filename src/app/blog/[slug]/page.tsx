@@ -11,9 +11,9 @@ export async function generateStaticParams() {
   }))
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function generateMetadata({ params }: any) {
-  const post = getBlogPosts().find((post) => post.slug === params.slug)
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const post = getBlogPosts().find((post) => post.slug === slug)
   if (!post) {
     return
   }
@@ -24,9 +24,8 @@ export async function generateMetadata({ params }: any) {
     summary: description,
     image,
   } = post.metadata
-  const ogImage = image
-    ? image
-    : `${baseUrl}/og?title=${encodeURIComponent(title)}`
+
+  const ogImage = image ? image : `${baseUrl}/og?title=${encodeURIComponent(title)}`
 
   return {
     title,
@@ -52,9 +51,9 @@ export async function generateMetadata({ params }: any) {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function Blog({ params }: any) {
-  const post = getBlogPosts().find((post) => post.slug === params.slug)
+export default async function Blog({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const post = getBlogPosts().find((post) => post.slug === slug)
 
   if (!post) {
     notFound()
@@ -79,7 +78,7 @@ export default function Blog({ params }: any) {
             url: `${baseUrl}/blog/${post.slug}`,
             author: {
               '@type': 'Person',
-              name: 'My Portfolio',
+              name: 'Samuel Olaegbe',
             },
           }),
         }}

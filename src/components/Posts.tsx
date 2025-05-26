@@ -19,9 +19,12 @@ export function BlogPosts() {
                 href={`/blog/${post.slug}`}
                 className="flex items-baseline justify-between py-4 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-colors rounded-lg group"
               >
-                <span className="w-36 shrink-0 text-neutral-500 dark:text-neutral-400 text-sm tabular-nums">
+                <time
+                  dateTime={post.metadata.publishedAt}
+                  className="w-36 shrink-0 text-neutral-500 dark:text-neutral-400 text-sm tabular-nums"
+                >
                   {formatDate(post.metadata.publishedAt, false)}
-                </span>
+                </time>
                 <span className="flex-1 ml-4 font-medium text-neutral-900 dark:text-neutral-100 group-hover:underline">
                   {post.metadata.title}
                 </span>
