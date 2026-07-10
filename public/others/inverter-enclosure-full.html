@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>Inverter Enclosure — Full Spec (Sized to Real Equipment)</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+  html,body{margin:0;padding:0;overflow:hidden;background:#0f1115;font-family:-apple-system,Helvetica,Arial,sans-serif;}
+  #canvasWrap{position:fixed;inset:0;touch-action:none;}
+  canvas{display:block;}
+  .panel{position:absolute;background:rgba(20,24,30,0.82);backdrop-filter:blur(6px);
+    border:1px solid rgba(255,255,255,0.08);border-radius:14px;color:#e7e9ee;padding:16px 18px;box-sizing:border-box;}
+  #titleBar{top:64px;left:16px;max-width:250px;padding:12px 16px;}
+  #titleBar h1{font-size:14px;margin:0 0 4px 0;font-weight:700;color:#fff;}
+  #titleBar p{font-size:11px;margin:0;color:#9aa3b2;line-height:1.4;}
+  #mountInfo{top:64px;right:16px;max-width:250px;padding:14px 16px;}
+  #mountInfo h2{font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:#8b93a3;margin:0 0 10px 0;}
+  #mountInfo .mRow{font-size:11px;color:#dde1e8;margin-bottom:8px;line-height:1.42;}
+  #mountInfo .mRow b{color:#fff;}
+  #viewBtns{bottom:16px;left:16px;display:flex;flex-wrap:wrap;gap:8px;max-width:235px;padding:14px;}
+  #viewBtns .row-label{font-size:10px;text-transform:uppercase;letter-spacing:0.06em;color:#8b93a3;width:100%;margin-bottom:2px;}
+  button.vbtn{background:#2a3140;color:#e7e9ee;border:1px solid rgba(255,255,255,0.12);
+    border-radius:9px;padding:9px 12px;font-size:12px;cursor:pointer;transition:background 0.15s;}
+  button.vbtn:active,button.vbtn.active{background:#4f7cff;}
+  #legend{bottom:16px;right:16px;max-width:230px;padding:14px 16px;}
+  #legend h2{font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:#8b93a3;margin:0 0 10px 0;}
+  .legRow{display:flex;align-items:center;gap:8px;margin-bottom:7px;font-size:11.5px;color:#dde1e8;}
+  .swatch{width:12px;height:12px;border-radius:3px;flex:0 0 auto;}
+  #tabs{position:fixed;top:0;left:0;right:0;height:52px;background:#14171d;display:flex;
+        align-items:center;gap:8px;padding:0 14px;box-sizing:border-box;z-index:50;border-bottom:1px solid rgba(255,255,255,0.08);}
+  .tabBtn{background:transparent;color:#9aa3b2;border:none;padding:10px 16px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;}
+  .tabBtn.active{background:#2a3140;color:#fff;}
+  #view2d{position:fixed;top:52px;left:0;right:0;bottom:0;background:#f7f8fa;overflow:auto;display:none;padding:24px;box-sizing:border-box;}
+  #view2d svg{width:100%;height:auto;display:block;margin:0 auto;max-width:1700px;}
+  #view3dWrap{position:fixed;top:52px;left:0;right:0;bottom:0;display:none;}
+  #view3dWrap.active, #view2d.active{display:block;}
+  @media (max-width:640px){
+    #titleBar{top:60px;max-width:170px;} #titleBar h1{font-size:12px;} #titleBar p{font-size:9.5px;}
+    #legend{max-width:150px;padding:11px;} #viewBtns{max-width:150px;padding:11px;}
+    #mountInfo{max-width:160px;padding:11px;top:60px;} #mountInfo .mRow{font-size:9.5px;}
+    button.vbtn{padding:8px 9px;font-size:10px;} .tabBtn{padding:9px 12px;font-size:12px;} #view2d{padding:14px;}
+  }
+</style>
+</head>
+<body>
+
+<div id="tabs">
+  <button class="tabBtn active" data-tab="3d">3D Interactive</button>
+  <button class="tabBtn" data-tab="2d">2D Spec</button>
+</div>
+
+<div id="view3dWrap" class="active">
+  <div id="canvasWrap"></div>
+  <div class="panel" id="titleBar">
+    <h1>Wall-Flush Shroud — 3D</h1>
+    <p>Drag to rotate · Scroll/pinch to zoom · Sized to a real 220Ah battery — taller than before</p>
+  </div>
+  <div class="panel" id="viewBtns">
+    <div class="row-label">Camera presets</div>
+    <button class="vbtn" data-view="iso">Isometric</button>
+    <button class="vbtn" data-view="front">Front</button>
+    <button class="vbtn" data-view="side">Side</button>
+    <button class="vbtn" data-view="top">Top</button>
+    <div class="row-label" style="margin-top:6px;">Inspect</div>
+    <button class="vbtn" id="doorToggleA">Slide Lower Door (Genus)</button>
+    <button class="vbtn" id="doorToggleB">Slide Upper Door (Deye)</button>
+    <button class="vbtn" id="hingeToggle">Lift &amp; Pull Genus Forward</button>
+  </div>
+  <div class="panel" id="mountInfo">
+    <h2>Sizing, venting &amp; access</h2>
+    <div class="mRow"><b>Battery:</b> real 220Ah tall tubular is 50.5x19x41cm — this model is sized to that, not a guess</div>
+    <div class="mRow"><b>Genus:</b> hangs on 2 iron hook brackets fixed to the wall — no hinge. Lift up ~3.5cm to clear the hooks, then pull forward for full back-panel access</div>
+    <div class="mRow"><b>Vents:</b> louvered, insect-meshed, top and bottom — restored, positioned clear of both slide tracks</div>
+    <div class="mRow"><b>Brackets:</b> 4x flush standoffs, M8x80mm masonry anchors, recessed — no foothold</div>
+    <div class="mRow"><b>Note:</b> Deye/lithium dimensions are estimated — confirm against your actual units before fabrication</div>
+  </div>
+  <div class="panel" id="legend">
+    <h2>Parts key</h2>
+    <div class="legRow"><span class="swatch" style="background:#9aa3ad;"></span>Building wall</div>
+    <div class="legRow"><span class="swatch" style="background:#c5cbd1;"></span>Shroud frame</div>
+    <div class="legRow"><span class="swatch" style="background:#5c6773;"></span>Vent louvers (top/bottom)</div>
+    <div class="legRow"><span class="swatch" style="background:#f0c96b;"></span>Genus door — slides up</div>
+    <div class="legRow"><span class="swatch" style="background:#8fb4e8;"></span>Deye door — slides down</div>
+    <div class="legRow"><span class="swatch" style="background:#7d8896;"></span>Genus 1.6kVA (hook-hung)</div>
+    <div class="legRow"><span class="swatch" style="background:#232830;"></span>Tubular battery (50.5x19x41cm)</div>
+    <div class="legRow"><span class="swatch" style="background:#3a5a8c;"></span>Deye 3.5kVA</div>
+    <div class="legRow"><span class="swatch" style="background:#161a20;"></span>Lithium pack</div>
+  </div>
+</div>
+
+<div id="view2d">
+<svg viewBox="0 0 1700 1250" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <linearGradient id="metalGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#d8dde2"/><stop offset="50%" stop-color="#eef1f4"/><stop offset="100%" stop-color="#c5cbd1"/>
+    </linearGradient>
+    <linearGradient id="roofGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4a5560"/><stop offset="100%" stop-color="#2f3740"/>
+    </linearGradient>
+    <linearGradient id="slideGradA" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#fbe4a8"/><stop offset="100%" stop-color="#f0c96b"/>
+    </linearGradient>
+    <linearGradient id="slideGradB" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#c4dcf5"/><stop offset="100%" stop-color="#8fb4e8"/>
+    </linearGradient>
+    <pattern id="louver" width="10" height="6" patternUnits="userSpaceOnUse">
+      <rect width="10" height="6" fill="#c5cbd1"/><line x1="0" y1="3" x2="10" y2="3" stroke="#8a939c" stroke-width="1.5"/>
+    </pattern>
+    <marker id="arrowUp" markerWidth="8" markerHeight="8" refX="4" refY="0" orient="auto"><path d="M0,4 L4,0 L8,4" fill="none" stroke="#c99a33" stroke-width="2"/></marker>
+    <marker id="arrowDn" markerWidth="8" markerHeight="8" refX="4" refY="8" orient="auto"><path d="M0,4 L4,8 L8,4" fill="none" stroke="#3a6fb0" stroke-width="2"/></marker>
+  </defs>
+  <rect width="1700" height="1250" fill="#f7f8fa"/>
+  <text x="60" y="55" font-size="27" font-weight="700" fill="#1f2937">Wall-Flush Shroud — Sized to Real Equipment — 2D Spec</text>
+  <text x="60" y="82" font-size="15" fill="#6b7280">Battery 50.5x19x41cm (confirmed) · vents restored · Genus hinge-swings forward for rear-panel access</text>
+  <line x1="60" y1="102" x2="1640" y2="102" stroke="#e5e7eb" stroke-width="1.5"/>
+
+  <!-- FRONT VIEW -->
+  <g transform="translate(140,240)">
+    <text x="145" y="-60" font-size="17" font-weight="700" fill="#374151">FRONT VIEW — closed</text>
+    <rect x="-40" y="-30" width="380" height="850" fill="#e2e5e9" stroke="#c3c8ce"/>
+    <text x="145" y="-8" font-size="10.5" text-anchor="middle" fill="#9ca3af">— building wall —</text>
+
+    <polygon points="0,0 290,0 330,-26 -6,-26" fill="url(#roofGrad)"/>
+
+    <rect x="-8" y="35" width="12" height="26" fill="#4b5563"/>
+    <rect x="286" y="35" width="12" height="26" fill="#4b5563"/>
+    <rect x="-8" y="640" width="12" height="26" fill="#4b5563"/>
+    <rect x="286" y="640" width="12" height="26" fill="#4b5563"/>
+    <text x="145" y="18" font-size="10.5" text-anchor="middle" fill="#6b7280">flush standoff brackets — recessed</text>
+
+    <rect x="0" y="0" width="290" height="680" fill="url(#metalGrad)" stroke="#8a939c" stroke-width="2"/>
+
+    <!-- top vent -->
+    <rect x="14" y="12" width="262" height="30" fill="url(#louver)" stroke="#8a939c"/>
+    <text x="145" y="55" font-size="10.5" text-anchor="middle" fill="#4b5563">top intake louver, insect mesh</text>
+
+    <!-- upper bay: Deye door -->
+    <rect x="14" y="66" width="262" height="260" fill="url(#slideGradB)" stroke="#3a6fb0" stroke-width="1.5"/>
+    <text x="145" y="105" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2937">UPPER BAY — Deye door</text>
+    <text x="145" y="125" font-size="12" text-anchor="middle" fill="#374151">Deye 3.5kVA + 24V lithium</text>
+    <text x="145" y="141" font-size="10" text-anchor="middle" fill="#6b7280">(est. — confirm exact dims)</text>
+    <rect x="28" y="152" width="234" height="30" fill="#e8f4fb" stroke="#8fb4e8" stroke-dasharray="3,3"/>
+    <text x="145" y="172" font-size="10.5" text-anchor="middle" fill="#3a6fb0">polycarbonate viewing strip</text>
+    <path d="M145,280 L145,310" stroke="#3a6fb0" stroke-width="3" marker-end="url(#arrowDn)"/>
+    <text x="145" y="245" font-size="11" text-anchor="middle" fill="#3a6fb0">rear rail — slides DOWN</text>
+    <text x="145" y="261" font-size="11" text-anchor="middle" fill="#3a6fb0">into lower bay's rear space</text>
+
+    <rect x="6" y="330" width="278" height="7" fill="#8a939c"/>
+
+    <!-- lower bay: Genus door -->
+    <rect x="14" y="341" width="262" height="300" fill="url(#slideGradA)" stroke="#c99a33" stroke-width="1.5"/>
+    <text x="145" y="380" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2937">LOWER BAY — Genus door</text>
+    <text x="145" y="400" font-size="12" text-anchor="middle" fill="#374151">Genus 1.6kVA (hook-hung, upper</text>
+    <text x="145" y="416" font-size="12" text-anchor="middle" fill="#374151">portion) + tubular battery (base)</text>
+    <rect x="28" y="426" width="234" height="30" fill="#fdf3dc" stroke="#f0c96b" stroke-dasharray="3,3"/>
+    <text x="145" y="446" font-size="10.5" text-anchor="middle" fill="#c99a33">polycarbonate viewing strip</text>
+    <path d="M145,600 L145,530" stroke="#c99a33" stroke-width="3" marker-end="url(#arrowUp)"/>
+    <text x="145" y="625" font-size="11" text-anchor="middle" fill="#c99a33">front rail — slides UP</text>
+
+    <rect x="10" y="12" width="6" height="629" fill="#4b5563"/>
+    <rect x="274" y="12" width="6" height="629" fill="#4b5563"/>
+
+    <!-- bottom vent -->
+    <rect x="14" y="644" width="262" height="28" fill="url(#louver)" stroke="#8a939c"/>
+    <text x="145" y="690" font-size="10.5" text-anchor="middle" fill="#4b5563">bottom exhaust louver, sloped, meshed</text>
+
+    <text x="145" y="720" font-size="11" text-anchor="middle" fill="#6b7280">40cm clear gap to floor — hanger &amp; walking space pass underneath</text>
+
+    <line x1="-70" y1="0" x2="-70" y2="680" stroke="#9ca3af" stroke-width="1"/>
+    <text x="-100" y="345" font-size="13" fill="#4b5563" transform="rotate(-90,-100,345)" text-anchor="middle">178 cm</text>
+    <line x1="0" y1="755" x2="290" y2="755" stroke="#9ca3af" stroke-width="1"/>
+    <text x="145" y="780" font-size="13" fill="#4b5563" text-anchor="middle">62 cm</text>
+  </g>
+
+  <!-- GENUS HOOK-HANG DETAIL -->
+  <g transform="translate(620,240)">
+    <text x="90" y="-60" font-size="17" font-weight="700" fill="#374151">GENUS HOOK-HANG DETAIL</text>
+    <rect x="-20" y="0" width="20" height="500" fill="#c3c8ce"/>
+    <text x="-10" y="250" font-size="10" text-anchor="middle" fill="#6b7280" transform="rotate(-90,-10,250)">wall</text>
+
+    <!-- iron hooks on wall -->
+    <rect x="20" y="30" width="14" height="30" fill="#2b2f36"/>
+    <rect x="20" y="30" width="34" height="10" fill="#2b2f36"/>
+    <rect x="136" y="30" width="14" height="30" fill="#2b2f36"/>
+    <rect x="116" y="30" width="34" height="10" fill="#2b2f36"/>
+    <text x="85" y="20" font-size="10" text-anchor="middle" fill="#6b7280">2x iron L-hooks, bolted to wall</text>
+
+    <!-- resting state -->
+    <rect x="10" y="60" width="150" height="180" fill="#7d8896" stroke="#5a6371" stroke-width="1.5"/>
+    <text x="85" y="150" font-size="11" text-anchor="middle" fill="#fff">Genus — hanging</text>
+    <text x="85" y="168" font-size="10" text-anchor="middle" fill="#e5e7eb">resting on hooks</text>
+
+    <!-- step 1: lifted -->
+    <g transform="translate(210,-15)">
+      <rect x="10" y="60" width="150" height="180" fill="#8a95a3" stroke="#5a6371" stroke-width="1.5" opacity="0.9"/>
+      <path d="M85,60 L85,20" stroke="#c99a33" stroke-width="2.5" marker-end="url(#arrowUpG)"/>
+      <text x="85" y="12" font-size="10.5" text-anchor="middle" fill="#c99a33">1. lift ~3.5cm</text>
+      <text x="85" y="150" font-size="11" text-anchor="middle" fill="#fff">clears hooks</text>
+    </g>
+
+    <!-- step 2: pulled forward -->
+    <g transform="translate(420,60)">
+      <rect x="10" y="0" width="150" height="180" fill="#9aa5b3" stroke="#5a6371" stroke-width="1.5" opacity="0.9" transform="skewY(-6)"/>
+      <path d="M0,90 L-55,90" stroke="#059669" stroke-width="2.5" marker-end="url(#arrowLeftG)"/>
+      <text x="-20" y="75" font-size="10.5" fill="#059669">2. pull forward</text>
+      <text x="85" y="95" font-size="11" text-anchor="middle" fill="#fff" transform="skewY(-6)">back now open</text>
+    </g>
+    <defs>
+      <marker id="arrowUpG" markerWidth="8" markerHeight="8" refX="4" refY="0" orient="auto"><path d="M0,4 L4,0 L8,4" fill="none" stroke="#c99a33" stroke-width="2"/></marker>
+      <marker id="arrowLeftG" markerWidth="8" markerHeight="8" refX="0" refY="4" orient="auto"><path d="M8,0 L0,4 L8,8" fill="none" stroke="#059669" stroke-width="2"/></marker>
+    </defs>
+    <text x="220" y="290" font-size="11" text-anchor="middle" fill="#6b7280">No hinge hardware — it's just weight resting on two hooks, like a picture frame</text>
+    <text x="220" y="308" font-size="11" text-anchor="middle" fill="#6b7280">~19cm forward clearance inside the bay is enough to fully pull it off the wall plane</text>
+  </g>
+
+  <!-- BATTERY REAL DIMENSIONS -->
+  <g transform="translate(1080,240)">
+    <text x="60" y="-60" font-size="17" font-weight="700" fill="#374151">BATTERY — CONFIRMED DIMENSIONS</text>
+    <rect x="0" y="0" width="200" height="164" fill="#232830" stroke="#111417" stroke-width="1.5" rx="4"/>
+    <text x="100" y="70" font-size="12" text-anchor="middle" fill="#fff">220Ah 12V</text>
+    <text x="100" y="88" font-size="12" text-anchor="middle" fill="#fff">tall tubular</text>
+    <line x1="0" y1="184" x2="200" y2="184" stroke="#9ca3af"/>
+    <text x="100" y="204" font-size="12" fill="#4b5563" text-anchor="middle">50.5 cm (W)</text>
+    <line x1="-24" y1="0" x2="-24" y2="164" stroke="#9ca3af"/>
+    <text x="-50" y="85" font-size="12" fill="#4b5563" transform="rotate(-90,-50,85)" text-anchor="middle">41 cm (H)</text>
+    <text x="230" y="85" font-size="12" fill="#4b5563">19 cm deep</text>
+    <text x="0" y="240" font-size="11" fill="#6b7280">This is the real published spec for a Kan/Luminous-class 220Ah tall tubular —</text>
+    <text x="0" y="258" font-size="11" fill="#6b7280">the shroud's lower bay is sized around it, not a rounded guess.</text>
+  </g>
+
+  <!-- BALCONY PLAN (unchanged) -->
+  <g transform="translate(140,1010)">
+    <text x="10" y="-30" font-size="17" font-weight="700" fill="#374151">BALCONY PLAN (unchanged from prior revision)</text>
+    <rect x="0" y="0" width="560" height="180" fill="#eef1f4" stroke="#9ca3af"/>
+    <rect x="0" y="0" width="30" height="180" fill="#9aa3ad"/>
+    <text x="15" y="90" font-size="10" fill="#f7f8fa" text-anchor="middle" transform="rotate(-90,15,90)">LEFT WALL 99cm</text>
+    <rect x="30" y="0" width="70" height="14" fill="#3a3f47"/>
+    <text x="65" y="34" font-size="10" text-anchor="middle" fill="#374151">entrance door</text>
+    <rect x="30" y="55" width="30" height="110" fill="#c5cbd1" stroke="#6b7280" stroke-width="1.5"/>
+    <text x="10" y="112" font-size="9.5" text-anchor="middle" fill="#1f2937" transform="rotate(-90,10,112)">shroud</text>
+    <rect x="60" y="0" width="90" height="180" fill="#dff3e6" opacity="0.6"/>
+    <text x="105" y="90" font-size="10" text-anchor="middle" fill="#059669" transform="rotate(-90,105,90)">clear path</text>
+    <rect x="160" y="65" width="65" height="95" fill="none" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <text x="192" y="115" font-size="10" text-anchor="middle" fill="#6b7280">hanger</text>
+    <rect x="530" y="0" width="30" height="180" fill="#9aa3ad"/>
+    <text x="545" y="90" font-size="9.5" fill="#f7f8fa" text-anchor="middle" transform="rotate(-90,545,90)">RIGHT WALL — AC reserved</text>
+  </g>
+
+  <g transform="translate(950,610)">
+    <rect x="0" y="0" width="440" height="330" fill="#f3f4f6" stroke="#d1d5db" rx="6"/>
+    <text x="20" y="30" font-size="14" font-weight="700" fill="#1f2937">Updated Spec Summary</text>
+    <text x="20" y="56" font-size="12" fill="#374151">• Height grew to ~178cm — driven by the real</text>
+    <text x="20" y="76" font-size="12" fill="#374151">&#160;&#160;41cm battery + Genus stacked above it</text>
+    <text x="20" y="98" font-size="12" fill="#374151">• Width 62cm — fits the 50.5cm battery with margin</text>
+    <text x="20" y="120" font-size="12" fill="#374151">• Genus hinges at the top, swings forward ~20cm</text>
+    <text x="20" y="140" font-size="12" fill="#374151">&#160;&#160;for rear switch/plug access</text>
+    <text x="20" y="162" font-size="12" fill="#374151">• Vents restored: top intake + bottom exhaust,</text>
+    <text x="20" y="182" font-size="12" fill="#374151">&#160;&#160;both insect-meshed, clear of slide tracks</text>
+    <text x="20" y="204" font-size="12" fill="#374151">• Both doors still slide (bypass, front/rear rail)</text>
+    <text x="20" y="226" font-size="12" fill="#374151">• Deye/lithium sizing is an estimate — confirm</text>
+    <text x="20" y="246" font-size="12" fill="#374151">&#160;&#160;actual dimensions once units are purchased</text>
+    <text x="20" y="268" font-size="12" fill="#374151">• If 178cm is too tall for the balcony ceiling,</text>
+    <text x="20" y="288" font-size="12" fill="#374151">&#160;&#160;a slimmer wall-mount lithium pack shortens</text>
+    <text x="20" y="308" font-size="12" fill="#374151">&#160;&#160;the upper bay — worth checking before build</text>
+  </g>
+</svg>
+</div>
+
+<script>
+document.querySelectorAll('.tabBtn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tabBtn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const tab = btn.dataset.tab;
+    document.getElementById('view3dWrap').classList.toggle('active', tab==='3d');
+    document.getElementById('view2d').classList.toggle('active', tab==='2d');
+    if(tab==='3d'){ onResize(); }
+  });
+});
+
+const wrap = document.getElementById('canvasWrap');
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x11141a);
+scene.fog = new THREE.Fog(0x11141a, 6, 18);
+
+const camera = new THREE.PerspectiveCamera(42, window.innerWidth/(window.innerHeight-52), 0.05, 50);
+const renderer = new THREE.WebGLRenderer({antialias:true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+renderer.setSize(window.innerWidth, window.innerHeight-52);
+renderer.shadowMap.enabled = true;
+wrap.appendChild(renderer.domElement);
+
+scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+const sun = new THREE.DirectionalLight(0xffffff, 0.9);
+sun.position.set(3, 5, 4); sun.castShadow = true;
+sun.shadow.mapSize.set(1024,1024);
+sun.shadow.camera.left=-3; sun.shadow.camera.right=3; sun.shadow.camera.top=3; sun.shadow.camera.bottom=-3;
+scene.add(sun);
+const fill = new THREE.DirectionalLight(0x6f8fff, 0.25);
+fill.position.set(-4,2,-3); scene.add(fill);
+
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(20,20), new THREE.MeshStandardMaterial({color:0x1b1f27, roughness:1}));
+ground.rotation.x = -Math.PI/2; ground.receiveShadow = true;
+scene.add(ground);
+scene.add(new THREE.GridHelper(20, 40, 0x2a3140, 0x1e232c));
+
+const wallMat = new THREE.MeshStandardMaterial({color:0x4a5560, roughness:0.9});
+const wallPlane = new THREE.Mesh(new THREE.BoxGeometry(1.6, 3.0, 0.06), wallMat);
+wallPlane.position.set(0, 1.5, -0.20);
+wallPlane.receiveShadow = true;
+scene.add(wallPlane);
+
+function louverTexture(color1, color2){
+  const c = document.createElement('canvas'); c.width=64; c.height=64;
+  const ctx = c.getContext('2d');
+  ctx.fillStyle = color1; ctx.fillRect(0,0,64,64);
+  ctx.strokeStyle = color2; ctx.lineWidth = 5;
+  for(let y=6;y<64;y+=12){ ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(64,y); ctx.stroke(); }
+  const tex = new THREE.CanvasTexture(c); tex.wrapS = tex.wrapT = THREE.RepeatWrapping; tex.repeat.set(4,2);
+  return tex;
+}
+function makeLabel(text, sub){
+  const c = document.createElement('canvas'); c.width=512; c.height=140;
+  const ctx = c.getContext('2d');
+  ctx.fillStyle='rgba(15,18,24,0.88)'; roundRect(ctx,4,4,504,132,18); ctx.fill();
+  ctx.fillStyle='#ffffff'; ctx.font='700 40px Helvetica, Arial'; ctx.textBaseline='top';
+  ctx.fillText(text, 26, 20);
+  if(sub){ ctx.fillStyle='#9aa3b2'; ctx.font='400 26px Helvetica, Arial'; ctx.fillText(sub, 26, 76); }
+  function roundRect(ctx,x,y,w,h,r){
+    ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r);
+    ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath();
+  }
+  const tex = new THREE.CanvasTexture(c);
+  const spr = new THREE.Sprite(new THREE.SpriteMaterial({map:tex, transparent:true, depthTest:false}));
+  spr.scale.set(0.6, 0.6*(140/512), 1); spr.renderOrder = 999;
+  return spr;
+}
+
+// ================= SIZED TO REAL EQUIPMENT =================
+// battery (confirmed): 0.505 x 0.19 x 0.41 (W x D x H)
+const battW=0.505, battD=0.19, battH=0.41;
+const genusW=0.30, genusD=0.13, genusH=0.36; // estimated, typical class
+const deyeW=0.32, deyeD=0.14, deyeH=0.40;    // estimated — flag to confirm
+const lithW=0.36, lithD=0.10, lithH=0.34;    // estimated slim wall pack — flag to confirm
+
+const ventH=0.055;
+const gapAboveBatt=0.05, gapAboveGenus=0.09; // wiring + hinge swing clearance
+const lowerBayH = battH + gapAboveBatt + genusH + gapAboveGenus; // 0.41+0.05+0.36+0.09=0.91
+const gapDeye=0.05, gapLith=0.05;
+const upperBayH = deyeH + gapDeye + lithH + gapLith; // 0.40+0.05+0.34+0.05=0.84... using real vars below
+
+const W = Math.max(battW, deyeW, lithW) + 0.11; // clear side margin
+const D = Math.max(battD, genusD, deyeD) + 0.13; // depth incl. hinge-swing + rail clearance
+const midRailH = 0.02;
+const H = ventH + lowerBayH + midRailH + upperBayH + ventH;
+const GAP = 0.40;
+
+const cab = new THREE.Group();
+cab.position.set(0, GAP, 0);
+scene.add(cab);
+
+const steelMat = new THREE.MeshStandardMaterial({color:0xc9cfd6, roughness:0.45, metalness:0.35});
+const steelDark = new THREE.MeshStandardMaterial({color:0x8891a0, roughness:0.5, metalness:0.3});
+const doorMatA  = new THREE.MeshStandardMaterial({color:0xf0c96b, roughness:0.4, metalness:0.15});
+const doorMatB  = new THREE.MeshStandardMaterial({color:0x8fb4e8, roughness:0.4, metalness:0.15});
+const viewMat   = new THREE.MeshStandardMaterial({color:0xdff3fb, roughness:0.2, metalness:0.1, transparent:true, opacity:0.75});
+const roofMat  = new THREE.MeshStandardMaterial({color:0x2f3740, roughness:0.55, metalness:0.4});
+const haspMat  = new THREE.MeshStandardMaterial({color:0x1f2530, roughness:0.4, metalness:0.6});
+const trackMat = new THREE.MeshStandardMaterial({color:0x4b5561, roughness:0.5, metalness:0.6});
+const ventMat  = new THREE.MeshStandardMaterial({map:louverTexture('#7c8794','#4b5561'), roughness:0.6, metalness:0.2});
+
+const bracketGeo = new THREE.BoxGeometry(0.03,0.045,0.09);
+[[-W/2+0.05, H-0.08],[W/2-0.05, H-0.08],[-W/2+0.05, 0.08],[W/2-0.05, 0.08]].forEach(p=>{
+  const b = new THREE.Mesh(bracketGeo, trackMat);
+  b.position.set(p[0], p[1], -D/2-0.025);
+  cab.add(b);
+});
+
+const backPanel = new THREE.Mesh(new THREE.BoxGeometry(W,H,0.015), steelDark);
+backPanel.position.set(0, H/2, -D/2);
+cab.add(backPanel);
+[-1,1].forEach(side=>{
+  const sp = new THREE.Mesh(new THREE.BoxGeometry(0.015,H,D), steelMat);
+  sp.position.set(side*W/2, H/2, 0);
+  sp.castShadow = sp.receiveShadow = true;
+  cab.add(sp);
+});
+const topPanel = new THREE.Mesh(new THREE.BoxGeometry(W,0.015,D), steelMat);
+topPanel.position.set(0, H, 0); cab.add(topPanel);
+const botPanel = new THREE.Mesh(new THREE.BoxGeometry(W,0.015,D), steelMat);
+botPanel.position.set(0, 0, 0); cab.add(botPanel);
+
+// roof: forward-only overhang, flush at wall, sloped down toward front
+const roofPivot = new THREE.Group();
+roofPivot.position.set(0, H, -D/2);
+cab.add(roofPivot);
+const overhang = 0.34;
+const roofSlab = new THREE.Mesh(new THREE.BoxGeometry(W+0.06, 0.02, overhang), roofMat);
+roofSlab.position.set(0, 0, overhang/2);
+roofSlab.castShadow = true;
+roofPivot.add(roofSlab);
+roofPivot.rotation.x = 0.07;
+const dripLip = new THREE.Mesh(new THREE.BoxGeometry(W+0.06, 0.022, 0.014), roofMat);
+dripLip.position.set(0, -0.011, overhang-0.005);
+roofPivot.add(dripLip);
+
+// vents: top (under roof, above upper bay) and bottom (above floor attach, below lower bay)
+const ventTop = new THREE.Mesh(new THREE.BoxGeometry(W*0.84, ventH*0.7, 0.02), ventMat);
+ventTop.position.set(0, H-ventH*0.55, D/2+0.01);
+cab.add(ventTop);
+const ventBottom = new THREE.Mesh(new THREE.BoxGeometry(W*0.84, ventH*0.6, 0.02), ventMat);
+ventBottom.position.set(0, ventH*0.5, D/2+0.01);
+cab.add(ventBottom);
+
+const lowerBayY = ventH;
+const upperBayY = lowerBayY + lowerBayH + midRailH;
+const midY = lowerBayY + lowerBayH;
+
+const midRail = new THREE.Mesh(new THREE.BoxGeometry(W,midRailH,D), steelDark);
+midRail.position.set(0, midY+midRailH/2, 0); cab.add(midRail);
+
+// dual rails, spanning the working zone (from just above bottom vent to just below top vent)
+const railFrontZ = D/2 + 0.028;
+const railRearZ  = D/2 + 0.010;
+const railSpanH = H - ventH*2;
+[railFrontZ, railRearZ].forEach(z=>{
+  [-1,1].forEach(side=>{
+    const t = new THREE.Mesh(new THREE.BoxGeometry(0.018,railSpanH,0.018), trackMat);
+    t.position.set(side*(W/2-0.03), ventH+railSpanH/2, z);
+    cab.add(t);
+  });
+});
+
+// ---- Genus door (front rail) — covers lower bay, slides UP ----
+const doorAPivot = new THREE.Group();
+cab.add(doorAPivot);
+const doorA = new THREE.Mesh(new THREE.BoxGeometry(W-0.07, lowerBayH-0.02, 0.018), doorMatA);
+doorA.position.set(0, lowerBayY+lowerBayH/2, railFrontZ);
+doorA.castShadow = doorA.receiveShadow = true;
+doorAPivot.add(doorA);
+const viewA = new THREE.Mesh(new THREE.BoxGeometry(W-0.16, lowerBayH*0.14, 0.006), viewMat);
+viewA.position.set(0, lowerBayY+lowerBayH*0.86, railFrontZ+0.011);
+doorAPivot.add(viewA);
+const boltA = new THREE.Mesh(new THREE.BoxGeometry(0.045,0.018,0.018), haspMat);
+boltA.position.set(0, lowerBayY+lowerBayH*0.5, railFrontZ+0.012);
+doorAPivot.add(boltA);
+const travelA = Math.min(lowerBayH, upperBayH);
+
+// ---- Deye door (rear rail) — covers upper bay, slides DOWN ----
+const doorBPivot = new THREE.Group();
+cab.add(doorBPivot);
+const doorB = new THREE.Mesh(new THREE.BoxGeometry(W-0.07, upperBayH-0.02, 0.018), doorMatB);
+doorB.position.set(0, upperBayY+upperBayH/2, railRearZ);
+doorB.castShadow = doorB.receiveShadow = true;
+doorBPivot.add(doorB);
+const viewB = new THREE.Mesh(new THREE.BoxGeometry(W-0.16, upperBayH*0.16, 0.006), viewMat);
+viewB.position.set(0, upperBayY+upperBayH*0.18, railRearZ+0.011);
+doorBPivot.add(viewB);
+const boltB = new THREE.Mesh(new THREE.BoxGeometry(0.045,0.018,0.018), haspMat);
+boltB.position.set(0, upperBayY+upperBayH*0.5, railRearZ+0.012);
+doorBPivot.add(boltB);
+const travelB = -Math.min(lowerBayH, upperBayH);
+
+// ---- interior equipment ----
+const battMat  = new THREE.MeshStandardMaterial({color:0x232830, roughness:0.6});
+const genusMat = new THREE.MeshStandardMaterial({color:0x7d8896, roughness:0.5, metalness:0.2});
+const deyeMat  = new THREE.MeshStandardMaterial({color:0x3a5a8c, roughness:0.4, metalness:0.3});
+const lithMat  = new THREE.MeshStandardMaterial({color:0x161a20, roughness:0.5, metalness:0.2});
+
+const battery = new THREE.Mesh(new THREE.BoxGeometry(battW,battH,battD), battMat);
+battery.position.set(0, lowerBayY+battH/2, -D/2+battD/2+0.01);
+battery.castShadow = true; cab.add(battery);
+
+// Genus hangs on two iron wall hooks/brackets — lifts up to disengage, then pulls forward
+const hookMat = new THREE.MeshStandardMaterial({color:0x2b2f36, roughness:0.5, metalness:0.7});
+const genusBaseY = lowerBayY + battH + gapAboveBatt; // bottom edge of genus, resting height
+[[-genusW/2+0.05, 0],[genusW/2-0.05, 0]].forEach(p=>{
+  // L-shaped iron hook fixed to the wall
+  const hookV = new THREE.Mesh(new THREE.BoxGeometry(0.02,0.05,0.02), hookMat);
+  hookV.position.set(p[0], genusBaseY+genusH-0.04, -D/2+0.02);
+  cab.add(hookV);
+  const hookH = new THREE.Mesh(new THREE.BoxGeometry(0.02,0.02,0.05), hookMat);
+  hookH.position.set(p[0], genusBaseY+genusH-0.015, -D/2+0.04);
+  cab.add(hookH);
+});
+const genusGroup = new THREE.Group();
+genusGroup.position.set(0, genusBaseY, -D/2+0.02);
+cab.add(genusGroup);
+const genus = new THREE.Mesh(new THREE.BoxGeometry(genusW, genusH, genusD), genusMat);
+genus.position.set(0, genusH/2, genusD/2);
+genus.castShadow = true;
+genusGroup.add(genus);
+// slotted bracket notches on the back, visual only
+[[-genusW/2+0.05, genusH-0.03],[genusW/2-0.05, genusH-0.03]].forEach(p=>{
+  const slot = new THREE.Mesh(new THREE.BoxGeometry(0.035,0.018,0.012), hookMat);
+  slot.position.set(p[0], p[1], -0.006);
+  genusGroup.add(slot);
+});
+const liftClear = 0.035;   // how far it lifts to clear the hooks
+const pullForward = 0.19;  // how far it then pulls forward for back access
+
+const deye = new THREE.Mesh(new THREE.BoxGeometry(deyeW,deyeH,deyeD), deyeMat);
+deye.position.set(0, upperBayY+upperBayH-gapDeye-deyeH/2, -D/2+deyeD/2+0.02);
+deye.castShadow = true; cab.add(deye);
+const lithium = new THREE.Mesh(new THREE.BoxGeometry(lithW,lithH,lithD), lithMat);
+lithium.position.set(0, upperBayY+lithH/2, -D/2+lithD/2+0.02);
+lithium.castShadow = true; cab.add(lithium);
+
+const labWall = makeLabel("Building wall", "flush-mount surface");
+labWall.position.set(0, H+0.32, -0.20); cab.add(labWall);
+const labBatt = makeLabel("Tubular battery", "50.5 x 19 x 41cm — confirmed");
+labBatt.position.set(0.5, battery.position.y, -0.06); cab.add(labBatt);
+const labGenus = makeLabel("Genus Heiwa-i 1625", "hangs on 2 iron hooks — lift, then pull forward");
+labGenus.position.set(0.55, genusBaseY+genusH*0.5, 0.05); cab.add(labGenus);
+const labDeye = makeLabel("Deye 3.5kVA hybrid", "est. size — confirm");
+labDeye.position.set(0.5, deye.position.y+0.06, -0.02); cab.add(labDeye);
+const labLith = makeLabel("Lithium pack", "est. size — confirm");
+labLith.position.set(0.5, lithium.position.y, -0.02); cab.add(labLith);
+const labVentTop = makeLabel("Top vent", "insect mesh");
+labVentTop.position.set(0, H+0.10, D/2+0.35); cab.add(labVentTop);
+const labVentBot = makeLabel("Bottom vent", "insect mesh, sloped");
+labVentBot.position.set(0, -0.05, D/2+0.35); cab.add(labVentBot);
+const labGap = makeLabel("40cm gap to floor", "hanger passes underneath");
+labGap.position.set(0, -0.20, 0.3); cab.add(labGap);
+
+const target = new THREE.Vector3(0, GAP+H*0.5, 0);
+let radius = 3.0, theta = Math.PI*0.30, phi = Math.PI*0.42;
+const minR=1.2, maxR=5.2, minPhi=0.15, maxPhi=Math.PI/2-0.05;
+function updateCamera(){
+  const x = target.x + radius*Math.sin(phi)*Math.sin(theta);
+  const y = target.y + radius*Math.cos(phi);
+  const z = target.z + radius*Math.sin(phi)*Math.cos(theta);
+  camera.position.set(x,y,z); camera.lookAt(target);
+}
+updateCamera();
+
+let dragging=false, lastX=0, lastY=0;
+function pointerDown(e){ dragging=true; const p=getPos(e); lastX=p.x; lastY=p.y; }
+function pointerMove(e){
+  if(!dragging) return;
+  const p = getPos(e);
+  const dx = p.x-lastX, dy = p.y-lastY;
+  theta -= dx*0.006;
+  phi = Math.min(maxPhi, Math.max(minPhi, phi - dy*0.006));
+  lastX=p.x; lastY=p.y; updateCamera(); clearActiveBtns();
+}
+function pointerUp(){ dragging=false; }
+function getPos(e){
+  if(e.touches && e.touches.length) return {x:e.touches[0].clientX, y:e.touches[0].clientY};
+  return {x:e.clientX, y:e.clientY};
+}
+renderer.domElement.addEventListener('pointerdown', pointerDown);
+window.addEventListener('pointermove', pointerMove);
+window.addEventListener('pointerup', pointerUp);
+renderer.domElement.addEventListener('wheel', (e)=>{
+  e.preventDefault();
+  radius = Math.min(maxR, Math.max(minR, radius + e.deltaY*0.0018));
+  updateCamera();
+}, {passive:false});
+let pinchStart=null;
+renderer.domElement.addEventListener('touchstart', (e)=>{ if(e.touches.length===2){ pinchStart = dist(e.touches[0],e.touches[1]); } },{passive:true});
+renderer.domElement.addEventListener('touchmove', (e)=>{
+  if(e.touches.length===2 && pinchStart){
+    const d = dist(e.touches[0],e.touches[1]);
+    radius = Math.min(maxR, Math.max(minR, radius - (d-pinchStart)*0.005));
+    pinchStart = d; updateCamera();
+  }
+},{passive:true});
+function dist(a,b){ const dx=a.clientX-b.clientX, dy=a.clientY-b.clientY; return Math.sqrt(dx*dx+dy*dy); }
+
+const presets = {
+  iso:   {theta: Math.PI*0.30, phi: Math.PI*0.42, r:3.0},
+  front: {theta: 0,             phi: Math.PI*0.46, r:2.7},
+  side:  {theta: Math.PI/2,     phi: Math.PI*0.46, r:2.7},
+  top:   {theta: Math.PI*0.18,  phi: 0.22,          r:3.2},
+};
+let animT = null;
+function goPreset(name){ const p = presets[name]; animT = {theta0:theta, phi0:phi, r0:radius, theta1:p.theta, phi1:p.phi, r1:p.r, t:0}; }
+document.querySelectorAll('.vbtn[data-view]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.vbtn[data-view]').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active'); goPreset(btn.dataset.view);
+  });
+});
+function clearActiveBtns(){ document.querySelectorAll('.vbtn[data-view]').forEach(b=>b.classList.remove('active')); }
+
+let openA=false, animA=null;
+document.getElementById('doorToggleA').addEventListener('click', (e)=>{
+  openA = !openA;
+  e.target.textContent = openA ? "Close Lower Door (Genus)" : "Slide Lower Door (Genus)";
+  animA = {t:0, from: openA?0:travelA, to: openA?travelA:0};
+});
+let openB=false, animB=null;
+document.getElementById('doorToggleB').addEventListener('click', (e)=>{
+  openB = !openB;
+  e.target.textContent = openB ? "Close Upper Door (Deye)" : "Slide Upper Door (Deye)";
+  animB = {t:0, from: openB?0:travelB, to: openB?travelB:0};
+});
+let hingeOpen=false, animH=null;
+document.getElementById('hingeToggle').addEventListener('click', (e)=>{
+  hingeOpen = !hingeOpen;
+  e.target.textContent = hingeOpen ? "Rehang Genus" : "Lift & Pull Genus Forward";
+  animH = {t:0, from: hingeOpen?0:1, to: hingeOpen?1:0};
+});
+
+function animate(){
+  requestAnimationFrame(animate);
+  if(animT){
+    animT.t += 0.045; const t = Math.min(1, animT.t); const ease = 1-Math.pow(1-t,3);
+    theta = animT.theta0 + (animT.theta1-animT.theta0)*ease;
+    phi   = animT.phi0   + (animT.phi1  -animT.phi0)*ease;
+    radius= animT.r0     + (animT.r1    -animT.r0)*ease;
+    updateCamera(); if(t>=1) animT=null;
+  }
+  if(animA){
+    animA.t += 0.04; const t = Math.min(1, animA.t); const ease = 1-Math.pow(1-t,3);
+    doorAPivot.position.y = animA.from + (animA.to-animA.from)*ease;
+    if(t>=1) animA=null;
+  }
+  if(animB){
+    animB.t += 0.04; const t = Math.min(1, animB.t); const ease = 1-Math.pow(1-t,3);
+    doorBPivot.position.y = animB.from + (animB.to-animB.from)*ease;
+    if(t>=1) animB=null;
+  }
+  if(animH){
+    animH.t += 0.035; const t = Math.min(1, animH.t);
+    const progress = animH.from + (animH.to-animH.from)*t;
+    // progress 0..1 maps to: 0-0.4 = lift up, 0.4-1 = pull forward
+    let liftT = Math.min(1, progress/0.4);
+    let pullT = Math.max(0, (progress-0.4)/0.6);
+    liftT = 1-Math.pow(1-liftT,2); pullT = 1-Math.pow(1-pullT,2);
+    genusGroup.position.y = genusBaseY + liftClear*liftT;
+    genusGroup.position.z = (-D/2+0.02) + pullForward*pullT;
+    if(t>=1) animH=null;
+  }
+  renderer.render(scene, camera);
+}
+animate();
+
+function onResize(){
+  camera.aspect = window.innerWidth/(window.innerHeight-52);
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight-52);
+}
+window.addEventListener('resize', onResize);
+</script>
+</body>
+</html>
