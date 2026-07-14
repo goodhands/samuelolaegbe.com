@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-<title>Inverter Enclosure — Full Spec (Sized to Real Equipment)</title>
+<title>Wall-Flush Shroud 2.0 — Floor-Loaded Battery Plinth Spec</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <style>
   html,body{margin:0;padding:0;overflow:hidden;background:#0f1115;font-family:-apple-system,Helvetica,Arial,sans-serif;}
@@ -14,7 +14,7 @@
   #titleBar{top:64px;left:16px;max-width:250px;padding:12px 16px;}
   #titleBar h1{font-size:14px;margin:0 0 4px 0;font-weight:700;color:#fff;}
   #titleBar p{font-size:11px;margin:0;color:#9aa3b2;line-height:1.4;}
-  #mountInfo{top:64px;right:16px;max-width:250px;padding:14px 16px;}
+  #mountInfo{top:64px;right:16px;max-width:255px;padding:14px 16px;}
   #mountInfo h2{font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:#8b93a3;margin:0 0 10px 0;}
   #mountInfo .mRow{font-size:11px;color:#dde1e8;margin-bottom:8px;line-height:1.42;}
   #mountInfo .mRow b{color:#fff;}
@@ -25,21 +25,42 @@
   button.vbtn:active,button.vbtn.active{background:#4f7cff;}
   #legend{bottom:16px;right:16px;max-width:230px;padding:14px 16px;}
   #legend h2{font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:#8b93a3;margin:0 0 10px 0;}
-  .legRow{display:flex;align-items:center;gap:8px;margin-bottom:7px;font-size:11.5px;color:#dde1e8;}
+  .legRow{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:11px;color:#dde1e8;}
   .swatch{width:12px;height:12px;border-radius:3px;flex:0 0 auto;}
   #tabs{position:fixed;top:0;left:0;right:0;height:52px;background:#14171d;display:flex;
         align-items:center;gap:8px;padding:0 14px;box-sizing:border-box;z-index:50;border-bottom:1px solid rgba(255,255,255,0.08);}
   .tabBtn{background:transparent;color:#9aa3b2;border:none;padding:10px 16px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;}
   .tabBtn.active{background:#2a3140;color:#fff;}
-  #view2d{position:fixed;top:52px;left:0;right:0;bottom:0;background:#f7f8fa;overflow:auto;display:none;padding:24px;box-sizing:border-box;}
+  #view2d,#viewTools{position:fixed;top:52px;left:0;right:0;bottom:0;background:#f7f8fa;overflow:auto;display:none;padding:24px;box-sizing:border-box;}
   #view2d svg{width:100%;height:auto;display:block;margin:0 auto;max-width:1700px;}
   #view3dWrap{position:fixed;top:52px;left:0;right:0;bottom:0;display:none;}
-  #view3dWrap.active, #view2d.active{display:block;}
+  #view3dWrap.active, #view2d.active, #viewTools.active{display:block;}
+
+  #toolsInner{max-width:1000px;margin:0 auto;color:#1f2937;}
+  #toolsInner h1{font-size:24px;margin:0 0 6px 0;}
+  #toolsInner p.sub{color:#6b7280;margin:0 0 28px 0;font-size:14px;}
+  .toolSection{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:20px 24px;margin-bottom:18px;}
+  .toolSection h2{font-size:15px;margin:0 0 14px 0;color:#1f2937;display:flex;align-items:center;gap:8px;}
+  .toolSection h2 .tag{font-size:10px;text-transform:uppercase;letter-spacing:0.05em;background:#eef1f4;color:#6b7280;padding:3px 8px;border-radius:20px;}
+  table.toolTable{width:100%;border-collapse:collapse;font-size:13px;}
+  table.toolTable th{text-align:left;color:#6b7280;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:0.04em;
+    padding:6px 10px;border-bottom:2px solid #e5e7eb;}
+  table.toolTable td{padding:8px 10px;border-bottom:1px solid #f0f1f3;vertical-align:top;}
+  table.toolTable tr:last-child td{border-bottom:none;}
+  .critical{color:#b91c1c;font-weight:600;}
+  .savings{color:#059669;font-weight:600;}
+  .keep{color:#374151;font-style:italic;}
+  .recBox{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:14px 16px;margin-top:12px;}
+  .recBox h3{margin:0 0 6px 0;font-size:13px;color:#166534;}
+  .recBox p{margin:0 0 8px 0;font-size:12.5px;color:#374151;line-height:1.5;}
+  .recBox p:last-child{margin-bottom:0;}
+
   @media (max-width:640px){
     #titleBar{top:60px;max-width:170px;} #titleBar h1{font-size:12px;} #titleBar p{font-size:9.5px;}
     #legend{max-width:150px;padding:11px;} #viewBtns{max-width:150px;padding:11px;}
     #mountInfo{max-width:160px;padding:11px;top:60px;} #mountInfo .mRow{font-size:9.5px;}
-    button.vbtn{padding:8px 9px;font-size:10px;} .tabBtn{padding:9px 12px;font-size:12px;} #view2d{padding:14px;}
+    button.vbtn{padding:8px 9px;font-size:10px;} .tabBtn{padding:9px 10px;font-size:11.5px;} #view2d,#viewTools{padding:14px;}
+    .toolSection{padding:14px 16px;} table.toolTable{font-size:11.5px;}
   }
 </style>
 </head>
@@ -48,13 +69,15 @@
 <div id="tabs">
   <button class="tabBtn active" data-tab="3d">3D Interactive</button>
   <button class="tabBtn" data-tab="2d">2D Spec</button>
+  <button class="tabBtn" data-tab="tools">Tools &amp; BOM</button>
 </div>
 
+<!-- ================= 3D ================= -->
 <div id="view3dWrap" class="active">
   <div id="canvasWrap"></div>
   <div class="panel" id="titleBar">
-    <h1>Wall-Flush Shroud — 3D</h1>
-    <p>Drag to rotate · Scroll/pinch to zoom · Sized to a real 220Ah battery — taller than before</p>
+    <h1>Floor-Loaded Plinth — 3D</h1>
+    <p>Drag to rotate · Scroll/pinch to zoom · 120kg battery now sits on the floor, not the wall</p>
   </div>
   <div class="panel" id="viewBtns">
     <div class="row-label">Camera presets</div>
@@ -63,34 +86,34 @@
     <button class="vbtn" data-view="side">Side</button>
     <button class="vbtn" data-view="top">Top</button>
     <div class="row-label" style="margin-top:6px;">Inspect</div>
-    <button class="vbtn" id="doorToggleA">Slide Lower Door (Genus)</button>
-    <button class="vbtn" id="doorToggleB">Slide Upper Door (Deye)</button>
-    <button class="vbtn" id="hingeToggle">Lift &amp; Pull Genus Forward</button>
+    <button class="vbtn" id="doorToggleA">Swing Battery Door</button>
+    <button class="vbtn" id="doorToggleB">Swing Inverter Door</button>
   </div>
   <div class="panel" id="mountInfo">
-    <h2>Sizing, venting &amp; access</h2>
-    <div class="mRow"><b>Battery:</b> real 220Ah tall tubular is 50.5x19x41cm — this model is sized to that, not a guess</div>
-    <div class="mRow"><b>Genus:</b> hangs on 2 iron hook brackets fixed to the wall — no hinge. Lift up ~3.5cm to clear the hooks, then pull forward for full back-panel access</div>
-    <div class="mRow"><b>Vents:</b> louvered, insect-meshed, top and bottom — restored, positioned clear of both slide tracks</div>
-    <div class="mRow"><b>Brackets:</b> 4x flush standoffs, M8x80mm masonry anchors, recessed — no foothold</div>
-    <div class="mRow"><b>Note:</b> Deye/lithium dimensions are estimated — confirm against your actual units before fabrication</div>
+    <h2>Load path &amp; anchoring</h2>
+    <div class="mRow"><b>120kg battery</b> transfers 100% through the welded steel plinth to the floor slab — wall carries zero static weight</div>
+    <div class="mRow"><b>Anti-tip only:</b> 4x M10 threaded rods in hollow-brick chemical anchors (2 at top bay, 2 at mid-shelf) — resist tipping, not deadweight</div>
+    <div class="mRow"><b>No expansion bolts</b> — hollow brick webs would shatter. Chemical resin + mesh sleeve only</div>
+    <div class="mRow"><b>Thermal split:</b> insulated mid-shelf stops inverter exhaust heat reaching the battery</div>
+    <div class="mRow"><b>Z-baffle vents</b> on side panels — air turns twice before reaching either bay, blocking driving rain</div>
   </div>
   <div class="panel" id="legend">
     <h2>Parts key</h2>
-    <div class="legRow"><span class="swatch" style="background:#9aa3ad;"></span>Building wall</div>
+    <div class="legRow"><span class="swatch" style="background:#9aa3ad;"></span>Building wall (brick)</div>
     <div class="legRow"><span class="swatch" style="background:#c5cbd1;"></span>Shroud frame</div>
-    <div class="legRow"><span class="swatch" style="background:#5c6773;"></span>Vent louvers (top/bottom)</div>
-    <div class="legRow"><span class="swatch" style="background:#f0c96b;"></span>Genus door — slides up</div>
-    <div class="legRow"><span class="swatch" style="background:#8fb4e8;"></span>Deye door — slides down</div>
-    <div class="legRow"><span class="swatch" style="background:#7d8896;"></span>Genus 1.6kVA (hook-hung)</div>
-    <div class="legRow"><span class="swatch" style="background:#232830;"></span>Tubular battery (50.5x19x41cm)</div>
-    <div class="legRow"><span class="swatch" style="background:#3a5a8c;"></span>Deye 3.5kVA</div>
-    <div class="legRow"><span class="swatch" style="background:#161a20;"></span>Lithium pack</div>
+    <div class="legRow"><span class="swatch" style="background:#3a3f47;"></span>Steel plinth (floor-loaded)</div>
+    <div class="legRow"><span class="swatch" style="background:#161a20;"></span>PowerAxis 16kWh battery (120kg)</div>
+    <div class="legRow"><span class="swatch" style="background:#3a5a8c;"></span>Deye 6kW inverter (9.3kg)</div>
+    <div class="legRow"><span class="swatch" style="background:#e8a33a;"></span>Battery door — gasketed swing</div>
+    <div class="legRow"><span class="swatch" style="background:#8fb4e8;"></span>Inverter door — gasketed swing</div>
+    <div class="legRow"><span class="swatch" style="background:#c94f4f;"></span>Anti-tip chemical anchor rods</div>
+    <div class="legRow"><span class="swatch" style="background:#14161a;"></span>Covert camera (under roof overhang)</div>
   </div>
 </div>
 
+<!-- ================= 2D ================= -->
 <div id="view2d">
-<svg viewBox="0 0 1700 1250" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<svg viewBox="0 0 1700 1300" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
   <defs>
     <linearGradient id="metalGrad" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0%" stop-color="#d8dde2"/><stop offset="50%" stop-color="#eef1f4"/><stop offset="100%" stop-color="#c5cbd1"/>
@@ -98,173 +121,257 @@
     <linearGradient id="roofGrad" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#4a5560"/><stop offset="100%" stop-color="#2f3740"/>
     </linearGradient>
-    <linearGradient id="slideGradA" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#fbe4a8"/><stop offset="100%" stop-color="#f0c96b"/>
-    </linearGradient>
-    <linearGradient id="slideGradB" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#c4dcf5"/><stop offset="100%" stop-color="#8fb4e8"/>
-    </linearGradient>
-    <pattern id="louver" width="10" height="6" patternUnits="userSpaceOnUse">
-      <rect width="10" height="6" fill="#c5cbd1"/><line x1="0" y1="3" x2="10" y2="3" stroke="#8a939c" stroke-width="1.5"/>
-    </pattern>
-    <marker id="arrowUp" markerWidth="8" markerHeight="8" refX="4" refY="0" orient="auto"><path d="M0,4 L4,0 L8,4" fill="none" stroke="#c99a33" stroke-width="2"/></marker>
-    <marker id="arrowDn" markerWidth="8" markerHeight="8" refX="4" refY="8" orient="auto"><path d="M0,4 L4,8 L8,4" fill="none" stroke="#3a6fb0" stroke-width="2"/></marker>
+    <marker id="arrowDn2" markerWidth="8" markerHeight="8" refX="4" refY="8" orient="auto"><path d="M0,4 L4,8 L8,4" fill="none" stroke="#374151" stroke-width="2"/></marker>
   </defs>
-  <rect width="1700" height="1250" fill="#f7f8fa"/>
-  <text x="60" y="55" font-size="27" font-weight="700" fill="#1f2937">Wall-Flush Shroud — Sized to Real Equipment — 2D Spec</text>
-  <text x="60" y="82" font-size="15" fill="#6b7280">Battery 50.5x19x41cm (confirmed) · vents restored · Genus hinge-swings forward for rear-panel access</text>
+  <rect width="1700" height="1300" fill="#f7f8fa"/>
+  <text x="60" y="55" font-size="27" font-weight="700" fill="#1f2937">Wall-Flush Shroud 2.0 — Floor-Loaded Structural Spec</text>
+  <text x="60" y="82" font-size="15" fill="#6b7280">PowerAxis 16kWh (120kg, floor-loaded) + Deye 6kW off-grid — hollow-brick chemical anti-tip anchoring</text>
   <line x1="60" y1="102" x2="1640" y2="102" stroke="#e5e7eb" stroke-width="1.5"/>
 
   <!-- FRONT VIEW -->
-  <g transform="translate(140,240)">
-    <text x="145" y="-60" font-size="17" font-weight="700" fill="#374151">FRONT VIEW — closed</text>
-    <rect x="-40" y="-30" width="380" height="850" fill="#e2e5e9" stroke="#c3c8ce"/>
-    <text x="145" y="-8" font-size="10.5" text-anchor="middle" fill="#9ca3af">— building wall —</text>
+  <g transform="translate(150,220)">
+    <text x="160" y="-50" font-size="17" font-weight="700" fill="#374151">FRONT VIEW — total 1940 x 650mm</text>
+    <rect x="-50" y="-30" width="410" height="1000" fill="#e2e5e9" stroke="#c3c8ce"/>
+    <text x="160" y="-8" font-size="10.5" text-anchor="middle" fill="#9ca3af">— hollow brick wall —</text>
 
-    <polygon points="0,0 290,0 330,-26 -6,-26" fill="url(#roofGrad)"/>
+    <polygon points="0,0 320,0 360,-26 -6,-26" fill="url(#roofGrad)"/>
 
-    <rect x="-8" y="35" width="12" height="26" fill="#4b5563"/>
-    <rect x="286" y="35" width="12" height="26" fill="#4b5563"/>
-    <rect x="-8" y="640" width="12" height="26" fill="#4b5563"/>
-    <rect x="286" y="640" width="12" height="26" fill="#4b5563"/>
-    <text x="145" y="18" font-size="10.5" text-anchor="middle" fill="#6b7280">flush standoff brackets — recessed</text>
+    <!-- anti-tip anchors, top -->
+    <circle cx="40" cy="35" r="6" fill="#c94f4f"/><circle cx="280" cy="35" r="6" fill="#c94f4f"/>
+    <text x="160" y="18" font-size="10.5" text-anchor="middle" fill="#c94f4f">2x M10 chemical anti-tip anchors (top)</text>
 
-    <rect x="0" y="0" width="290" height="680" fill="url(#metalGrad)" stroke="#8a939c" stroke-width="2"/>
+    <rect x="0" y="0" width="320" height="960" fill="url(#metalGrad)" stroke="#8a939c" stroke-width="2"/>
 
-    <!-- top vent -->
-    <rect x="14" y="12" width="262" height="30" fill="url(#louver)" stroke="#8a939c"/>
-    <text x="145" y="55" font-size="10.5" text-anchor="middle" fill="#4b5563">top intake louver, insect mesh</text>
+    <!-- inverter bay -->
+    <rect x="14" y="14" width="292" height="330" fill="#dfe9f7" stroke="#3a6fb0" stroke-width="1.5"/>
+    <text x="160" y="55" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2937">INVERTER BAY</text>
+    <text x="160" y="76" font-size="12" text-anchor="middle" fill="#374151">Deye 6kW off-grid (IP65)</text>
+    <text x="160" y="94" font-size="11" text-anchor="middle" fill="#6b7280">427.5 x 306 x 175.8mm — 9.3kg</text>
+    <text x="160" y="112" font-size="11" text-anchor="middle" fill="#6b7280">wall-stabilized, mid-shelf supported</text>
+    <rect x="30" y="130" width="260" height="26" fill="#eef4fb" stroke="#8fb4e8" stroke-dasharray="3,3"/>
+    <text x="160" y="148" font-size="10.5" text-anchor="middle" fill="#3a6fb0">display + breaker viewing strip</text>
+    <text x="160" y="200" font-size="10.5" text-anchor="middle" fill="#6b7280">gasketed swing door, single hinge</text>
+    <text x="160" y="216" font-size="10.5" text-anchor="middle" fill="#6b7280">(or bypass slide — inverter is IP65)</text>
 
-    <!-- upper bay: Deye door -->
-    <rect x="14" y="66" width="262" height="260" fill="url(#slideGradB)" stroke="#3a6fb0" stroke-width="1.5"/>
-    <text x="145" y="105" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2937">UPPER BAY — Deye door</text>
-    <text x="145" y="125" font-size="12" text-anchor="middle" fill="#374151">Deye 3.5kVA + 24V lithium</text>
-    <text x="145" y="141" font-size="10" text-anchor="middle" fill="#6b7280">(est. — confirm exact dims)</text>
-    <rect x="28" y="152" width="234" height="30" fill="#e8f4fb" stroke="#8fb4e8" stroke-dasharray="3,3"/>
-    <text x="145" y="172" font-size="10.5" text-anchor="middle" fill="#3a6fb0">polycarbonate viewing strip</text>
-    <path d="M145,280 L145,310" stroke="#3a6fb0" stroke-width="3" marker-end="url(#arrowDn)"/>
-    <text x="145" y="245" font-size="11" text-anchor="middle" fill="#3a6fb0">rear rail — slides DOWN</text>
-    <text x="145" y="261" font-size="11" text-anchor="middle" fill="#3a6fb0">into lower bay's rear space</text>
+    <!-- reinforced mid-shelf -->
+    <rect x="4" y="350" width="312" height="16" fill="#3a3f47"/>
+    <text x="160" y="342" font-size="10.5" text-anchor="middle" fill="#3a3f47">reinforced mid-shelf, ceramic-fiber insulated underside</text>
+    <circle cx="40" cy="358" r="6" fill="#c94f4f"/><circle cx="280" cy="358" r="6" fill="#c94f4f"/>
+    <text x="160" y="380" font-size="10.5" text-anchor="middle" fill="#c94f4f">2x M10 chemical anti-tip anchors (mid-shelf)</text>
 
-    <rect x="6" y="330" width="278" height="7" fill="#8a939c"/>
+    <!-- battery bay -->
+    <rect x="14" y="396" width="292" height="470" fill="#e7e9ec" stroke="#3a3f47" stroke-width="1.5"/>
+    <text x="160" y="440" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2937">BATTERY BAY</text>
+    <text x="160" y="461" font-size="12" text-anchor="middle" fill="#374151">PowerAxis 16kWh 51.2V 314Ah (IP20)</text>
+    <text x="160" y="479" font-size="11" text-anchor="middle" fill="#6b7280">942.5 x 450.5 x 230mm — 120kg</text>
+    <text x="160" y="497" font-size="11" text-anchor="middle" fill="#6b7280">rests in retaining-lip steel tray</text>
+    <rect x="30" y="515" width="260" height="26" fill="#eef1f4" stroke="#8a939c" stroke-dasharray="3,3"/>
+    <text x="160" y="533" font-size="10.5" text-anchor="middle" fill="#4b5563">smart touch display + breaker viewing strip</text>
+    <text x="160" y="700" font-size="10.5" text-anchor="middle" fill="#6b7280">full-height gasketed swing door</text>
+    <text x="160" y="716" font-size="10.5" text-anchor="middle" fill="#6b7280">piano hinge + 3x cam-lock latches</text>
+    <text x="160" y="732" font-size="10.5" text-anchor="middle" fill="#6b7280">EPDM D-profile perimeter seal</text>
 
-    <!-- lower bay: Genus door -->
-    <rect x="14" y="341" width="262" height="300" fill="url(#slideGradA)" stroke="#c99a33" stroke-width="1.5"/>
-    <text x="145" y="380" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2937">LOWER BAY — Genus door</text>
-    <text x="145" y="400" font-size="12" text-anchor="middle" fill="#374151">Genus 1.6kVA (hook-hung, upper</text>
-    <text x="145" y="416" font-size="12" text-anchor="middle" fill="#374151">portion) + tubular battery (base)</text>
-    <rect x="28" y="426" width="234" height="30" fill="#fdf3dc" stroke="#f0c96b" stroke-dasharray="3,3"/>
-    <text x="145" y="446" font-size="10.5" text-anchor="middle" fill="#c99a33">polycarbonate viewing strip</text>
-    <path d="M145,600 L145,530" stroke="#c99a33" stroke-width="3" marker-end="url(#arrowUp)"/>
-    <text x="145" y="625" font-size="11" text-anchor="middle" fill="#c99a33">front rail — slides UP</text>
+    <!-- plinth -->
+    <rect x="4" y="866" width="312" height="94" fill="#3a3f47"/>
+    <text x="160" y="898" font-size="12" text-anchor="middle" fill="#fff">WELDED STEEL PLINTH</text>
+    <text x="160" y="916" font-size="10.5" text-anchor="middle" fill="#cbd5e1">100% deadweight → floor slab</text>
+    <text x="160" y="932" font-size="10.5" text-anchor="middle" fill="#cbd5e1">4x adjustable leveling feet</text>
+    <rect x="20" y="960" width="18" height="20" fill="#1f2937"/>
+    <rect x="282" y="960" width="18" height="20" fill="#1f2937"/>
+    <text x="160" y="1000" font-size="11" text-anchor="middle" fill="#6b7280">100mm floor clearance — flash-pool protection, NOT a floating gap</text>
 
-    <rect x="10" y="12" width="6" height="629" fill="#4b5563"/>
-    <rect x="274" y="12" width="6" height="629" fill="#4b5563"/>
-
-    <!-- bottom vent -->
-    <rect x="14" y="644" width="262" height="28" fill="url(#louver)" stroke="#8a939c"/>
-    <text x="145" y="690" font-size="10.5" text-anchor="middle" fill="#4b5563">bottom exhaust louver, sloped, meshed</text>
-
-    <text x="145" y="720" font-size="11" text-anchor="middle" fill="#6b7280">40cm clear gap to floor — hanger &amp; walking space pass underneath</text>
-
-    <line x1="-70" y1="0" x2="-70" y2="680" stroke="#9ca3af" stroke-width="1"/>
-    <text x="-100" y="345" font-size="13" fill="#4b5563" transform="rotate(-90,-100,345)" text-anchor="middle">178 cm</text>
-    <line x1="0" y1="755" x2="290" y2="755" stroke="#9ca3af" stroke-width="1"/>
-    <text x="145" y="780" font-size="13" fill="#4b5563" text-anchor="middle">62 cm</text>
+    <line x1="-90" y1="0" x2="-90" y2="960" stroke="#9ca3af" stroke-width="1"/>
+    <text x="-120" y="480" font-size="13" fill="#4b5563" transform="rotate(-90,-120,480)" text-anchor="middle">1940 mm total</text>
+    <line x1="0" y1="1030" x2="320" y2="1030" stroke="#9ca3af" stroke-width="1"/>
+    <text x="160" y="1055" font-size="13" fill="#4b5563" text-anchor="middle">650 mm</text>
   </g>
 
-  <!-- GENUS HOOK-HANG DETAIL -->
-  <g transform="translate(620,240)">
-    <text x="90" y="-60" font-size="17" font-weight="700" fill="#374151">GENUS HOOK-HANG DETAIL</text>
-    <rect x="-20" y="0" width="20" height="500" fill="#c3c8ce"/>
-    <text x="-10" y="250" font-size="10" text-anchor="middle" fill="#6b7280" transform="rotate(-90,-10,250)">wall</text>
+  <!-- SIDE VIEW: depth + z-baffle -->
+  <g transform="translate(680,220)">
+    <text x="90" y="-50" font-size="17" font-weight="700" fill="#374151">SIDE VIEW — depth 380mm</text>
+    <rect x="-30" y="-30" width="30" height="960" fill="#c3c8ce"/>
+    <text x="-15" y="480" font-size="10" text-anchor="middle" fill="#6b7280" transform="rotate(-90,-15,480)">wall</text>
+    <polygon points="-15,0 165,0 195,-26 -15,-26" fill="url(#roofGrad)"/>
+    <rect x="0" y="0" width="180" height="960" fill="url(#metalGrad)" stroke="#8a939c" stroke-width="2"/>
 
-    <!-- iron hooks on wall -->
-    <rect x="20" y="30" width="14" height="30" fill="#2b2f36"/>
-    <rect x="20" y="30" width="34" height="10" fill="#2b2f36"/>
-    <rect x="136" y="30" width="14" height="30" fill="#2b2f36"/>
-    <rect x="116" y="30" width="34" height="10" fill="#2b2f36"/>
-    <text x="85" y="20" font-size="10" text-anchor="middle" fill="#6b7280">2x iron L-hooks, bolted to wall</text>
-
-    <!-- resting state -->
-    <rect x="10" y="60" width="150" height="180" fill="#7d8896" stroke="#5a6371" stroke-width="1.5"/>
-    <text x="85" y="150" font-size="11" text-anchor="middle" fill="#fff">Genus — hanging</text>
-    <text x="85" y="168" font-size="10" text-anchor="middle" fill="#e5e7eb">resting on hooks</text>
-
-    <!-- step 1: lifted -->
-    <g transform="translate(210,-15)">
-      <rect x="10" y="60" width="150" height="180" fill="#8a95a3" stroke="#5a6371" stroke-width="1.5" opacity="0.9"/>
-      <path d="M85,60 L85,20" stroke="#c99a33" stroke-width="2.5" marker-end="url(#arrowUpG)"/>
-      <text x="85" y="12" font-size="10.5" text-anchor="middle" fill="#c99a33">1. lift ~3.5cm</text>
-      <text x="85" y="150" font-size="11" text-anchor="middle" fill="#fff">clears hooks</text>
+    <!-- Z-baffle intake -->
+    <g transform="translate(0,120)">
+      <rect x="-24" y="0" width="24" height="50" fill="#8a939c"/>
+      <path d="M-24,0 L-24,50 L0,50 L0,35 L-14,35 L-14,15 L0,15 L0,0 Z" fill="#5c6773"/>
+      <text x="-70" y="30" font-size="9.5" fill="#374151">Z-baffle</text>
+      <text x="-70" y="43" font-size="9.5" fill="#374151">intake</text>
     </g>
+    <text x="90" y="210" font-size="10.5" text-anchor="middle" fill="#6b7280">air turns twice — blocks driving rain</text>
 
-    <!-- step 2: pulled forward -->
-    <g transform="translate(420,60)">
-      <rect x="10" y="0" width="150" height="180" fill="#9aa5b3" stroke="#5a6371" stroke-width="1.5" opacity="0.9" transform="skewY(-6)"/>
-      <path d="M0,90 L-55,90" stroke="#059669" stroke-width="2.5" marker-end="url(#arrowLeftG)"/>
-      <text x="-20" y="75" font-size="10.5" fill="#059669">2. pull forward</text>
-      <text x="85" y="95" font-size="11" text-anchor="middle" fill="#fff" transform="skewY(-6)">back now open</text>
-    </g>
-    <defs>
-      <marker id="arrowUpG" markerWidth="8" markerHeight="8" refX="4" refY="0" orient="auto"><path d="M0,4 L4,0 L8,4" fill="none" stroke="#c99a33" stroke-width="2"/></marker>
-      <marker id="arrowLeftG" markerWidth="8" markerHeight="8" refX="0" refY="4" orient="auto"><path d="M8,0 L0,4 L8,8" fill="none" stroke="#059669" stroke-width="2"/></marker>
-    </defs>
-    <text x="220" y="290" font-size="11" text-anchor="middle" fill="#6b7280">No hinge hardware — it's just weight resting on two hooks, like a picture frame</text>
-    <text x="220" y="308" font-size="11" text-anchor="middle" fill="#6b7280">~19cm forward clearance inside the bay is enough to fully pull it off the wall plane</text>
+    <line x1="0" y1="1030" x2="180" y2="1030" stroke="#9ca3af" stroke-width="1"/>
+    <text x="90" y="1055" font-size="13" fill="#4b5563" text-anchor="middle">380 mm</text>
+    <text x="90" y="230" font-size="10.5" text-anchor="middle" fill="#6b7280">230mm battery + cable bend radius + door clearance</text>
   </g>
 
-  <!-- BATTERY REAL DIMENSIONS -->
-  <g transform="translate(1080,240)">
-    <text x="60" y="-60" font-size="17" font-weight="700" fill="#374151">BATTERY — CONFIRMED DIMENSIONS</text>
-    <rect x="0" y="0" width="200" height="164" fill="#232830" stroke="#111417" stroke-width="1.5" rx="4"/>
-    <text x="100" y="70" font-size="12" text-anchor="middle" fill="#fff">220Ah 12V</text>
-    <text x="100" y="88" font-size="12" text-anchor="middle" fill="#fff">tall tubular</text>
-    <line x1="0" y1="184" x2="200" y2="184" stroke="#9ca3af"/>
-    <text x="100" y="204" font-size="12" fill="#4b5563" text-anchor="middle">50.5 cm (W)</text>
-    <line x1="-24" y1="0" x2="-24" y2="164" stroke="#9ca3af"/>
-    <text x="-50" y="85" font-size="12" fill="#4b5563" transform="rotate(-90,-50,85)" text-anchor="middle">41 cm (H)</text>
-    <text x="230" y="85" font-size="12" fill="#4b5563">19 cm deep</text>
-    <text x="0" y="240" font-size="11" fill="#6b7280">This is the real published spec for a Kan/Luminous-class 220Ah tall tubular —</text>
-    <text x="0" y="258" font-size="11" fill="#6b7280">the shroud's lower bay is sized around it, not a rounded guess.</text>
+  <!-- HOLLOW BRICK ANCHOR DETAIL -->
+  <g transform="translate(1020,220)">
+    <text x="130" y="-50" font-size="17" font-weight="700" fill="#374151">HOLLOW BRICK CHEMICAL ANCHOR</text>
+    <rect x="0" y="40" width="260" height="200" fill="#d8c9b0" stroke="#a89478"/>
+    <!-- hollow webs -->
+    <rect x="30" y="60" width="200" height="20" fill="#c7b494"/>
+    <rect x="30" y="100" width="200" height="20" fill="#c7b494"/>
+    <rect x="30" y="140" width="200" height="20" fill="#c7b494"/>
+    <rect x="30" y="180" width="200" height="20" fill="#c7b494"/>
+    <text x="130" y="30" font-size="10.5" text-anchor="middle" fill="#6b7280">hollow brick — sitting room on far side</text>
+
+    <!-- mesh sleeve + resin bulb -->
+    <rect x="90" y="95" width="70" height="30" fill="#e8a33a" opacity="0.5"/>
+    <circle cx="160" cy="110" r="22" fill="#e8a33a" opacity="0.65"/>
+    <line x1="60" y1="110" x2="182" y2="110" stroke="#3a3f47" stroke-width="4"/>
+    <text x="130" y="260" font-size="10.5" text-anchor="middle" fill="#374151">mesh sleeve traps resin — forms a solid</text>
+    <text x="130" y="276" font-size="10.5" text-anchor="middle" fill="#374151">"chemical bulb" behind the front brick face</text>
+
+    <path d="M225,110 L245,110" stroke="#b91c1c" stroke-width="2" marker-end="url(#arrowDn2)"/>
+    <text x="252" y="105" font-size="9.5" fill="#b91c1c">drill stops before</text>
+    <text x="252" y="118" font-size="9.5" fill="#b91c1c">rear web — protects</text>
+    <text x="252" y="131" font-size="9.5" fill="#b91c1c">sitting-room plaster</text>
+
+    <text x="0" y="330" font-size="11" fill="#b91c1c" font-weight="700">✕ NO expansion/sleeve anchors — shatters hollow webs</text>
+    <text x="0" y="352" font-size="11" fill="#059669" font-weight="700">✓ Injection resin + mesh sleeve + threaded rod only</text>
+    <text x="0" y="378" font-size="11" fill="#374151">4x M10 rods total: 2 at top bay, 2 at mid-shelf</text>
+    <text x="0" y="398" font-size="11" fill="#374151">Anti-tip stabilization only — carries no deadweight</text>
   </g>
 
-  <!-- BALCONY PLAN (unchanged) -->
-  <g transform="translate(140,1010)">
-    <text x="10" y="-30" font-size="17" font-weight="700" fill="#374151">BALCONY PLAN (unchanged from prior revision)</text>
-    <rect x="0" y="0" width="560" height="180" fill="#eef1f4" stroke="#9ca3af"/>
-    <rect x="0" y="0" width="30" height="180" fill="#9aa3ad"/>
-    <text x="15" y="90" font-size="10" fill="#f7f8fa" text-anchor="middle" transform="rotate(-90,15,90)">LEFT WALL 99cm</text>
-    <rect x="30" y="0" width="70" height="14" fill="#3a3f47"/>
-    <text x="65" y="34" font-size="10" text-anchor="middle" fill="#374151">entrance door</text>
-    <rect x="30" y="55" width="30" height="110" fill="#c5cbd1" stroke="#6b7280" stroke-width="1.5"/>
-    <text x="10" y="112" font-size="9.5" text-anchor="middle" fill="#1f2937" transform="rotate(-90,10,112)">shroud</text>
-    <rect x="60" y="0" width="90" height="180" fill="#dff3e6" opacity="0.6"/>
-    <text x="105" y="90" font-size="10" text-anchor="middle" fill="#059669" transform="rotate(-90,105,90)">clear path</text>
-    <rect x="160" y="65" width="65" height="95" fill="none" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="4,3"/>
-    <text x="192" y="115" font-size="10" text-anchor="middle" fill="#6b7280">hanger</text>
-    <rect x="530" y="0" width="30" height="180" fill="#9aa3ad"/>
-    <text x="545" y="90" font-size="9.5" fill="#f7f8fa" text-anchor="middle" transform="rotate(-90,545,90)">RIGHT WALL — AC reserved</text>
-  </g>
-
-  <g transform="translate(950,610)">
+  <g transform="translate(1020,600)">
     <rect x="0" y="0" width="440" height="330" fill="#f3f4f6" stroke="#d1d5db" rx="6"/>
-    <text x="20" y="30" font-size="14" font-weight="700" fill="#1f2937">Updated Spec Summary</text>
-    <text x="20" y="56" font-size="12" fill="#374151">• Height grew to ~178cm — driven by the real</text>
-    <text x="20" y="76" font-size="12" fill="#374151">&#160;&#160;41cm battery + Genus stacked above it</text>
-    <text x="20" y="98" font-size="12" fill="#374151">• Width 62cm — fits the 50.5cm battery with margin</text>
-    <text x="20" y="120" font-size="12" fill="#374151">• Genus hinges at the top, swings forward ~20cm</text>
-    <text x="20" y="140" font-size="12" fill="#374151">&#160;&#160;for rear switch/plug access</text>
-    <text x="20" y="162" font-size="12" fill="#374151">• Vents restored: top intake + bottom exhaust,</text>
-    <text x="20" y="182" font-size="12" fill="#374151">&#160;&#160;both insect-meshed, clear of slide tracks</text>
-    <text x="20" y="204" font-size="12" fill="#374151">• Both doors still slide (bypass, front/rear rail)</text>
-    <text x="20" y="226" font-size="12" fill="#374151">• Deye/lithium sizing is an estimate — confirm</text>
-    <text x="20" y="246" font-size="12" fill="#374151">&#160;&#160;actual dimensions once units are purchased</text>
-    <text x="20" y="268" font-size="12" fill="#374151">• If 178cm is too tall for the balcony ceiling,</text>
-    <text x="20" y="288" font-size="12" fill="#374151">&#160;&#160;a slimmer wall-mount lithium pack shortens</text>
-    <text x="20" y="308" font-size="12" fill="#374151">&#160;&#160;the upper bay — worth checking before build</text>
+    <text x="20" y="30" font-size="14" font-weight="700" fill="#1f2937">Structural Spec Summary</text>
+    <text x="20" y="56" font-size="12" fill="#374151">• Total: 1940mm H x 650mm W x 380mm D</text>
+    <text x="20" y="78" font-size="12" fill="#374151">• Loaded weight: ~165kg (120kg batt + 9.3kg</text>
+    <text x="20" y="98" font-size="12" fill="#374151">&#160;&#160;inverter + ~35kg welded steel frame)</text>
+    <text x="20" y="120" font-size="12" fill="#374151">• 100% deadweight → floor slab via plinth</text>
+    <text x="20" y="142" font-size="12" fill="#374151">• Wall anchors = anti-tip only, chemical resin</text>
+    <text x="20" y="164" font-size="12" fill="#374151">• Mid-shelf: insulated, thermally isolates bays</text>
+    <text x="20" y="186" font-size="12" fill="#374151">• Z-baffle vents on side panels, not door face</text>
+    <text x="20" y="208" font-size="12" fill="#374151">• 12V thermostat fan, 30°C trigger, battery bay</text>
+    <text x="20" y="230" font-size="12" fill="#374151">• All cable exits: IP68 glands, base of plinth,</text>
+    <text x="20" y="250" font-size="12" fill="#374151">&#160;&#160;with drip-loop before entry</text>
+    <text x="20" y="272" font-size="12" fill="#374151">• Battery door: full swing, gasketed, 3x latch</text>
+    <text x="20" y="294" font-size="12" fill="#374151">• Confirm balcony soffit clearance ≥ 2.1m before</text>
+    <text x="20" y="314" font-size="12" fill="#374151">&#160;&#160;fabrication — 1940mm is tall</text>
   </g>
 </svg>
+</div>
+
+<!-- ================= TOOLS & BOM ================= -->
+<div id="viewTools">
+<div id="toolsInner">
+  <h1>Tools, Hardware &amp; Bill of Materials</h1>
+  <p class="sub">Everything the welder and installer need on site — grouped by task. Items marked <span class="critical">critical</span> aren't substitutable without compromising the load path or weather seal.</p>
+
+  <div class="toolSection">
+    <h2>Cost Optimization — What's Actually Optional <span class="tag">Save ~₦100k–170k</span></h2>
+    <table class="toolTable">
+      <tr><th>Item</th><th>Savings if cut</th><th>Trade-off</th></tr>
+      <tr><td>12V fan + thermostat module</td><td class="savings">₦15,000–25,000</td><td>Battery BMS + inverter's own IP65 cooling cover a lot; passive Z-baffle venting alone may suffice outside peak heat months. Most defensible cut if budget's tight, but sustained 135A load in Lagos heat is exactly where I'd hesitate to drop it fully.</td></tr>
+        <tr><td>Polycarbonate viewing windows</td><td class="savings">₦10,000–15,000</td><td>Open the door to check the display instead. Convenience loss only, no functional loss.</td></tr>
+      <tr><td>Epoxy marine paint → basic enamel</td><td class="savings">₦15,000–25,000</td><td>Real trade-off — enamel looks fine at first but won't hold up against coastal humidity as long. Pay now or repaint in ~2 years.</td></tr>
+      <tr><td>Stainless → mild steel fasteners (static only)</td><td class="savings">₦10,000–15,000</td><td>Keep stainless on hinges/latches (moving, wearing parts); mild steel passable on static bolts if well painted.</td></tr>
+      <tr><td>Adjustable leveling feet → fixed feet + shims</td><td class="savings">₦10,000–15,000</td><td>Manual leveling with washers works, just less clean and harder to re-level later.</td></tr>
+    </table>
+    <p style="font-size:12px;color:#6b7280;margin-top:12px;">Cutting all of these brings the all-in cost from ~₦450k–750k down to roughly <b>₦350k–450k</b>. <span class="keep">Don't cut:</span> plinth steel spec, chemical anchor system, or the battery door gasket — these aren't cost padding, they're the two things (structural safety and zero-water-tolerance sealing) the whole design exists to solve.</p>
+  </div>
+
+  <div class="toolSection">
+    <h2>Security — Locks &amp; Covert Camera <span class="tag">Recommended addition</span></h2>
+    <table class="toolTable">
+      <tr><th>Item</th><th>Spec</th><th>Purpose</th></tr>
+      <tr><td>Keyed cam lock</td><td class="critical">Replaces mid-height draw latch, battery door</td><td>Same compression function as a plain latch, but takes a key — the plain latches specified elsewhere aren't security hardware</td></tr>
+      <tr><td>Heavy-duty hasp + padlock</td><td>Secondary, battery door</td><td>Visible deterrent + redundancy on the highest-value bay</td></tr>
+      <tr><td>Magnetic reed tamper sensor</td><td>Wired to GSM alarm module</td><td>SMS/call alert the instant the battery door opens unexpectedly — highest value-per-naira security add</td></tr>
+    </table>
+    <div class="recBox">
+      <h3>Stealth camera recommendation</h3>
+      <p><b>Best option for this build:</b> rather than buying a disguised "spy camera" product, embed a small covert camera <i>module</i> (just the lens + board, no visible housing) inside the roof overhang or one of the Z-baffle vent hoods you're already having welded. It's genuinely more discreet than anything off-the-shelf, because it's not a separate object someone could spot or steal — it's built into the structure. Wire it off the same 12V line as the fan/thermostat, on its own fuse.</p>
+      <p><b>Reliable brands to build around:</b> Reolink (Argus/Lumus mini series) or EZVIZ mini outdoor modules — both are legitimately weatherproof (IP65+), have solid low-light performance, and are sold through mainstream Nigerian retailers rather than only sketchy marketplace listings. Avoid generic "disguised as X" spy-cam products for this — most are indoor-rated, battery life is often under 2 hours, and long-term reliability outdoors is inconsistent. For something protecting a ~₦2m+ system, a known brand's mini module is worth the extra cost.</p>
+      <p><b>Placement:</b> tuck it under the roof's forward overhang facing down/out — it stays dry, sits in shadow (harder to spot from below), and covers exactly the approach angle someone would use to reach the doors.</p>
+    </div>
+  </div>
+
+  <div class="toolSection">
+    <h2>Steel Fabrication <span class="tag">Welder</span></h2>
+    <table class="toolTable">
+      <tr><th>Item</th><th>Spec</th><th>Purpose</th></tr>
+      <tr><td>Welding machine</td><td>MMA/ARC or MIG, 200A+</td><td>Frame, plinth, mid-shelf joints</td></tr>
+      <tr><td>Angle grinder</td><td>4.5" with cutting + grinding discs</td><td>Cutting SHS stock, deburring welds</td></tr>
+      <tr><td>SHS steel stock</td><td class="critical">50x50x4mm (plinth base)</td><td>Load-bearing plinth frame — do not under-spec</td></tr>
+      <tr><td>SHS steel stock</td><td>40x40x3mm</td><td>Upright frame members</td></tr>
+      <tr><td>Steel plate</td><td>3mm mild steel</td><td>Panels, mid-shelf, battery tray</td></tr>
+      <tr><td>Angle iron</td><td>40x40x3mm</td><td>Mid-shelf ledger supports</td></tr>
+      <tr><td>Tape measure &amp; square</td><td>5m tape, steel try-square</td><td>Frame squareness — critical for door seal fit</td></tr>
+      <tr><td>Welding PPE</td><td>Helmet, gloves, apron</td><td>Standard site safety</td></tr>
+      <tr><td>Adjustable leveling feet</td><td>4x, M16 threaded, load-rated ≥50kg each</td><td>100mm floor clearance, levels on uneven screed</td></tr>
+    </table>
+  </div>
+
+  <div class="toolSection">
+    <h2>Hollow-Brick Chemical Anchoring <span class="tag">Critical — no substitutions</span></h2>
+    <table class="toolTable">
+      <tr><th>Item</th><th>Spec</th><th>Purpose</th></tr>
+      <tr><td>Rotary hammer drill</td><td>SDS-plus, depth-stop collar</td><td>Drilling anchor holes without overshooting the rear web</td></tr>
+      <tr><td>Masonry drill bits</td><td>12mm (for M10 rods)</td><td>Matched to mesh sleeve OD</td></tr>
+      <tr><td>Perforated mesh sleeves</td><td class="critical">Sized for hollow brick, M10</td><td>Traps resin inside the cavity — forms the chemical bulb</td></tr>
+      <tr><td>Injection resin</td><td class="critical">Polyester or epoxy-acrylate, hollow-masonry rated</td><td>Bonds rod to sleeve — low-expansion formula only</td></tr>
+      <tr><td>Manual/pneumatic caulking gun</td><td>Matched to resin cartridge</td><td>Controlled resin injection</td></tr>
+      <tr><td>Threaded rods</td><td>M10, stainless or zinc-plated, 4x</td><td>2 at top bay, 2 at mid-shelf — anti-tip only</td></tr>
+      <tr><td>Wire brush + air blower/pump</td><td>12mm bore brush, hand pump</td><td>Clearing drill dust — resin bond fails on dusty holes</td></tr>
+      <tr><td>Depth-stop marker/tape</td><td>—</td><td>Physically marks max drill depth before piercing rear web</td></tr>
+    </table>
+  </div>
+
+  <div class="toolSection">
+    <h2>Doors, Seals &amp; Hardware <span class="tag">Weatherproofing</span></h2>
+    <table class="toolTable">
+      <tr><th>Item</th><th>Spec</th><th>Purpose</th></tr>
+      <tr><td>Piano hinge</td><td>Full-length, 304 stainless</td><td>Battery door — rated for door weight + wind load</td></tr>
+      <tr><td>Butt hinges</td><td>3x heavy-duty, 304 stainless</td><td>Inverter door</td></tr>
+      <tr><td>Cam-lock draw latches</td><td>3x per battery door</td><td>Even gasket compression along full door height</td></tr>
+      <tr><td>EPDM D-profile gasket</td><td>Full perimeter, both doors</td><td>Primary weather seal</td></tr>
+      <tr><td>Polycarbonate sheet</td><td>4-6mm, both doors</td><td>Viewing strips for display/breaker without opening</td></tr>
+    </table>
+  </div>
+
+  <div class="toolSection">
+    <h2>Thermal &amp; Electrical <span class="tag">Fit-out</span></h2>
+    <table class="toolTable">
+      <tr><th>Item</th><th>Spec</th><th>Purpose</th></tr>
+      <tr><td>Ceramic fiber board</td><td>10-15mm, bonded to mid-shelf underside</td><td>Blocks inverter exhaust heat from battery bay</td></tr>
+      <tr><td>12V DC axial fan</td><td>120-150mm</td><td>Battery bay active cooling</td></tr>
+      <tr><td>Digital thermostat module</td><td>W1209-class, 30°C trigger</td><td>Automates fan trigger point</td></tr>
+      <tr><td>12V/1A power adapter</td><td>—</td><td>Fan + thermostat power (confirm against battery aux tap)</td></tr>
+      <tr><td>IP68 cable glands</td><td class="critical">M32/M40, sized to 35mm² cable OD</td><td>All AC/PV/battery cable exits — one gland per cable, never bundled</td></tr>
+      <tr><td>Rubber/neoprene isolator pads</td><td>4x, under battery base</td><td>Vibration dampening, casing protection</td></tr>
+    </table>
+  </div>
+
+  <div class="toolSection">
+    <h2>Finish &amp; Corrosion Protection</h2>
+    <table class="toolTable">
+      <tr><th>Item</th><th>Spec</th><th>Purpose</th></tr>
+      <tr><td>Hot-dip galvanizing or zinc primer</td><td>Full frame</td><td>Base corrosion protection</td></tr>
+      <tr><td>2-part epoxy marine paint</td><td>Dark matte finish</td><td>UV/weather topcoat, low-visibility security finish</td></tr>
+      <tr><td>304 stainless fasteners</td><td>All hinges, latches, brackets</td><td>Prevents rust bleed-through into painted frame</td></tr>
+    </table>
+  </div>
+
+  <div class="toolSection">
+    <h2>Installation Sequence Checklist</h2>
+    <table class="toolTable">
+      <tr><th>Step</th><th>Action</th></tr>
+      <tr><td>1</td><td>Confirm balcony soffit clearance ≥ 2.1m before fabrication begins</td></tr>
+      <tr><td>2</td><td>Weld frame, plinth, mid-shelf complete off-site or in a staging area</td></tr>
+      <tr><td>3</td><td>Position empty frame, level on adjustable feet</td></tr>
+      <tr><td>4</td><td>Drill and set all 4 chemical anti-tip anchors — allow full resin cure time before loading</td></tr>
+      <tr><td>5</td><td>Secure frame to wall via anti-tip brackets</td></tr>
+      <tr><td>6</td><td>Lift 120kg battery into plinth tray — 2-3 person lift, never before the frame is fixed</td></tr>
+      <tr><td>7</td><td>Install inverter on mid-shelf, wire, fit doors and gaskets last</td></tr>
+    </table>
+  </div>
+</div>
 </div>
 
 <script>
@@ -275,6 +382,7 @@ document.querySelectorAll('.tabBtn').forEach(btn=>{
     const tab = btn.dataset.tab;
     document.getElementById('view3dWrap').classList.toggle('active', tab==='3d');
     document.getElementById('view2d').classList.toggle('active', tab==='2d');
+    document.getElementById('viewTools').classList.toggle('active', tab==='tools');
     if(tab==='3d'){ onResize(); }
   });
 });
@@ -282,9 +390,9 @@ document.querySelectorAll('.tabBtn').forEach(btn=>{
 const wrap = document.getElementById('canvasWrap');
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x11141a);
-scene.fog = new THREE.Fog(0x11141a, 6, 18);
+scene.fog = new THREE.Fog(0x11141a, 7, 20);
 
-const camera = new THREE.PerspectiveCamera(42, window.innerWidth/(window.innerHeight-52), 0.05, 50);
+const camera = new THREE.PerspectiveCamera(42, window.innerWidth/(window.innerHeight-52), 0.05, 60);
 const renderer = new THREE.WebGLRenderer({antialias:true});
 renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
 renderer.setSize(window.innerWidth, window.innerHeight-52);
@@ -293,9 +401,9 @@ wrap.appendChild(renderer.domElement);
 
 scene.add(new THREE.AmbientLight(0xffffff, 0.55));
 const sun = new THREE.DirectionalLight(0xffffff, 0.9);
-sun.position.set(3, 5, 4); sun.castShadow = true;
+sun.position.set(3, 6, 4); sun.castShadow = true;
 sun.shadow.mapSize.set(1024,1024);
-sun.shadow.camera.left=-3; sun.shadow.camera.right=3; sun.shadow.camera.top=3; sun.shadow.camera.bottom=-3;
+sun.shadow.camera.left=-3; sun.shadow.camera.right=3; sun.shadow.camera.top=4; sun.shadow.camera.bottom=-3;
 scene.add(sun);
 const fill = new THREE.DirectionalLight(0x6f8fff, 0.25);
 fill.position.set(-4,2,-3); scene.add(fill);
@@ -305,228 +413,215 @@ ground.rotation.x = -Math.PI/2; ground.receiveShadow = true;
 scene.add(ground);
 scene.add(new THREE.GridHelper(20, 40, 0x2a3140, 0x1e232c));
 
-const wallMat = new THREE.MeshStandardMaterial({color:0x4a5560, roughness:0.9});
-const wallPlane = new THREE.Mesh(new THREE.BoxGeometry(1.6, 3.0, 0.06), wallMat);
-wallPlane.position.set(0, 1.5, -0.20);
+const wallMat = new THREE.MeshStandardMaterial({color:0x8a7860, roughness:0.9});
+const wallPlane = new THREE.Mesh(new THREE.BoxGeometry(1.7, 3.2, 0.15), wallMat);
+wallPlane.position.set(0, 1.6, -0.26);
 wallPlane.receiveShadow = true;
 scene.add(wallPlane);
 
-function louverTexture(color1, color2){
-  const c = document.createElement('canvas'); c.width=64; c.height=64;
-  const ctx = c.getContext('2d');
-  ctx.fillStyle = color1; ctx.fillRect(0,0,64,64);
-  ctx.strokeStyle = color2; ctx.lineWidth = 5;
-  for(let y=6;y<64;y+=12){ ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(64,y); ctx.stroke(); }
-  const tex = new THREE.CanvasTexture(c); tex.wrapS = tex.wrapT = THREE.RepeatWrapping; tex.repeat.set(4,2);
-  return tex;
-}
 function makeLabel(text, sub){
-  const c = document.createElement('canvas'); c.width=512; c.height=140;
+  const c = document.createElement('canvas'); c.width=520; c.height=140;
   const ctx = c.getContext('2d');
-  ctx.fillStyle='rgba(15,18,24,0.88)'; roundRect(ctx,4,4,504,132,18); ctx.fill();
-  ctx.fillStyle='#ffffff'; ctx.font='700 40px Helvetica, Arial'; ctx.textBaseline='top';
-  ctx.fillText(text, 26, 20);
-  if(sub){ ctx.fillStyle='#9aa3b2'; ctx.font='400 26px Helvetica, Arial'; ctx.fillText(sub, 26, 76); }
+  ctx.fillStyle='rgba(15,18,24,0.88)'; roundRect(ctx,4,4,512,132,18); ctx.fill();
+  ctx.fillStyle='#ffffff'; ctx.font='700 38px Helvetica, Arial'; ctx.textBaseline='top';
+  ctx.fillText(text, 24, 18);
+  if(sub){ ctx.fillStyle='#9aa3b2'; ctx.font='400 24px Helvetica, Arial'; ctx.fillText(sub, 24, 72); }
   function roundRect(ctx,x,y,w,h,r){
     ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r);
     ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath();
   }
   const tex = new THREE.CanvasTexture(c);
   const spr = new THREE.Sprite(new THREE.SpriteMaterial({map:tex, transparent:true, depthTest:false}));
-  spr.scale.set(0.6, 0.6*(140/512), 1); spr.renderOrder = 999;
+  spr.scale.set(0.62, 0.62*(140/520), 1); spr.renderOrder = 999;
   return spr;
 }
 
-// ================= SIZED TO REAL EQUIPMENT =================
-// battery (confirmed): 0.505 x 0.19 x 0.41 (W x D x H)
-const battW=0.505, battD=0.19, battH=0.41;
-const genusW=0.30, genusD=0.13, genusH=0.36; // estimated, typical class
-const deyeW=0.32, deyeD=0.14, deyeH=0.40;    // estimated — flag to confirm
-const lithW=0.36, lithD=0.10, lithH=0.34;    // estimated slim wall pack — flag to confirm
+// ================= REAL DIMENSIONS =================
+const battW=0.4505, battD=0.230, battH=0.9425;
+const invW=0.306, invD=0.1758, invH=0.4275;
 
-const ventH=0.055;
-const gapAboveBatt=0.05, gapAboveGenus=0.09; // wiring + hinge swing clearance
-const lowerBayH = battH + gapAboveBatt + genusH + gapAboveGenus; // 0.41+0.05+0.36+0.09=0.91
-const gapDeye=0.05, gapLith=0.05;
-const upperBayH = deyeH + gapDeye + lithH + gapLith; // 0.40+0.05+0.34+0.05=0.84... using real vars below
-
-const W = Math.max(battW, deyeW, lithW) + 0.11; // clear side margin
-const D = Math.max(battD, genusD, deyeD) + 0.13; // depth incl. hinge-swing + rail clearance
-const midRailH = 0.02;
-const H = ventH + lowerBayH + midRailH + upperBayH + ventH;
-const GAP = 0.40;
+const W = 0.65, D = 0.38;
+const plinthH = 0.10;
+const battClear = 0.10; // access/cable clearance above battery within its bay
+const battBayH = battH + battClear;
+const midShelfH = 0.04;
+const invClear = 0.17;
+const invBayH = invH + invClear;
+const roofPlenum = 0.15;
+const H = plinthH + battBayH + midShelfH + invBayH + roofPlenum;
 
 const cab = new THREE.Group();
-cab.position.set(0, GAP, 0);
+cab.position.set(0, 0, 0); // floor-loaded — no floating gap
 scene.add(cab);
 
 const steelMat = new THREE.MeshStandardMaterial({color:0xc9cfd6, roughness:0.45, metalness:0.35});
 const steelDark = new THREE.MeshStandardMaterial({color:0x8891a0, roughness:0.5, metalness:0.3});
-const doorMatA  = new THREE.MeshStandardMaterial({color:0xf0c96b, roughness:0.4, metalness:0.15});
+const plinthMat = new THREE.MeshStandardMaterial({color:0x3a3f47, roughness:0.5, metalness:0.4});
+const doorMatA  = new THREE.MeshStandardMaterial({color:0xe8a33a, roughness:0.4, metalness:0.15});
 const doorMatB  = new THREE.MeshStandardMaterial({color:0x8fb4e8, roughness:0.4, metalness:0.15});
 const viewMat   = new THREE.MeshStandardMaterial({color:0xdff3fb, roughness:0.2, metalness:0.1, transparent:true, opacity:0.75});
 const roofMat  = new THREE.MeshStandardMaterial({color:0x2f3740, roughness:0.55, metalness:0.4});
-const haspMat  = new THREE.MeshStandardMaterial({color:0x1f2530, roughness:0.4, metalness:0.6});
-const trackMat = new THREE.MeshStandardMaterial({color:0x4b5561, roughness:0.5, metalness:0.6});
-const ventMat  = new THREE.MeshStandardMaterial({map:louverTexture('#7c8794','#4b5561'), roughness:0.6, metalness:0.2});
+const anchorMat = new THREE.MeshStandardMaterial({color:0xc94f4f, roughness:0.4, metalness:0.5});
+const battMat = new THREE.MeshStandardMaterial({color:0x161a20, roughness:0.4, metalness:0.3});
+const invMat = new THREE.MeshStandardMaterial({color:0x3a5a8c, roughness:0.4, metalness:0.3});
+const baffleMat = new THREE.MeshStandardMaterial({color:0x5c6773, roughness:0.6, metalness:0.3});
 
-const bracketGeo = new THREE.BoxGeometry(0.03,0.045,0.09);
-[[-W/2+0.05, H-0.08],[W/2-0.05, H-0.08],[-W/2+0.05, 0.08],[W/2-0.05, 0.08]].forEach(p=>{
-  const b = new THREE.Mesh(bracketGeo, trackMat);
-  b.position.set(p[0], p[1], -D/2-0.025);
-  cab.add(b);
+// ---- plinth (floor-loaded) ----
+const plinth = new THREE.Mesh(new THREE.BoxGeometry(W,plinthH,D), plinthMat);
+plinth.position.set(0, plinthH/2, 0);
+plinth.castShadow = plinth.receiveShadow = true;
+cab.add(plinth);
+const footGeo = new THREE.CylinderGeometry(0.02,0.025,0.03,10);
+[[-W/2+0.06,-D/2+0.06],[W/2-0.06,-D/2+0.06],[-W/2+0.06,D/2-0.06],[W/2-0.06,D/2-0.06]].forEach(p=>{
+  const f = new THREE.Mesh(footGeo, plinthMat);
+  f.position.set(p[0], 0.015, p[1]);
+  cab.add(f);
 });
 
-const backPanel = new THREE.Mesh(new THREE.BoxGeometry(W,H,0.015), steelDark);
-backPanel.position.set(0, H/2, -D/2);
+// ---- frame shell ----
+const backPanel = new THREE.Mesh(new THREE.BoxGeometry(W,H-plinthH,0.02), steelDark);
+backPanel.position.set(0, plinthH+(H-plinthH)/2, -D/2);
 cab.add(backPanel);
 [-1,1].forEach(side=>{
-  const sp = new THREE.Mesh(new THREE.BoxGeometry(0.015,H,D), steelMat);
-  sp.position.set(side*W/2, H/2, 0);
+  const sp = new THREE.Mesh(new THREE.BoxGeometry(0.02,H-plinthH,D), steelMat);
+  sp.position.set(side*W/2, plinthH+(H-plinthH)/2, 0);
   sp.castShadow = sp.receiveShadow = true;
   cab.add(sp);
 });
-const topPanel = new THREE.Mesh(new THREE.BoxGeometry(W,0.015,D), steelMat);
+const topPanel = new THREE.Mesh(new THREE.BoxGeometry(W,0.02,D), steelMat);
 topPanel.position.set(0, H, 0); cab.add(topPanel);
-const botPanel = new THREE.Mesh(new THREE.BoxGeometry(W,0.015,D), steelMat);
-botPanel.position.set(0, 0, 0); cab.add(botPanel);
 
-// roof: forward-only overhang, flush at wall, sloped down toward front
+// roof: forward overhang, flush at wall
 const roofPivot = new THREE.Group();
 roofPivot.position.set(0, H, -D/2);
 cab.add(roofPivot);
-const overhang = 0.34;
-const roofSlab = new THREE.Mesh(new THREE.BoxGeometry(W+0.06, 0.02, overhang), roofMat);
-roofSlab.position.set(0, 0, overhang/2);
+const overhang = 0.40;
+const roofSlab = new THREE.Mesh(new THREE.BoxGeometry(W+0.08, 0.025, overhang), roofMat);
+roofSlab.position.set(0,0,overhang/2);
 roofSlab.castShadow = true;
 roofPivot.add(roofSlab);
 roofPivot.rotation.x = 0.07;
-const dripLip = new THREE.Mesh(new THREE.BoxGeometry(W+0.06, 0.022, 0.014), roofMat);
-dripLip.position.set(0, -0.011, overhang-0.005);
-roofPivot.add(dripLip);
 
-// vents: top (under roof, above upper bay) and bottom (above floor attach, below lower bay)
-const ventTop = new THREE.Mesh(new THREE.BoxGeometry(W*0.84, ventH*0.7, 0.02), ventMat);
-ventTop.position.set(0, H-ventH*0.55, D/2+0.01);
-cab.add(ventTop);
-const ventBottom = new THREE.Mesh(new THREE.BoxGeometry(W*0.84, ventH*0.6, 0.02), ventMat);
-ventBottom.position.set(0, ventH*0.5, D/2+0.01);
-cab.add(ventBottom);
+// covert camera module, tucked under the roof overhang facing down/out
+const camMat = new THREE.MeshStandardMaterial({color:0x14161a, roughness:0.3, metalness:0.6});
+const camGroup = new THREE.Group();
+camGroup.position.set(W/2-0.06, -0.03, overhang*0.55);
+camGroup.rotation.x = -0.35;
+const camBody = new THREE.Mesh(new THREE.CylinderGeometry(0.012,0.012,0.03,10), camMat);
+camGroup.add(camBody);
+const camLens = new THREE.Mesh(new THREE.CylinderGeometry(0.007,0.007,0.006,10), new THREE.MeshStandardMaterial({color:0x000000, roughness:0.1, metalness:0.8}));
+camLens.position.set(0,-0.017,0);
+camGroup.add(camLens);
+roofPivot.add(camGroup);
 
-const lowerBayY = ventH;
-const upperBayY = lowerBayY + lowerBayH + midRailH;
-const midY = lowerBayY + lowerBayH;
+// ---- mid-shelf (insulated, structural) ----
+const battBayY = plinthH;
+const midShelfY = battBayY + battBayH;
+const invBayY = midShelfY + midShelfH;
 
-const midRail = new THREE.Mesh(new THREE.BoxGeometry(W,midRailH,D), steelDark);
-midRail.position.set(0, midY+midRailH/2, 0); cab.add(midRail);
+const midShelf = new THREE.Mesh(new THREE.BoxGeometry(W,midShelfH,D), plinthMat);
+midShelf.position.set(0, midShelfY+midShelfH/2, 0);
+midShelf.castShadow = midShelf.receiveShadow = true;
+cab.add(midShelf);
+const insulation = new THREE.Mesh(new THREE.BoxGeometry(W-0.03,0.015,D-0.03), new THREE.MeshStandardMaterial({color:0xe8e2d5, roughness:0.9}));
+insulation.position.set(0, midShelfY-0.008, 0);
+cab.add(insulation);
 
-// dual rails, spanning the working zone (from just above bottom vent to just below top vent)
-const railFrontZ = D/2 + 0.028;
-const railRearZ  = D/2 + 0.010;
-const railSpanH = H - ventH*2;
-[railFrontZ, railRearZ].forEach(z=>{
+// ---- Z-baffle vents (side panels) ----
+function makeZBaffle(y, side){
+  const g = new THREE.Group();
+  g.position.set(side*(W/2), y, D*0.15);
+  const hood = new THREE.Mesh(new THREE.BoxGeometry(0.05,0.11,0.09), baffleMat);
+  hood.position.set(side*0.03, 0, 0);
+  g.add(hood);
+  const baffle1 = new THREE.Mesh(new THREE.BoxGeometry(0.008,0.09,0.07), steelDark);
+  baffle1.position.set(side*0.015, 0, 0.01);
+  g.add(baffle1);
+  cab.add(g);
+}
+makeZBaffle(invBayY+invBayH*0.7, -1);
+makeZBaffle(invBayY+invBayH*0.7, 1);
+makeZBaffle(battBayY+battBayH*0.5, -1);
+makeZBaffle(battBayY+battBayH*0.5, 1);
+
+// ---- 12V fan + thermostat (battery bay upper panel) ----
+const fanRing = new THREE.Mesh(new THREE.TorusGeometry(0.045,0.008,8,20), steelDark);
+fanRing.position.set(0.12, midShelfY-0.03, D/2-0.02);
+cab.add(fanRing);
+const thermoBox = new THREE.Mesh(new THREE.BoxGeometry(0.05,0.03,0.02), new THREE.MeshStandardMaterial({color:0x1f2530}));
+thermoBox.position.set(0.22, midShelfY-0.03, D/2-0.01);
+cab.add(thermoBox);
+
+// ---- anti-tip chemical anchors ----
+function makeAnchor(y){
   [-1,1].forEach(side=>{
-    const t = new THREE.Mesh(new THREE.BoxGeometry(0.018,railSpanH,0.018), trackMat);
-    t.position.set(side*(W/2-0.03), ventH+railSpanH/2, z);
-    cab.add(t);
+    const rod = new THREE.Mesh(new THREE.CylinderGeometry(0.006,0.006,0.14,8), anchorMat);
+    rod.rotation.x = Math.PI/2;
+    rod.position.set(side*(W/2-0.08), y, -D/2-0.06);
+    cab.add(rod);
+    const sleeve = new THREE.Mesh(new THREE.CylinderGeometry(0.014,0.014,0.06,8), anchorMat);
+    sleeve.rotation.x = Math.PI/2;
+    sleeve.position.set(side*(W/2-0.08), y, -D/2-0.10);
+    cab.add(sleeve);
   });
-});
+}
+makeAnchor(invBayY+invBayH*0.85);
+makeAnchor(midShelfY+midShelfH*0.5);
 
-// ---- Genus door (front rail) — covers lower bay, slides UP ----
-const doorAPivot = new THREE.Group();
-cab.add(doorAPivot);
-const doorA = new THREE.Mesh(new THREE.BoxGeometry(W-0.07, lowerBayH-0.02, 0.018), doorMatA);
-doorA.position.set(0, lowerBayY+lowerBayH/2, railFrontZ);
-doorA.castShadow = doorA.receiveShadow = true;
-doorAPivot.add(doorA);
-const viewA = new THREE.Mesh(new THREE.BoxGeometry(W-0.16, lowerBayH*0.14, 0.006), viewMat);
-viewA.position.set(0, lowerBayY+lowerBayH*0.86, railFrontZ+0.011);
-doorAPivot.add(viewA);
-const boltA = new THREE.Mesh(new THREE.BoxGeometry(0.045,0.018,0.018), haspMat);
-boltA.position.set(0, lowerBayY+lowerBayH*0.5, railFrontZ+0.012);
-doorAPivot.add(boltA);
-const travelA = Math.min(lowerBayH, upperBayH);
+// ---- doors ----
+function makeSwingDoor(y0, hgt, mat){
+  const pivot = new THREE.Group();
+  pivot.position.set(-W/2, y0, D/2);
+  cab.add(pivot);
+  const door = new THREE.Mesh(new THREE.BoxGeometry(W-0.02, hgt-0.02, 0.02), mat);
+  door.position.set((W-0.02)/2, hgt/2, 0);
+  door.castShadow = door.receiveShadow = true;
+  pivot.add(door);
+  const latch = new THREE.Mesh(new THREE.BoxGeometry(0.05,0.02,0.02), new THREE.MeshStandardMaterial({color:0x1f2530}));
+  latch.position.set(W-0.06, hgt*0.5, 0.02);
+  pivot.add(latch);
+  return {pivot, door};
+}
+const doorA = makeSwingDoor(battBayY, battBayH, doorMatA); // battery
+const doorB = makeSwingDoor(invBayY, invBayH, doorMatB);   // inverter
+const viewA = new THREE.Mesh(new THREE.BoxGeometry(W-0.16, battBayH*0.10, 0.006), viewMat);
+viewA.position.set((W-0.02)/2, battBayH*0.72, 0.012);
+doorA.pivot.add(viewA);
+const viewB = new THREE.Mesh(new THREE.BoxGeometry(W-0.16, invBayH*0.14, 0.006), viewMat);
+viewB.position.set((W-0.02)/2, invBayH*0.72, 0.012);
+doorB.pivot.add(viewB);
 
-// ---- Deye door (rear rail) — covers upper bay, slides DOWN ----
-const doorBPivot = new THREE.Group();
-cab.add(doorBPivot);
-const doorB = new THREE.Mesh(new THREE.BoxGeometry(W-0.07, upperBayH-0.02, 0.018), doorMatB);
-doorB.position.set(0, upperBayY+upperBayH/2, railRearZ);
-doorB.castShadow = doorB.receiveShadow = true;
-doorBPivot.add(doorB);
-const viewB = new THREE.Mesh(new THREE.BoxGeometry(W-0.16, upperBayH*0.16, 0.006), viewMat);
-viewB.position.set(0, upperBayY+upperBayH*0.18, railRearZ+0.011);
-doorBPivot.add(viewB);
-const boltB = new THREE.Mesh(new THREE.BoxGeometry(0.045,0.018,0.018), haspMat);
-boltB.position.set(0, upperBayY+upperBayH*0.5, railRearZ+0.012);
-doorBPivot.add(boltB);
-const travelB = -Math.min(lowerBayH, upperBayH);
-
-// ---- interior equipment ----
-const battMat  = new THREE.MeshStandardMaterial({color:0x232830, roughness:0.6});
-const genusMat = new THREE.MeshStandardMaterial({color:0x7d8896, roughness:0.5, metalness:0.2});
-const deyeMat  = new THREE.MeshStandardMaterial({color:0x3a5a8c, roughness:0.4, metalness:0.3});
-const lithMat  = new THREE.MeshStandardMaterial({color:0x161a20, roughness:0.5, metalness:0.2});
-
+// ---- equipment ----
 const battery = new THREE.Mesh(new THREE.BoxGeometry(battW,battH,battD), battMat);
-battery.position.set(0, lowerBayY+battH/2, -D/2+battD/2+0.01);
+battery.position.set(0, battBayY+battH/2+0.02, -D/2+battD/2+0.02);
 battery.castShadow = true; cab.add(battery);
 
-// Genus hangs on two iron wall hooks/brackets — lifts up to disengage, then pulls forward
-const hookMat = new THREE.MeshStandardMaterial({color:0x2b2f36, roughness:0.5, metalness:0.7});
-const genusBaseY = lowerBayY + battH + gapAboveBatt; // bottom edge of genus, resting height
-[[-genusW/2+0.05, 0],[genusW/2-0.05, 0]].forEach(p=>{
-  // L-shaped iron hook fixed to the wall
-  const hookV = new THREE.Mesh(new THREE.BoxGeometry(0.02,0.05,0.02), hookMat);
-  hookV.position.set(p[0], genusBaseY+genusH-0.04, -D/2+0.02);
-  cab.add(hookV);
-  const hookH = new THREE.Mesh(new THREE.BoxGeometry(0.02,0.02,0.05), hookMat);
-  hookH.position.set(p[0], genusBaseY+genusH-0.015, -D/2+0.04);
-  cab.add(hookH);
-});
-const genusGroup = new THREE.Group();
-genusGroup.position.set(0, genusBaseY, -D/2+0.02);
-cab.add(genusGroup);
-const genus = new THREE.Mesh(new THREE.BoxGeometry(genusW, genusH, genusD), genusMat);
-genus.position.set(0, genusH/2, genusD/2);
-genus.castShadow = true;
-genusGroup.add(genus);
-// slotted bracket notches on the back, visual only
-[[-genusW/2+0.05, genusH-0.03],[genusW/2-0.05, genusH-0.03]].forEach(p=>{
-  const slot = new THREE.Mesh(new THREE.BoxGeometry(0.035,0.018,0.012), hookMat);
-  slot.position.set(p[0], p[1], -0.006);
-  genusGroup.add(slot);
-});
-const liftClear = 0.035;   // how far it lifts to clear the hooks
-const pullForward = 0.19;  // how far it then pulls forward for back access
+const inverter = new THREE.Mesh(new THREE.BoxGeometry(invW,invH,invD), invMat);
+inverter.position.set(0, invBayY+invH/2+0.05, -D/2+invD/2+0.03);
+inverter.castShadow = true; cab.add(inverter);
 
-const deye = new THREE.Mesh(new THREE.BoxGeometry(deyeW,deyeH,deyeD), deyeMat);
-deye.position.set(0, upperBayY+upperBayH-gapDeye-deyeH/2, -D/2+deyeD/2+0.02);
-deye.castShadow = true; cab.add(deye);
-const lithium = new THREE.Mesh(new THREE.BoxGeometry(lithW,lithH,lithD), lithMat);
-lithium.position.set(0, upperBayY+lithH/2, -D/2+lithD/2+0.02);
-lithium.castShadow = true; cab.add(lithium);
+const labWall = makeLabel("Hollow brick wall", "sitting room on far side");
+labWall.position.set(0, H+0.35, -0.26); cab.add(labWall);
+const labBatt = makeLabel("PowerAxis 16kWh", "942.5x450.5x230mm — 120kg");
+labBatt.position.set(0.55, battery.position.y, -0.05); cab.add(labBatt);
+const labInv = makeLabel("Deye 6kW off-grid", "427.5x306x175.8mm — 9.3kg");
+labInv.position.set(0.55, inverter.position.y+0.05, -0.05); cab.add(labInv);
+const labPlinth = makeLabel("Steel plinth", "100% deadweight to floor");
+labPlinth.position.set(0, plinthH*0.5, 0.35); cab.add(labPlinth);
+const labAnchor = makeLabel("Chemical anti-tip anchor", "M10, resin + mesh sleeve");
+labAnchor.position.set(-0.55, invBayY+invBayH*0.85, -0.30); cab.add(labAnchor);
+const labFan = makeLabel("12V thermostat fan", "30°C trigger");
+labFan.position.set(0.55, midShelfY+0.15, 0.15); cab.add(labFan);
+const labVent = makeLabel("Z-baffle vent", "air turns twice, blocks rain");
+labVent.position.set(0.62, invBayY+invBayH*0.7, D*0.4); cab.add(labVent);
+const labCam = makeLabel("Covert camera module", "under roof overhang, shadowed");
+labCam.position.set(0.35, H+0.18, overhang*0.7); cab.add(labCam);
+const labMid = makeLabel("Insulated mid-shelf", "blocks heat transfer to battery");
+labMid.position.set(0, midShelfY+0.14, 0.3); cab.add(labMid);
 
-const labWall = makeLabel("Building wall", "flush-mount surface");
-labWall.position.set(0, H+0.32, -0.20); cab.add(labWall);
-const labBatt = makeLabel("Tubular battery", "50.5 x 19 x 41cm — confirmed");
-labBatt.position.set(0.5, battery.position.y, -0.06); cab.add(labBatt);
-const labGenus = makeLabel("Genus Heiwa-i 1625", "hangs on 2 iron hooks — lift, then pull forward");
-labGenus.position.set(0.55, genusBaseY+genusH*0.5, 0.05); cab.add(labGenus);
-const labDeye = makeLabel("Deye 3.5kVA hybrid", "est. size — confirm");
-labDeye.position.set(0.5, deye.position.y+0.06, -0.02); cab.add(labDeye);
-const labLith = makeLabel("Lithium pack", "est. size — confirm");
-labLith.position.set(0.5, lithium.position.y, -0.02); cab.add(labLith);
-const labVentTop = makeLabel("Top vent", "insect mesh");
-labVentTop.position.set(0, H+0.10, D/2+0.35); cab.add(labVentTop);
-const labVentBot = makeLabel("Bottom vent", "insect mesh, sloped");
-labVentBot.position.set(0, -0.05, D/2+0.35); cab.add(labVentBot);
-const labGap = makeLabel("40cm gap to floor", "hanger passes underneath");
-labGap.position.set(0, -0.20, 0.3); cab.add(labGap);
-
-const target = new THREE.Vector3(0, GAP+H*0.5, 0);
-let radius = 3.0, theta = Math.PI*0.30, phi = Math.PI*0.42;
-const minR=1.2, maxR=5.2, minPhi=0.15, maxPhi=Math.PI/2-0.05;
+const target = new THREE.Vector3(0, H*0.5, 0);
+let radius = 3.4, theta = Math.PI*0.30, phi = Math.PI*0.42;
+const minR=1.4, maxR=6.0, minPhi=0.15, maxPhi=Math.PI/2-0.05;
 function updateCamera(){
   const x = target.x + radius*Math.sin(phi)*Math.sin(theta);
   const y = target.y + radius*Math.cos(phi);
@@ -555,7 +650,7 @@ window.addEventListener('pointermove', pointerMove);
 window.addEventListener('pointerup', pointerUp);
 renderer.domElement.addEventListener('wheel', (e)=>{
   e.preventDefault();
-  radius = Math.min(maxR, Math.max(minR, radius + e.deltaY*0.0018));
+  radius = Math.min(maxR, Math.max(minR, radius + e.deltaY*0.002));
   updateCamera();
 }, {passive:false});
 let pinchStart=null;
@@ -563,17 +658,17 @@ renderer.domElement.addEventListener('touchstart', (e)=>{ if(e.touches.length===
 renderer.domElement.addEventListener('touchmove', (e)=>{
   if(e.touches.length===2 && pinchStart){
     const d = dist(e.touches[0],e.touches[1]);
-    radius = Math.min(maxR, Math.max(minR, radius - (d-pinchStart)*0.005));
+    radius = Math.min(maxR, Math.max(minR, radius - (d-pinchStart)*0.006));
     pinchStart = d; updateCamera();
   }
 },{passive:true});
 function dist(a,b){ const dx=a.clientX-b.clientX, dy=a.clientY-b.clientY; return Math.sqrt(dx*dx+dy*dy); }
 
 const presets = {
-  iso:   {theta: Math.PI*0.30, phi: Math.PI*0.42, r:3.0},
-  front: {theta: 0,             phi: Math.PI*0.46, r:2.7},
-  side:  {theta: Math.PI/2,     phi: Math.PI*0.46, r:2.7},
-  top:   {theta: Math.PI*0.18,  phi: 0.22,          r:3.2},
+  iso:   {theta: Math.PI*0.30, phi: Math.PI*0.42, r:3.4},
+  front: {theta: 0,             phi: Math.PI*0.46, r:3.0},
+  side:  {theta: Math.PI/2,     phi: Math.PI*0.46, r:3.0},
+  top:   {theta: Math.PI*0.18,  phi: 0.22,          r:3.6},
 };
 let animT = null;
 function goPreset(name){ const p = presets[name]; animT = {theta0:theta, phi0:phi, r0:radius, theta1:p.theta, phi1:p.phi, r1:p.r, t:0}; }
@@ -588,20 +683,14 @@ function clearActiveBtns(){ document.querySelectorAll('.vbtn[data-view]').forEac
 let openA=false, animA=null;
 document.getElementById('doorToggleA').addEventListener('click', (e)=>{
   openA = !openA;
-  e.target.textContent = openA ? "Close Lower Door (Genus)" : "Slide Lower Door (Genus)";
-  animA = {t:0, from: openA?0:travelA, to: openA?travelA:0};
+  e.target.textContent = openA ? "Close Battery Door" : "Swing Battery Door";
+  animA = {t:0, from: openA?0:2.0, to: openA?2.0:0};
 });
 let openB=false, animB=null;
 document.getElementById('doorToggleB').addEventListener('click', (e)=>{
   openB = !openB;
-  e.target.textContent = openB ? "Close Upper Door (Deye)" : "Slide Upper Door (Deye)";
-  animB = {t:0, from: openB?0:travelB, to: openB?travelB:0};
-});
-let hingeOpen=false, animH=null;
-document.getElementById('hingeToggle').addEventListener('click', (e)=>{
-  hingeOpen = !hingeOpen;
-  e.target.textContent = hingeOpen ? "Rehang Genus" : "Lift & Pull Genus Forward";
-  animH = {t:0, from: hingeOpen?0:1, to: hingeOpen?1:0};
+  e.target.textContent = openB ? "Close Inverter Door" : "Swing Inverter Door";
+  animB = {t:0, from: openB?0:2.0, to: openB?2.0:0};
 });
 
 function animate(){
@@ -615,24 +704,13 @@ function animate(){
   }
   if(animA){
     animA.t += 0.04; const t = Math.min(1, animA.t); const ease = 1-Math.pow(1-t,3);
-    doorAPivot.position.y = animA.from + (animA.to-animA.from)*ease;
+    doorA.pivot.rotation.y = -(animA.from + (animA.to-animA.from)*ease);
     if(t>=1) animA=null;
   }
   if(animB){
     animB.t += 0.04; const t = Math.min(1, animB.t); const ease = 1-Math.pow(1-t,3);
-    doorBPivot.position.y = animB.from + (animB.to-animB.from)*ease;
+    doorB.pivot.rotation.y = -(animB.from + (animB.to-animB.from)*ease);
     if(t>=1) animB=null;
-  }
-  if(animH){
-    animH.t += 0.035; const t = Math.min(1, animH.t);
-    const progress = animH.from + (animH.to-animH.from)*t;
-    // progress 0..1 maps to: 0-0.4 = lift up, 0.4-1 = pull forward
-    let liftT = Math.min(1, progress/0.4);
-    let pullT = Math.max(0, (progress-0.4)/0.6);
-    liftT = 1-Math.pow(1-liftT,2); pullT = 1-Math.pow(1-pullT,2);
-    genusGroup.position.y = genusBaseY + liftClear*liftT;
-    genusGroup.position.z = (-D/2+0.02) + pullForward*pullT;
-    if(t>=1) animH=null;
   }
   renderer.render(scene, camera);
 }
